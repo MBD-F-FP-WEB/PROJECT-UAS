@@ -11,7 +11,9 @@ CREATE TABLE territories
 	territory_description varchar(255),
 	region_id int,
 	PRIMARY KEY (territory_id),
-	FOREIGN KEY (region_id) REFERENCES region(region_id)
+	CONSTRAINT fk_t_to_region 
+		FOREIGN KEY (region_id) 
+		REFERENCES region(region_id)
 );
 
 CREATE TABLE employee
@@ -36,7 +38,9 @@ CREATE TABLE employee
 	photo_path varchar(255),
 
 	PRIMARY KEY (employee_id),
-	FOREIGN KEY (reports_to) REFERENCES employee(employee_id)
+	CONSTRAINT fk_e_to_employee 
+		FOREIGN KEY (reports_to) 
+		REFERENCES employee(employee_id)
 );
 
 CREATE TABLE employee_territories
@@ -45,8 +49,12 @@ CREATE TABLE employee_territories
 	employee_id int,
 	territory_id varchar(255),
   PRIMARY KEY (id),
-	FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-	FOREIGN KEY (territory_id) REFERENCES territories(territory_id)
+	CONSTRAINT fk_et_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employee(employee_id),
+	CONSTRAINT fk_et_to_territory 
+		FOREIGN KEY (territory_id) 
+		REFERENCES territories(territory_id)
 );
 
 CREATE TABLE us_states
@@ -105,8 +113,12 @@ CREATE TABLE products
 	reorder_level int,
 	discontined int,
 	PRIMARY KEY (product_id),
-	FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id),
-	FOREIGN KEY (category_id) REFERENCES categories(category_id)
+	CONSTRAINT fk_p_to_suppliers 
+		FOREIGN KEY (supplier_id) 
+		REFERENCES suppliers(supplier_id),
+	CONSTRAINT fk_p_to_categories 
+		FOREIGN KEY (category_id) 
+		REFERENCES categories(category_id)
 );
 
 CREATE TABLE customer_demographics
@@ -138,8 +150,12 @@ CREATE TABLE customer_customer_demo
 	customer_id varchar(255),
 	customer_type_id varchar(255),
   PRIMARY KEY (id),
-	FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-	FOREIGN KEY (customer_type_id) REFERENCES customer_demographics(customer_type_id)
+	CONSTRAINT fk_ccd_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_ccd_to_customer_demographics 
+		FOREIGN KEY (customer_type_id) 
+		REFERENCES customer_demographics(customer_type_id)
 );
 
 CREATE TABLE orders
@@ -160,9 +176,15 @@ CREATE TABLE orders
 	ship_country varchar(255),
 
 	PRIMARY KEY (order_id),
-	FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-	FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-	FOREIGN KEY (ship_via) REFERENCES shippers(shipper_id)
+	CONSTRAINT fk_o_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_o_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employee(employee_id),
+	CONSTRAINT fk_o_to_shippers 
+		FOREIGN KEY (ship_via) 
+		REFERENCES shippers(shipper_id)
 );
 
 CREATE TABLE order_details
@@ -174,6 +196,10 @@ CREATE TABLE order_details
 	quantity int,
 	discount int,
 	PRIMARY KEY (id),
-	FOREIGN KEY (order_id) REFERENCES orders(order_id),
-	FOREIGN KEY (product_id) REFERENCES products(product_id)
+	CONSTRAINT fk_od_to_orders 
+		FOREIGN KEY (order_id) 
+		REFERENCES orders(order_id),
+	CONSTRAINT fk_od_to_products 
+		FOREIGN KEY (product_id) 
+		REFERENCES products(product_id)
 );
