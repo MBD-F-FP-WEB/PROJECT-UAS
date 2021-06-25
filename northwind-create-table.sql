@@ -1,3 +1,18 @@
+drop table region cascade;
+drop table territories cascade;
+drop table employees cascade;
+drop table employee_territories cascade;
+drop table us_states cascade;
+drop table shippers cascade;
+drop table categories cascade;
+drop table suppliers cascade;
+drop table products cascade;
+drop table customer_demographics cascade;
+drop table customers cascade;
+drop table customer_customer_demo cascade;
+drop table orders cascade;
+drop table order_details cascade;
+
 CREATE TABLE region
 (
 	region_id int,
@@ -16,7 +31,7 @@ CREATE TABLE territories
 		REFERENCES region(region_id)
 );
 
-CREATE TABLE employee
+CREATE TABLE employees
 (
 	employee_id int,
 	last_name varchar(255),
@@ -33,25 +48,23 @@ CREATE TABLE employee
 	home_phone varchar(255),
 	extension varchar(255),
 	photo bytea,
-	notes varchar(255),
+	notes text,
 	reports_to int,
 	photo_path varchar(255),
 
 	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_e_to_employee 
+	CONSTRAINT fk_e_to_employees 
 		FOREIGN KEY (reports_to) 
-		REFERENCES employee(employee_id)
+		REFERENCES employees(employee_id)
 );
 
 CREATE TABLE employee_territories
 (
-  id int,
 	employee_id int,
 	territory_id varchar(255),
-  PRIMARY KEY (id),
 	CONSTRAINT fk_et_to_employee 
 		FOREIGN KEY (employee_id) 
-		REFERENCES employee(employee_id),
+		REFERENCES employees(employee_id),
 	CONSTRAINT fk_et_to_territory 
 		FOREIGN KEY (territory_id) 
 		REFERENCES territories(territory_id)
@@ -181,7 +194,7 @@ CREATE TABLE orders
 		REFERENCES customers(customer_id),
 	CONSTRAINT fk_o_to_employee 
 		FOREIGN KEY (employee_id) 
-		REFERENCES employee(employee_id),
+		REFERENCES employees(employee_id),
 	CONSTRAINT fk_o_to_shippers 
 		FOREIGN KEY (ship_via) 
 		REFERENCES shippers(shipper_id)
@@ -189,13 +202,11 @@ CREATE TABLE orders
 
 CREATE TABLE order_details
 (
-  id int,
 	order_id int,
 	product_id int,
 	unit_price int,
 	quantity int,
 	discount int,
-	PRIMARY KEY (id),
 	CONSTRAINT fk_od_to_orders 
 		FOREIGN KEY (order_id) 
 		REFERENCES orders(order_id),
