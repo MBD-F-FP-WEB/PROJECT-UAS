@@ -51,6 +51,10 @@ Coded by www.creative-tim.com
   <!-- custom -->
   @yield('script')
   <!--   Core JS Files   -->
+  <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+  <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+  <script src="{{ asset('assets/js/plugins/parallax.min.js') }}"></script>
+
   <script src="{{ asset('assets/js/core/popper.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
