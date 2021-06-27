@@ -269,7 +269,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE proses_ubah_tgl_reservasi();
 
 -------------------------------------------------------------------------------------------------------------
--- VIEW REKAP PEMASUKAN
+-- VIEW REKAP PEMASUKAN per bulan
 -------------------------------------------------------------------------------------------------------------
 CREATE OR REPLACE VIEW rekap_pemasukan_bulanan AS
 SELECT 
