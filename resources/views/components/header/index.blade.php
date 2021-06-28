@@ -1,28 +1,90 @@
-<header class="header-2">
-  <div class="page-header section-height-75 relative" style="background-image: url('./assets/img/curved-images/curved1.jpg')">
-    <span class="mask bg-gradient-primary"></span>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-7 text-center mx-auto">
-          <h1 class="text-white pt-3 mt-n5">Soft UI Design System</h1>
-          <p class="lead text-white mt-3">Free & Open Source Web UI Kit built over Bootstrap 5. <br /> Join over 1.4 million developers around the world. </p>
+<div class="row">
+  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+              <h5 class="font-weight-bolder mb-0">
+                $53,000
+                <span class="text-success text-sm font-weight-bolder">+55%</span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="position-absolute w-100 z-index-1 bottom-0">
-      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="moving-waves">
-          <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
-          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
-          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
-          <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
-          <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
-          <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
-        </g>
-      </svg>
+  </div>
+  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+              <h5 class="font-weight-bolder mb-0">
+                2,300
+                <span class="text-success text-sm font-weight-bolder">+3%</span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</header>
+  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+              <h5 class="font-weight-bolder mb-0">
+                +3,462
+                <span class="text-danger text-sm font-weight-bolder">-2%</span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-8">
+            <div class="numbers">
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+              <h5 class="font-weight-bolder mb-0">
+                $103,430
+                <span class="text-success text-sm font-weight-bolder">+5%</span>
+              </h5>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

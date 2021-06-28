@@ -26,3 +26,4 @@
 4. procedure: INSERT order
 5. procedure: INSERT order_details
 6. mentrigger (function: menghitung total price) bila ada order masuk
+7. mengecek adanya diskon
