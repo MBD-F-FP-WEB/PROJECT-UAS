@@ -7,7 +7,7 @@ AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
 MAXVALUE 9999
-START WITH 1;
+START WITH 10;
 
 CREATE OR REPLACE FUNCTION add_new_employee_func()
 RETURNS TRIGGER
@@ -27,29 +27,29 @@ FOR EACH ROW
 EXECUTE PROCEDURE add_new_employee_func();
 
 -- table lapangan
-CREATE SEQUENCE lapangan_seq
+CREATE SEQUENCE region_seq
 AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
 MAXVALUE 9999
-START WITH 1;
+START WITH 5;
 
-CREATE OR REPLACE FUNCTION add_new_lapangan_func()
+CREATE OR REPLACE FUNCTION add_new_region_func()
 RETURNS TRIGGER
-AS $add_new_lapangan_func$
+AS $add_new_region_func$
 BEGIN
-	IF NEW.id_lapangan IS NULL
+	IF NEW.id_region IS NULL
 	THEN
-		NEW.id_lapangan := NEXTVAL('lapangan_seq');
+		NEW.id_region := NEXTVAL('region_seq');
 	END IF;
 	RETURN NEW;
 END;
-$add_new_lapangan_func$ LANGUAGE PLPGSQL;
+$add_new_region_func$ LANGUAGE PLPGSQL;
 
-CREATE TRIGGER add_new_lapangan
-BEFORE INSERT ON lapangan
+CREATE TRIGGER add_new_region
+BEFORE INSERT ON region
 FOR EACH ROW
-EXECUTE PROCEDURE add_new_lapangan_func();
+EXECUTE PROCEDURE add_new_region_func();
 
 
 -------------------------------------------------------------------------------------------------------------
