@@ -280,11 +280,17 @@ JOIN (
 GROUP BY order_date;
 
 -------------------------------------------------------------------------------------------------------------
--- VIEW REKAP TERBOOKING
+-- VIEW REKAP PEMBELIAN PER PRODUK
 -------------------------------------------------------------------------------------------------------------
-
-
-
+CREATE OR REPLACE VIEW rekap_pembelian_per_produk AS
+SELECT
+	product_name,
+	COUNT(
+		SELECT COUNT(od.order_id)
+		FROM order_details
+		WHERE od.product_id=p.product_id
+	) AS order_count
+FROM products AS p;
 
 -------------------------------------------------------------------------------------------------------------
 -- MENAMBAH SESI JIKA PENGGUNAAN MELEBIHI WAKTU SEHARUSNYA
