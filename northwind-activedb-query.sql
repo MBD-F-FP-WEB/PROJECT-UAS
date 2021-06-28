@@ -203,11 +203,64 @@ EXECUTE PROCEDURE add_new_order_func();
 
 
 -------------------------------------------------------------------------------------------------------------
--- MENGUBAH TANGGAL RESERVASI SESUAI WAKTU SAAT ITU
+-- function: MENGUBAH TANGGAL ORDER SESUAI WAKTU SAAT ITU
 -------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION proses_ubah_order_date() RETURNS TRIGGER AS $$
+BEGIN
+IF (TG_OP = 'INSERT') THEN
+	NEW.order_date := current_timestamp;
+	RETURN NEW;
+ELSEIF (TG_OP = 'UPDATE') THEN
+	NEW.order_date := current_timestamp;
+	RETURN NEW;
+END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_order_date
+BEFORE INSERT OR UPDATE ON order
+FOR EACH ROW
+EXECUTE PROCEDURE proses_ubah_order_date();
 
 
 
+-------------------------------------------------------------------------------------------------------------
+-- function: required date diubah ke tanggal sekarang misal kurang dari order date
+-------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION proses_ubah_required_date() RETURNS TRIGGER AS $$
+BEGIN
+IF (TG_OP = 'INSERT' || NEW.required_date < NEW.order_date) THEN
+	NEW.required_date := NEW.order_date + INTERVAL '1' DAY;
+	RETURN NEW;
+END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_required_date
+BEFORE INSERT OR UPDATE ON orders
+FOR EACH ROW
+EXECUTE PROCEDURE proses_ubah_required_date();
+
+
+-- function: 
+-- CREATE OR REPLACE FUNCTION show_description  (i_course_no number)
+-- RETURN varchar2
+-- AS
+-- 	v_description varchar2(50);
+-- BEGIN
+-- 	SELECT description
+-- 		INTO v_description
+-- 		FROM course
+-- 		WHERE course_no = i_course_no;
+-- 	RETURN v_description;
+-- EXCEPTION
+-- 	WHEN NO_DATA_FOUND
+-- 	THEN
+-- 		RETURN('The Course is not in the database');
+-- 	WHEN OTHERS
+-- 	THEN
+-- 		RETURN('Error in running show_description');
+-- END;
 
 -------------------------------------------------------------------------------------------------------------
 -- VIEW REKAP PEMASUKAN
@@ -236,3 +289,11 @@ EXECUTE PROCEDURE add_new_order_func();
 
 
 
+CREATE OR REPLACE PROCEDURE insert_peminjam (nama_peminjam VARCHAR, alamat_peminjam VARCHAR, telp_peminjam VARCHAR)
+LANGUAGE SQL
+AS $$
+INSERT INTO peminjam(nama_peminjam, alamat_peminjam, telp_peminjam) VALUES (nama_peminjam, alamat_peminjam, telp_peminjam);
+$$
+
+CALL insert_peminjam('Doni', 'Surabaya timur', '086888777555');
+SELECT * FROM peminjam;
