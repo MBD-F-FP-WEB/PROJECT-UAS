@@ -265,9 +265,19 @@ EXECUTE PROCEDURE proses_ubah_required_date();
 -------------------------------------------------------------------------------------------------------------
 -- VIEW REKAP PEMASUKAN
 -------------------------------------------------------------------------------------------------------------
-
-
-
+CREATE OR REPLACE VIEW rekap_pemasukan_bulanan AS
+SELECT
+	order_date,
+	SUM(t1.total_price)
+FROM orders
+JOIN (
+	SELECT
+		order_id,
+		SUM(quantity * unit_price) AS total_price
+	FROM order_details
+	GROUP BY order_id
+) AS t1 USING(order_id)
+GROUP BY order_date;
 
 -------------------------------------------------------------------------------------------------------------
 -- VIEW REKAP TERBOOKING
