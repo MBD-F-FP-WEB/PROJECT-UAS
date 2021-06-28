@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    use HasFactory;
-    protected $table = 'region';
+	use HasFactory;
+
+	protected $table = 'region';
+
+	protected $fillable = [
+		'region_description'
+	];
 }

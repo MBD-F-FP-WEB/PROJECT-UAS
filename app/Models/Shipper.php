@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shipper extends Model
 {
-    use HasFactory;
-    protected $table = 'shippers';
+	use HasFactory;
+
+	protected $table = 'shippers';
+
+	protected $fillable = [
+		'company_name',
+		'phone'
+	];
 }

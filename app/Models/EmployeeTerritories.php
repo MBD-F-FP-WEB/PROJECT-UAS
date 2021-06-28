@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeTerritories extends Model
 {
-    use HasFactory;
-    protected $table = 'employee_territories';
+	use HasFactory;
+
+	protected $table = 'employee_territories';
 }
