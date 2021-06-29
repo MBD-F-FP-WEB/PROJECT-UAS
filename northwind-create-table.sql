@@ -1,17 +1,17 @@
-drop table region cascade;
-drop table territories cascade;
-drop table employees cascade;
-drop table employee_territories cascade;
-drop table us_states cascade;
-drop table shippers cascade;
-drop table categories cascade;
-drop table suppliers cascade;
-drop table products cascade;
-drop table customer_demographics cascade;
-drop table customers cascade;
-drop table customer_customer_demo cascade;
-drop table orders cascade;
-drop table order_details cascade;
+DROP TABLE region CASCADE;
+DROP TABLE territories CASCADE;
+DROP TABLE employees CASCADE;
+DROP TABLE employee_territories CASCADE;
+DROP TABLE us_states CASCADE;
+DROP TABLE shippers CASCADE;
+DROP TABLE categories CASCADE;
+DROP TABLE suppliers CASCADE;
+DROP TABLE products CASCADE;
+DROP TABLE customer_demographics CASCADE;
+DROP TABLE customers CASCADE;
+DROP TABLE customer_customer_demo CASCADE;
+DROP TABLE orders CASCADE;
+DROP TABLE order_details CASCADE;
 
 CREATE TABLE region
 (

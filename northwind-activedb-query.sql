@@ -222,8 +222,6 @@ BEFORE INSERT OR UPDATE ON order
 FOR EACH ROW
 EXECUTE PROCEDURE proses_ubah_order_date();
 
-
-
 -------------------------------------------------------------------------------------------------------------
 -- function: required date diubah ke tanggal sekarang misal kurang dari order date
 -------------------------------------------------------------------------------------------------------------
@@ -297,14 +295,9 @@ FROM products AS p;
 -------------------------------------------------------------------------------------------------------------
 
 
-
-
 -------------------------------------------------------------------------------------------------------------
 -- PROCEDURE INSERT PEMINJAM
 -------------------------------------------------------------------------------------------------------------
-
-
-
 CREATE OR REPLACE PROCEDURE insert_peminjam (nama_peminjam VARCHAR, alamat_peminjam VARCHAR, telp_peminjam VARCHAR)
 LANGUAGE SQL
 AS $$
