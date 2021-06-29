@@ -51,7 +51,6 @@ CREATE TABLE employees
 	notes text,
 	reports_to int,
 	photo_path varchar(255),
-
 	PRIMARY KEY (employee_id),
 	CONSTRAINT fk_e_to_employees 
 		FOREIGN KEY (reports_to) 
@@ -187,7 +186,6 @@ CREATE TABLE orders
 	ship_region varchar(255),
 	ship_postal_code varchar(255),
 	ship_country varchar(255),
-
 	PRIMARY KEY (order_id),
 	CONSTRAINT fk_o_to_customers 
 		FOREIGN KEY (customer_id) 
