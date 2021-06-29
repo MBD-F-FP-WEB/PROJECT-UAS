@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('navbar')
-@include('components.sidenav', ['active' => "employee"])
+@include('components.sidenav', [
+  'active' => "employee",
+  'form' => ""
+])
 @endsection
+
 @section('content')
 <div class="container mt-5">
     <div class="row">
@@ -18,7 +22,6 @@
         </div>
         <!-- Else bootstrap marketplace -->
         
-
         <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
           <div class="container border-bottom">
             <div class="row py-3">

@@ -9,29 +9,263 @@
   <hr class="horizontal dark mt-0">
   <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
+
       <li class="nav-item">
         @php
-          $employee_active = ''
+          $forms_active = '';
+          $forms_show = '';
+        @endphp
+        @if ($active == "forms")
+        @php
+          $forms_active = 'active';
+          $forms_show = 'show';
+        @endphp
+        @endif
+        <a class="nav-link {{$forms_active}}" data-bs-toggle="collapse" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html#dashboardsExamples" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+            @include('icons.shop')
+          </div>
+          <span class="nav-link-text ms-1">Forms</span>
+        </a>
+        <div class="collapse {{$forms_show}}" id="dashboardsExamples">
+          <ul class="nav ms-4 ps-3">
+
+            @php
+              $category_form_active = '';
+            @endphp
+            @if ($form == "category")
+            @php
+              $category_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$category_form_active}}">
+              <a class="nav-link {{$category_form_active}}" href="{{ route('form.category') }}">
+                <span class="sidenav-mini-icon"> Ca </span>
+                <span class="sidenav-normal"> Category </span>
+              </a>
+            </li>
+
+            @php
+              $customer_customer_demo_form_active = '';
+            @endphp
+            @if ($form == "customer_customer_demo")
+            @php
+              $customer_customer_demo_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$customer_customer_demo_form_active}}">
+              <a class="nav-link {{$customer_customer_demo_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/automotive.html">
+                <span class="sidenav-mini-icon"> CCD </span>
+                <span class="sidenav-normal"> Customer Customer Demo </span>
+              </a>
+            </li>
+
+            @php
+              $customer_demographics_form_active = '';
+            @endphp
+            @if ($form == "customer_demographics")
+            @php
+              $customer_demographics_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$customer_demographics_form_active}}">
+              <a class="nav-link {{$customer_demographics_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/smart-home.html">
+                <span class="sidenav-mini-icon"> CD </span>
+                <span class="sidenav-normal"> Customer Demographics </span>
+              </a>
+            </li>
+            
+            @php
+              $customer_form_active = '';
+            @endphp
+            @if ($form == "customer")
+            @php
+              $customer_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$customer_form_active}}">
+              <a class="nav-link {{$customer_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> Cu </span>
+                <span class="sidenav-normal"> Customer </span>
+              </a>
+            </li>
+            
+            @php
+              $employee_territories_form_active = '';
+            @endphp
+            @if ($form == "employee_territories")
+            @php
+              $employee_territories_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$employee_territories_form_active}}">
+              <a class="nav-link {{$employee_territories_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> ET </span>
+                <span class="sidenav-normal"> Employee Territories </span>
+              </a>
+            </li>
+            
+            @php
+              $employee_form_active = '';
+            @endphp
+            @if ($form == "employee")
+            @php
+              $employee_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$employee_form_active}}">
+              <a class="nav-link {{$employee_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> E </span>
+                <span class="sidenav-normal"> Employee </span>
+              </a>
+            </li>
+            
+            @php
+              $order_detail_form_active = '';
+            @endphp
+            @if ($form == "order_detail")
+            @php
+              $order_detail_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$order_detail_form_active}}">
+              <a class="nav-link {{$order_detail_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> OD </span>
+                <span class="sidenav-normal"> Order Detail </span>
+              </a>
+            </li>
+            
+            @php
+              $order_form_active = '';
+            @endphp
+            @if ($form == "order")
+            @php
+              $order_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$order_form_active}}">
+              <a class="nav-link {{$order_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> O </span>
+                <span class="sidenav-normal"> Order </span>
+              </a>
+            </li>
+            
+            @php
+              $product_form_active = '';
+            @endphp
+            @if ($form == "product")
+            @php
+              $product_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$product_form_active}}">
+              <a class="nav-link {{$product_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> P </span>
+                <span class="sidenav-normal"> Product </span>
+              </a>
+            </li>
+            
+            @php
+              $region_form_active = '';
+            @endphp
+            @if ($form == "region")
+            @php
+              $region_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$region_form_active}}">
+              <a class="nav-link {{$region_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> R </span>
+                <span class="sidenav-normal"> Region </span>
+              </a>
+            </li>
+            
+            @php
+              $shipper_form_active = '';
+            @endphp
+            @if ($form == "shipper")
+            @php
+              $shipper_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$shipper_form_active}}">
+              <a class="nav-link {{$shipper_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> Sh </span>
+                <span class="sidenav-normal"> Shipper </span>
+              </a>
+            </li>
+            
+            @php
+              $supplier_form_active = '';
+            @endphp
+            @if ($form == "supplier")
+            @php
+              $supplier_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$supplier_form_active}}">
+              <a class="nav-link {{$supplier_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> Su </span>
+                <span class="sidenav-normal"> Supplier </span>
+              </a>
+            </li>
+            
+            @php
+              $territory_form_active = '';
+            @endphp
+            @if ($form == "territory")
+            @php
+              $territory_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$territory_form_active}}">
+              <a class="nav-link {{$territory_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> T </span>
+                <span class="sidenav-normal"> Territory </span>
+              </a>
+            </li>
+            
+            @php
+              $us_states_form_active = '';
+            @endphp
+            @if ($form == "us_states")
+            @php
+              $us_states_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$us_states_form_active}}">
+              <a class="nav-link {{$us_states_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+                <span class="sidenav-mini-icon"> US </span>
+                <span class="sidenav-normal"> US States </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        @php
+          $employee_active = '';
         @endphp
         @if ($active == "employee")
         @php
-          $employee_active = 'active'
+          $employee_active = 'active';
         @endphp
         @endif
         <a class="nav-link {{$employee_active}}" href="{{ route('home') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            @include('icons.shop')
+            @include('icons.office')
           </div>
           <span class="nav-link-text ms-1">Employee</span>
         </a>
       </li>
       <li class="nav-item">
         @php
-          $customer_active = ''
+          $customer_active = '';
         @endphp
         @if ($active == "customer")
         @php
-          $customer_active = 'active'
+          $customer_active = 'active';
         @endphp
         @endif
         <a class="nav-link {{$customer_active}}" href="../pages/tables.html">
@@ -43,11 +277,11 @@
       </li>
       <li class="nav-item">
         @php
-          $product_active = ''
+          $product_active = '';
         @endphp
         @if ($active == "product")
         @php
-          $product_active = 'active'
+          $product_active = 'active';
         @endphp
         @endif
         <a class="nav-link {{$product_active}}" href="../pages/tables.html">
@@ -59,11 +293,11 @@
       </li>
       <li class="nav-item">
         @php
-          $order_active = ''
+          $order_active = '';
         @endphp
         @if ($active == "order")
         @php
-          $order_active = 'active'
+          $order_active = 'active';
         @endphp
         @endif
         <a class="nav-link {{$order_active}}" href="../pages/tables.html">
@@ -126,21 +360,5 @@
         </a>
       </li> --}}
     </ul>
-  </div>
-  <div class="sidenav-footer mx-3 ">
-    <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-      <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
-      <div class="card-body text-start p-3 w-100">
-        <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-          <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
-        </div>
-        <div class="docs-info">
-          <h6 class="text-white up mb-0">Need help?</h6>
-          <p class="text-xs font-weight-bold">Please check our docs</p>
-          <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
-        </div>
-      </div>
-    </div>
-    <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
   </div>
 </aside>

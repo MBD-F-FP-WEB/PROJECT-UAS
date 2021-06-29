@@ -3,19 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\CreateController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::group(['prefix' => ''], function () {
     Route::get('', [ViewController::class, 'view'])->name('home');
+});
+
+Route::group(['prefix' => 'form'], function () {
+    Route::view('category', 'forms.category')->name('form.category');
 });
 
 Route::get('/form', [CreateController::class, 'view'])->name('form');
