@@ -241,6 +241,22 @@ $total$ LANGUAGE plpgsql;
 --
 select calc_total(10248);
 
+-- FT:UBAH REQUIRED DATE TO NOW IF < ORDER DATE
+--------------------------------------------------
+CREATE OR REPLACE FUNCTION proses_ubah_required_date() RETURNS TRIGGER AS $$
+BEGIN
+IF (TG_OP = 'INSERT' || NEW.required_date < NEW.order_date) THEN
+	NEW.required_date := NEW.order_date + INTERVAL '1' DAY;
+	RETURN NEW;
+END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_required_date
+BEFORE INSERT OR UPDATE ON orders
+FOR EACH ROW
+EXECUTE PROCEDURE proses_ubah_required_date();
+
 -- P:INSERT ORDER
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_orders (
@@ -264,3 +280,31 @@ VALUES (customer_id, employee_id, required_date, shipped_date, ship_via, freight
 $$
 --
 CALL insert_orders('WOLZA', 2, '1998-06-07', NULL, 2, 8, 'Ship Name', 'Ship Address', 'Ship City', 'NM', '87110', 'ID');
+
+-- V:REKAP PEMASUKAN
+----------------------------------------
+CREATE OR REPLACE VIEW rekap_pemasukan_bulanan AS
+SELECT
+	order_date,
+	SUM(t1.total_price)
+FROM orders
+JOIN (
+	SELECT
+		order_id,
+		SUM(quantity * unit_price) AS total_price
+	FROM order_details
+	GROUP BY order_id
+) AS t1 USING(order_id)
+GROUP BY order_date;
+
+-- V:REKAP PEMBELIAN PER PRODUK
+---------------------------------------
+CREATE OR REPLACE VIEW rekap_pembelian_per_produk AS
+SELECT
+	product_name,
+	COUNT(
+		SELECT COUNT(od.order_id)
+		FROM order_details
+		WHERE od.product_id=p.product_id
+	) AS order_count
+FROM products AS p;

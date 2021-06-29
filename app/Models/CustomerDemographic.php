@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerDemographic extends Model
 {
-    use HasFactory;
-    protected $table = 'customer_demographics';
+	use HasFactory;
+
+	protected $table = 'customer_demographics';
+
+	protected $fillable = [
+		'customer_desc'
+	];
 }

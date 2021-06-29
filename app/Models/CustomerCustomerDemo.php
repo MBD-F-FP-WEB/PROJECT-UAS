@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerCustomerDemo extends Model
 {
-    use HasFactory;
-    protected $table = 'customer_customer_demo';
+	use HasFactory;
+
+	protected $table = 'customer_customer_demo';
 }
