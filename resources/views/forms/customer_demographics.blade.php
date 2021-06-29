@@ -63,10 +63,10 @@
 @endsection
 
 @section('script')
-
+<!-- 
 CREATE TABLE customer_demographics
 (
 	customer_type_id varchar(255),
 	customer_desc varchar(255),
 	PRIMARY KEY (customer_type_id)
-);
+); -->

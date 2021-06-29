@@ -23,38 +23,37 @@
           @endif
           <form role="form text-left">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>employee_id</label>
+                <select class="form-control" name="employee_id">
+                  @foreach($employee_ids as $employee_id)
+                  <option value="{{$employee_id}}">{{$employee_id}}</option>
+                  @endforeach
+                </select>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('employee_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('employee_id') }}
                 </div>
                 @endif
             </div>
+
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>territory_id</label>
+                <select class="form-control" name="territory_id">
+                  @foreach($territory_ids as $territory_id)
+                  <option value="{{$territory_id}}">{{$territory_id}}</option>
+                  @endforeach
+                </select>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('territory_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('territory_id') }}
                 </div>
                 @endif
             </div>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
 
-                <!-- Error -->
-                @if ($errors->has('name'))
-                <div class="error">
-                    {{ $errors->first('name') }}
-                </div>
-                @endif
-            </div>
             <div class="form-check form-check-info text-left">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
               <label class="form-check-label" for="flexCheckDefault">
@@ -73,7 +72,7 @@
 @endsection
 
 @section('script')
-
+<!-- 
 CREATE TABLE employee_territories
 (
 	employee_id int,
@@ -84,4 +83,4 @@ CREATE TABLE employee_territories
 	CONSTRAINT fk_et_to_territory 
 		FOREIGN KEY (territory_id) 
 		REFERENCES territories(territory_id)
-);
+); -->
