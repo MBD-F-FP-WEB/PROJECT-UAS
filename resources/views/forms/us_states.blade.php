@@ -7,9 +7,14 @@
 ])
 @endsection
 
+@section('navbar')
+@include('components.sidenav', [
+  'active' => "forms",
+  'form' => "category"
+])
+@endsection
+
 @section('content')
-  <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-    <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
       <div class="card z-index-0">
         <div class="card-header text-center pt-4">
           <h5>Register with</h5>
@@ -23,35 +28,35 @@
           @endif
           <form role="form text-left">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>state_name</label>
+                <input type="text" class="form-control {{ $errors->has('state_name') ? 'error' : '' }}" name="state_name" id="state_name" value="{{ old('state_name') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('state_name'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('state_name') }}
                 </div>
                 @endif
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>state_abbr</label>
+                <input type="text" class="form-control {{ $errors->has('state_abbr') ? 'error' : '' }}" name="state_abbr" id="state_abbr" value="{{ old('state_abbr') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('state_abbr'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('state_abbr') }}
                 </div>
                 @endif
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>state_region</label>
+                <input type="text" class="form-control {{ $errors->has('state_region') ? 'error' : '' }}" name="state_region" id="state_region" value="{{ old('state_region') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('state_region'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('state_region') }}
                 </div>
                 @endif
             </div>
@@ -68,12 +73,10 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
 @endsection
 
 @section('script')
-
+<!-- 
 CREATE TABLE us_states
 (
 	state_id int,
@@ -81,4 +84,4 @@ CREATE TABLE us_states
 	state_abbr varchar(255),
 	state_region varchar(255),
 	PRIMARY KEY (state_id)
-);
+); -->

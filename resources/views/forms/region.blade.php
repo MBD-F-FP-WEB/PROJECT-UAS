@@ -7,9 +7,14 @@
 ])
 @endsection
 
+@section('navbar')
+@include('components.sidenav', [
+  'active' => "forms",
+  'form' => "category"
+])
+@endsection
+
 @section('content')
-  <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-    <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
       <div class="card z-index-0">
         <div class="card-header text-center pt-4">
           <h5>Register with</h5>
@@ -34,24 +39,13 @@
                 @endif
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>region_description</label>
+                <textarea name="region_description" id="region_description" cols="30" rows="10" class="form-control {{ $errors->has('region_description') ? 'error' : '' }}">{{ old('region_description') }}</textarea>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('region_description'))
                 <div class="error">
-                    {{ $errors->first('name') }}
-                </div>
-                @endif
-            </div>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
-
-                <!-- Error -->
-                @if ($errors->has('name'))
-                <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('region_description') }}
                 </div>
                 @endif
             </div>
@@ -68,8 +62,6 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
 @endsection
 
 @section('script')

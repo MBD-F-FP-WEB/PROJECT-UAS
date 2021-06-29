@@ -7,9 +7,14 @@
 ])
 @endsection
 
+@section('navbar')
+@include('components.sidenav', [
+  'active' => "forms",
+  'form' => "category"
+])
+@endsection
+
 @section('content')
-  <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-    <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
       <div class="card z-index-0">
         <div class="card-header text-center pt-4">
           <h5>Register with</h5>
@@ -23,38 +28,46 @@
           @endif
           <form role="form text-left">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>territory_id</label>
+                <input type="text" class="form-control {{ $errors->has('territory_id') ? 'error' : '' }}" name="territory_id" id="territory_id" value="{{ old('territory_id') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('territory_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('territory_id') }}
                 </div>
                 @endif
             </div>
+            
+            
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>territory_description</label>
+                <textarea name="territory_description" id="territory_description" cols="30" rows="10" class="form-control {{ $errors->has('territory_description') ? 'error' : '' }}">{{ old('territory_description') }}</textarea>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('territory_description'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('territory_description') }}
                 </div>
                 @endif
             </div>
+
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>region_id</label>
+                <select class="form-control" name="region_id">
+                  @foreach($region_ids as $region_id)
+                  <option value="{{$region_id}}">{{$region_id}}</option>
+                  @endforeach
+                </select>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('region_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('region_id') }}
                 </div>
                 @endif
             </div>
+
             <div class="form-check form-check-info text-left">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
               <label class="form-check-label" for="flexCheckDefault">
@@ -68,12 +81,10 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
 @endsection
 
 @section('script')
-
+<!-- 
 CREATE TABLE territories
 (
 	territory_id varchar(255),
@@ -83,4 +94,4 @@ CREATE TABLE territories
 	CONSTRAINT fk_t_to_region 
 		FOREIGN KEY (region_id) 
 		REFERENCES region(region_id)
-);
+); -->

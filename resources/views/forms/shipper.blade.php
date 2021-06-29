@@ -7,9 +7,14 @@
 ])
 @endsection
 
+@section('navbar')
+@include('components.sidenav', [
+  'active' => "forms",
+  'form' => "category"
+])
+@endsection
+
 @section('content')
-  <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-    <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
       <div class="card z-index-0">
         <div class="card-header text-center pt-4">
           <h5>Register with</h5>
@@ -22,25 +27,25 @@
           </div>  
           @endif
           <form role="form text-left">
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+          <div class="form-group">
+                <label>company_name</label>
+                <input type="text" class="form-control {{ $errors->has('company_name') ? 'error' : '' }}" name="company_name" id="company_name" value="{{ old('company_name') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('company_name'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('company_name') }}
                 </div>
                 @endif
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>phone</label>
+                <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value="{{ old('phone') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('phone'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('phone') }}
                 </div>
                 @endif
             </div>
@@ -68,17 +73,15 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
 @endsection
 
 @section('script')
 
-
+<!-- 
 CREATE TABLE shippers
 (
 	shipper_id int,
 	company_name varchar(255),
 	phone varchar(255),
 	PRIMARY KEY (shipper_id)
-);
+); -->
