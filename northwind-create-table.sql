@@ -212,3 +212,4 @@ CREATE TABLE order_details
 		FOREIGN KEY (product_id) 
 		REFERENCES products(product_id)
 );
+

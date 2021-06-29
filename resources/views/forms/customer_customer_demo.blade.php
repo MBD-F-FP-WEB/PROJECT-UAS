@@ -16,35 +16,40 @@
           @endif
           <form role="form text-left">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>customer_id</label>
+                <input type="text" class="form-control {{ $errors->has('customer_id') ? 'error' : '' }}" name="customer_id" id="customer_id" value="{{ old('customer_id') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('customer_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('customer_id') }}
                 </div>
                 @endif
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>customer_type_id</label>
+                <input type="text" class="form-control {{ $errors->has('customer_type_id') ? 'error' : '' }}" name="customer_type_id" id="customer_type_id" value="{{ old('customer_type_id') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('customer_type_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('customer_type_id') }}
                 </div>
                 @endif
             </div>
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>customer_type_id</label>
+                <input type="text" class="form-control {{ $errors->has('customer_type_id') ? 'error' : '' }}" name="customer_type_id" id="customer_type_id" value="{{ old('customer_type_id') }}">
 
+                <select class="form-control" name="jenis_kelamin">
+                  <option value="L">laki-laki</option>
+                  <option value="P">perempuan</option>
+                </select>
+                
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('customer_type_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('customer_type_id') }}
                 </div>
                 @endif
             </div>
@@ -67,28 +72,16 @@
 
 @section('script')
 
-CREATE TABLE employees
+CREATE TABLE customer_customer_demo
 (
-	employee_id int,
-	last_name varchar(255),
-	first_name varchar(255),
-	title varchar(255),
-	title_of_courtesy varchar(255),
-	birth_date date,
-	hire_date date,
-	address varchar(255),
-	city varchar(255),
-	region varchar(255),
-	postal_code varchar(255),
-	country varchar(255),
-	home_phone varchar(255),
-	extension varchar(255),
-	photo bytea,
-	notes text,
-	reports_to int,
-	photo_path varchar(255),
-	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_e_to_employees 
-		FOREIGN KEY (reports_to) 
-		REFERENCES employees(employee_id)
+  id int,
+	customer_id varchar(255),
+	customer_type_id varchar(255),
+  PRIMARY KEY (id),
+	CONSTRAINT fk_ccd_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_ccd_to_customer_demographics 
+		FOREIGN KEY (customer_type_id) 
+		REFERENCES customer_demographics(customer_type_id)
 );

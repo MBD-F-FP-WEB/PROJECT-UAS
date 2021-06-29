@@ -67,28 +67,14 @@
 
 @section('script')
 
-CREATE TABLE employees
+CREATE TABLE employee_territories
 (
 	employee_id int,
-	last_name varchar(255),
-	first_name varchar(255),
-	title varchar(255),
-	title_of_courtesy varchar(255),
-	birth_date date,
-	hire_date date,
-	address varchar(255),
-	city varchar(255),
-	region varchar(255),
-	postal_code varchar(255),
-	country varchar(255),
-	home_phone varchar(255),
-	extension varchar(255),
-	photo bytea,
-	notes text,
-	reports_to int,
-	photo_path varchar(255),
-	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_e_to_employees 
-		FOREIGN KEY (reports_to) 
-		REFERENCES employees(employee_id)
+	territory_id varchar(255),
+	CONSTRAINT fk_et_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employees(employee_id),
+	CONSTRAINT fk_et_to_territory 
+		FOREIGN KEY (territory_id) 
+		REFERENCES territories(territory_id)
 );

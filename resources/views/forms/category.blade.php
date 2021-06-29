@@ -14,7 +14,43 @@
               {{Session::get('success')}}
           </div>  
           @endif
-          <form role="form text-left">
+          <form role="form text-left" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>category_id</label>
+                <input type="text" class="form-control {{ $errors->has('category_id') ? 'error' : '' }}" name="category_id" id="category_id" value="{{ old('category_id') }}">
+
+                <!-- Error -->
+                @if ($errors->has('category_id'))
+                <div class="error">
+                    {{ $errors->first('category_id') }}
+                </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label>category_name</label>
+                <input type="text" class="form-control {{ $errors->has('category_name') ? 'error' : '' }}" name="category_name" id="category_name" value="{{ old('category_name') }}">
+
+                <!-- Error -->
+                @if ($errors->has('category_name'))
+                <div class="error">
+                    {{ $errors->first('category_name') }}
+                </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label>description</label>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control {{ $errors->has('description') ? 'error' : '' }}">{{ old('description') }}</textarea>
+
+                <!-- Error -->
+                @if ($errors->has('description'))
+                <div class="error">
+                    {{ $errors->first('description') }}
+                </div>
+                @endif
+            </div>
+
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
@@ -26,28 +62,19 @@
                 </div>
                 @endif
             </div>
+
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>picture</label>
+                <input type="file" name="picture" id="picture" cols="30" rows="10" class="form-control {{ $errors->has('picture') ? 'error' : '' }}" value="{{ old('picture') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('picture'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('picture') }}
                 </div>
                 @endif
             </div>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
-
-                <!-- Error -->
-                @if ($errors->has('name'))
-                <div class="error">
-                    {{ $errors->first('name') }}
-                </div>
-                @endif
-            </div>
+            
             <div class="form-check form-check-info text-left">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
               <label class="form-check-label" for="flexCheckDefault">
@@ -67,28 +94,11 @@
 
 @section('script')
 
-CREATE TABLE employees
+<!-- CREATE TABLE categories
 (
-	employee_id int,
-	last_name varchar(255),
-	first_name varchar(255),
-	title varchar(255),
-	title_of_courtesy varchar(255),
-	birth_date date,
-	hire_date date,
-	address varchar(255),
-	city varchar(255),
-	region varchar(255),
-	postal_code varchar(255),
-	country varchar(255),
-	home_phone varchar(255),
-	extension varchar(255),
-	photo bytea,
-	notes text,
-	reports_to int,
-	photo_path varchar(255),
-	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_e_to_employees 
-		FOREIGN KEY (reports_to) 
-		REFERENCES employees(employee_id)
-);
+	category_id int,
+	category_name varchar(255),
+	description varchar(255),
+	picture bytea,
+	PRIMARY KEY (category_id)
+); -->

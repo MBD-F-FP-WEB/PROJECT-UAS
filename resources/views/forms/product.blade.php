@@ -67,28 +67,23 @@
 
 @section('script')
 
-CREATE TABLE employees
+CREATE TABLE products
 (
-	employee_id int,
-	last_name varchar(255),
-	first_name varchar(255),
-	title varchar(255),
-	title_of_courtesy varchar(255),
-	birth_date date,
-	hire_date date,
-	address varchar(255),
-	city varchar(255),
-	region varchar(255),
-	postal_code varchar(255),
-	country varchar(255),
-	home_phone varchar(255),
-	extension varchar(255),
-	photo bytea,
-	notes text,
-	reports_to int,
-	photo_path varchar(255),
-	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_e_to_employees 
-		FOREIGN KEY (reports_to) 
-		REFERENCES employees(employee_id)
+	product_id int,
+	product_name varchar(255),
+	supplier_id int,
+	category_id int,
+	quantity_per_unit varchar(255),
+	unit_price int,
+	units_in_stock int,
+	units_on_order int,
+	reorder_level int,
+	discontined int,
+	PRIMARY KEY (product_id),
+	CONSTRAINT fk_p_to_suppliers 
+		FOREIGN KEY (supplier_id) 
+		REFERENCES suppliers(supplier_id),
+	CONSTRAINT fk_p_to_categories 
+		FOREIGN KEY (category_id) 
+		REFERENCES categories(category_id)
 );

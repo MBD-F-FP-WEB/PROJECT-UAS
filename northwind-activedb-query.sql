@@ -215,11 +215,29 @@ $total$ LANGUAGE plpgsql;
 --
 select calc_total(10248);
 
--- FT:UBAH REQUIRED DATE TO NOW IF < ORDER DATE
+-- F:HITUNG ORDER PRICE - DISCOUNT
+-------------------------------------------------
+CREATE OR REPLACE FUNCTION calc_diskon (o_id integer)
+RETURNS integer AS $total$
+declare
+    total integer;
+BEGIN
+   	select calc_diskon(o_id) - de.discount as totalprice into total
+	from order_details as de
+	natural join orders as o
+	where de.order_id = o_id
+	group by de.order_id;
+	RETURN total;
+END;
+$total$ LANGUAGE plpgsql;
+--
+select calc_diskon(10248);
+
+-- FT:UBAH REQUIRED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
 --------------------------------------------------
 CREATE OR REPLACE FUNCTION proses_ubah_required_date() RETURNS TRIGGER AS $$
 BEGIN
-IF (TG_OP = 'INSERT' || NEW.required_date < NEW.order_date) THEN
+IF (TG_OP = 'INSERT' OR NEW.required_date < NEW.order_date) THEN
 	NEW.required_date := NEW.order_date + INTERVAL '1' DAY;
 	RETURN NEW;
 END IF;
@@ -230,6 +248,89 @@ CREATE TRIGGER ubah_required_date
 BEFORE INSERT OR UPDATE ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE proses_ubah_required_date();
+
+-- FT:UBAH SHIPPED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
+--------------------------------------------------
+CREATE OR REPLACE FUNCTION proses_ubah_shipped_date() RETURNS TRIGGER AS $$
+BEGIN
+IF (TG_OP = 'INSERT' OR NEW.shipped_date < NEW.order_date) THEN
+	NEW.shipped_date := NEW.order_date + INTERVAL '1' DAY;
+	RETURN NEW;
+END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_shipped_date
+BEFORE INSERT OR UPDATE ON orders
+FOR EACH ROW
+EXECUTE PROCEDURE proses_ubah_required_date();
+
+-- FT:UPDATE UNIT IN STOCK & UNIT IN ORDER
+---------------------------------------
+CREATE OR REPLACE FUNCTION jum_unit() 
+RETURNS TRIGGER AS 
+$$
+DECLARE
+	q integer;
+	p_id integer;
+BEGIN
+	q := NEW.quantity;
+	p_id := NEW.product_id;
+	UPDATE products
+	SET 
+	units_in_stock = units_in_stock - q,
+	units_on_order = units_on_order + q
+	WHERE product_id = p_id;
+	RETURN NULL;
+END;
+$$ 
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_jum_unit
+AFTER INSERT OR UPDATE ON order_details
+FOR EACH ROW
+EXECUTE PROCEDURE jum_unit();
+--
+INSERT INTO order_details VALUES (10248, 75, 8, 25, 0);
+select * 
+FROM products
+where product_id = 75
+
+-- FT:CEK DETAIL ORDER YANG DISCONTINU
+-------------------------------------------------
+CREATE OR REPLACE FUNCTION cek_continu() 
+RETURNS TRIGGER AS 
+$$
+DECLARE
+	p_id integer;
+	p_discontinu integer;
+BEGIN
+	p_id := NEW.product_id;
+	
+	SELECT discontined into p_discontinu
+	from products
+	where product_id = p_id;
+	
+	IF p_discontinu = 1
+	THEN
+		RAISE EXCEPTION 'Order with Product ID % is discontinu', p_id
+      	USING HINT = 'Order dibatalkan';
+		RETURN NULL;
+	END IF;	
+	
+	RETURN NEW;
+END;
+$$ 
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trig_cek_continu
+BEFORE INSERT OR UPDATE ON order_details
+FOR EACH ROW
+EXECUTE PROCEDURE cek_continu();
+--
+INSERT INTO order_details VALUES (10248, 1, 18, 1, 0);
+select * from products
+
 
 -- P:INSERT ORDER
 ---------------------
@@ -437,3 +538,5 @@ SELECT
 		WHERE od.product_id=p.product_id
 	) AS order_count
 FROM products AS p;
+
+
