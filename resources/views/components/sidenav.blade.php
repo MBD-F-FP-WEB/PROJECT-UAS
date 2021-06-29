@@ -54,7 +54,7 @@
             @endphp
             @endif
             <li class="nav-item {{$customer_customer_demo_form_active}}">
-              <a class="nav-link {{$customer_customer_demo_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/automotive.html">
+              <a class="nav-link {{$customer_customer_demo_form_active}}" href="{{ route('form.customer_customer_demo') }}">
                 <span class="sidenav-mini-icon"> CCD </span>
                 <span class="sidenav-normal"> Customer Customer Demo </span>
               </a>
@@ -69,7 +69,7 @@
             @endphp
             @endif
             <li class="nav-item {{$customer_demographics_form_active}}">
-              <a class="nav-link {{$customer_demographics_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/smart-home.html">
+              <a class="nav-link {{$customer_demographics_form_active}}" href="{{ route('form.customer_demographics') }}">
                 <span class="sidenav-mini-icon"> CD </span>
                 <span class="sidenav-normal"> Customer Demographics </span>
               </a>
@@ -84,7 +84,7 @@
             @endphp
             @endif
             <li class="nav-item {{$customer_form_active}}">
-              <a class="nav-link {{$customer_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$customer_form_active}}" href="{{ route('form.customer') }}">
                 <span class="sidenav-mini-icon"> Cu </span>
                 <span class="sidenav-normal"> Customer </span>
               </a>
@@ -99,7 +99,7 @@
             @endphp
             @endif
             <li class="nav-item {{$employee_territories_form_active}}">
-              <a class="nav-link {{$employee_territories_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$employee_territories_form_active}}" href="{{ route('form.employee_territories') }}">
                 <span class="sidenav-mini-icon"> ET </span>
                 <span class="sidenav-normal"> Employee Territories </span>
               </a>
@@ -114,7 +114,7 @@
             @endphp
             @endif
             <li class="nav-item {{$employee_form_active}}">
-              <a class="nav-link {{$employee_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$employee_form_active}}" href="{{ route('form.employee') }}">
                 <span class="sidenav-mini-icon"> E </span>
                 <span class="sidenav-normal"> Employee </span>
               </a>
@@ -129,7 +129,7 @@
             @endphp
             @endif
             <li class="nav-item {{$order_detail_form_active}}">
-              <a class="nav-link {{$order_detail_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$order_detail_form_active}}" href="{{ route('form.order_detail') }}">
                 <span class="sidenav-mini-icon"> OD </span>
                 <span class="sidenav-normal"> Order Detail </span>
               </a>
@@ -144,7 +144,7 @@
             @endphp
             @endif
             <li class="nav-item {{$order_form_active}}">
-              <a class="nav-link {{$order_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$order_form_active}}" href="{{ route('form.order') }}">
                 <span class="sidenav-mini-icon"> O </span>
                 <span class="sidenav-normal"> Order </span>
               </a>
@@ -159,7 +159,7 @@
             @endphp
             @endif
             <li class="nav-item {{$product_form_active}}">
-              <a class="nav-link {{$product_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$product_form_active}}" href="{{ route('form.product') }}">
                 <span class="sidenav-mini-icon"> P </span>
                 <span class="sidenav-normal"> Product </span>
               </a>
@@ -174,7 +174,7 @@
             @endphp
             @endif
             <li class="nav-item {{$region_form_active}}">
-              <a class="nav-link {{$region_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$region_form_active}}" href="{{ route('form.region') }}">
                 <span class="sidenav-mini-icon"> R </span>
                 <span class="sidenav-normal"> Region </span>
               </a>
@@ -189,7 +189,7 @@
             @endphp
             @endif
             <li class="nav-item {{$shipper_form_active}}">
-              <a class="nav-link {{$shipper_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$shipper_form_active}}" href="{{ route('form.shipper') }}">
                 <span class="sidenav-mini-icon"> Sh </span>
                 <span class="sidenav-normal"> Shipper </span>
               </a>
@@ -204,7 +204,7 @@
             @endphp
             @endif
             <li class="nav-item {{$supplier_form_active}}">
-              <a class="nav-link {{$supplier_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$supplier_form_active}}" href="{{ route('form.supplier') }}">
                 <span class="sidenav-mini-icon"> Su </span>
                 <span class="sidenav-normal"> Supplier </span>
               </a>
@@ -219,7 +219,7 @@
             @endphp
             @endif
             <li class="nav-item {{$territory_form_active}}">
-              <a class="nav-link {{$territory_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$territory_form_active}}" href="{{ route('form.territory') }}">
                 <span class="sidenav-mini-icon"> T </span>
                 <span class="sidenav-normal"> Territory </span>
               </a>
@@ -234,7 +234,7 @@
             @endphp
             @endif
             <li class="nav-item {{$us_states_form_active}}">
-              <a class="nav-link {{$us_states_form_active}}" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/crm.html">
+              <a class="nav-link {{$us_states_form_active}}" href="{{ route('form.us_states') }}">
                 <span class="sidenav-mini-icon"> US </span>
                 <span class="sidenav-normal"> US States </span>
               </a>

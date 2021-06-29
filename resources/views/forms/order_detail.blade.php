@@ -1,4 +1,11 @@
-@extends('layouts.form')
+@extends('layouts.app')
+
+@section('navbar')
+@include('components.sidenav', [
+  'active' => "forms",
+  'form' => "order_detail"
+])
+@endsection
 
 @section('content')
   <div class="row mt-lg-n10 mt-md-n11 mt-n10">
