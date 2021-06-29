@@ -38,19 +38,20 @@
 
 <body class="g-sidenav-show  bg-gray-100">
   
-  @include('components.sidenav')
+  @yield('navbar')
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     @include('components.navbar')
     <div class="container-fluid py-4">
       @include('components.header.index')
-      @include('components.sections.index-1')
+      {{-- @include('components.sections.index-1')
       @include('components.sections.index-2')
-      @include('components.sections.index-3')
-      @include('components.footer.index')
+      @include('components.sections.index-3') --}}
       @yield('content')
+      @include('components.footer.index')
     </div>
   </main>
   @include('components.plugin')
+
   <!-- custom -->
   @yield('script')
   <!--   Core JS Files   -->

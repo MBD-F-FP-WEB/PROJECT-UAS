@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('navbar')
+@include('components.sidenav', ['active' => "employee"])
+@endsection
 @section('content')
 <div class="container mt-5">
     <div class="row">
