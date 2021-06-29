@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\CreateController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,5 @@ use App\Http\Controllers\ViewController;
 Route::group(['prefix' => ''], function () {
     Route::get('', [ViewController::class, 'view'])->name('home');
 });
+
+Route::get('/form', [CreateController::class, 'view'])->name('form');
