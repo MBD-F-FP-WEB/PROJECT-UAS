@@ -67,28 +67,30 @@
 
 @section('script')
 
-CREATE TABLE employees
+CREATE TABLE orders
 (
+	order_id int,
+	customer_id varchar(255),
 	employee_id int,
-	last_name varchar(255),
-	first_name varchar(255),
-	title varchar(255),
-	title_of_courtesy varchar(255),
-	birth_date date,
-	hire_date date,
-	address varchar(255),
-	city varchar(255),
-	region varchar(255),
-	postal_code varchar(255),
-	country varchar(255),
-	home_phone varchar(255),
-	extension varchar(255),
-	photo bytea,
-	notes text,
-	reports_to int,
-	photo_path varchar(255),
-	PRIMARY KEY (employee_id),
-	CONSTRAINT fk_e_to_employees 
-		FOREIGN KEY (reports_to) 
-		REFERENCES employees(employee_id)
+	order_date date,
+	required_date date,
+	shipped_date date,
+	ship_via int,
+	freight int,
+	ship_name varchar(255),
+	ship_address varchar(255),
+	ship_city varchar(255),
+	ship_region varchar(255),
+	ship_postal_code varchar(255),
+	ship_country varchar(255),
+	PRIMARY KEY (order_id),
+	CONSTRAINT fk_o_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_o_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employees(employee_id),
+	CONSTRAINT fk_o_to_shippers 
+		FOREIGN KEY (ship_via) 
+		REFERENCES shippers(shipper_id)
 );
