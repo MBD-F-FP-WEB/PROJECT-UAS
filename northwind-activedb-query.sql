@@ -296,6 +296,41 @@ select *
 FROM products
 where product_id = 75
 
+-- FT:CEK DETAIL ORDER YANG DISCONTINU
+-------------------------------------------------
+CREATE OR REPLACE FUNCTION cek_continu() 
+RETURNS TRIGGER AS 
+$$
+DECLARE
+	p_id integer;
+	p_discontinu integer;
+BEGIN
+	p_id := NEW.product_id;
+	
+	SELECT discontined into p_discontinu
+	from products
+	where product_id = p_id;
+	
+	IF p_discontinu = 1
+	THEN
+		RAISE EXCEPTION 'Order with Product ID % is discontinu', p_id
+      	USING HINT = 'Order dibatalkan';
+		RETURN NULL;
+	END IF;	
+	
+	RETURN NEW;
+END;
+$$ 
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trig_cek_continu
+BEFORE INSERT OR UPDATE ON order_details
+FOR EACH ROW
+EXECUTE PROCEDURE cek_continu();
+--
+INSERT INTO order_details VALUES (10248, 1, 18, 1, 0);
+select * from products
+
 
 -- P:INSERT ORDER
 ---------------------
