@@ -215,11 +215,11 @@ $total$ LANGUAGE plpgsql;
 --
 select calc_total(10248);
 
--- FT:UBAH REQUIRED DATE TO NOW IF < ORDER DATE
+-- FT:UBAH REQUIRED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
 --------------------------------------------------
 CREATE OR REPLACE FUNCTION proses_ubah_required_date() RETURNS TRIGGER AS $$
 BEGIN
-IF (TG_OP = 'INSERT' || NEW.required_date < NEW.order_date) THEN
+IF (TG_OP = 'INSERT' OR NEW.required_date < NEW.order_date) THEN
 	NEW.required_date := NEW.order_date + INTERVAL '1' DAY;
 	RETURN NEW;
 END IF;
@@ -227,6 +227,22 @@ END;
 $$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER ubah_required_date
+BEFORE INSERT OR UPDATE ON orders
+FOR EACH ROW
+EXECUTE PROCEDURE proses_ubah_required_date();
+
+-- FT:UBAH SHIPPED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
+--------------------------------------------------
+CREATE OR REPLACE FUNCTION proses_ubah_shipped_date() RETURNS TRIGGER AS $$
+BEGIN
+IF (TG_OP = 'INSERT' OR NEW.shipped_date < NEW.order_date) THEN
+	NEW.shipped_date := NEW.order_date + INTERVAL '1' DAY;
+	RETURN NEW;
+END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_shipped_date
 BEFORE INSERT OR UPDATE ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE proses_ubah_required_date();
@@ -437,3 +453,21 @@ SELECT
 		WHERE od.product_id=p.product_id
 	) AS order_count
 FROM products AS p;
+
+-- F:HITUNG ORDER PRICE - DISCOUNT
+-------------------------------------------------
+CREATE OR REPLACE FUNCTION calc_diskon (o_id integer)
+RETURNS integer AS $total$
+declare
+    total integer;
+BEGIN
+   	select calc_diskon(o_id) - de.discount as totalprice into total
+	from order_details as de
+	natural join orders as o
+	where de.order_id = o_id
+	group by de.order_id;
+	RETURN total;
+END;
+$total$ LANGUAGE plpgsql;
+--
+select calc_diskon(10248);

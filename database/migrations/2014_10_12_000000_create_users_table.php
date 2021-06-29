@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        /*
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -22,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        */
+        \DB::statement('CREATE TABLE not_shippers(shipper_id int, company_name varchar(255),phone varchar(255),PRIMARY KEY (shipper_id));');
     }
 
     /**
