@@ -12,42 +12,77 @@
           @if(Session::has('success'))
           <div class="alert alert-success">
               {{Session::get('success')}}
-          </div>  
+          </div>
           @endif
           <form role="form text-left">
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>order_id</label>
+                <select class="form-control" name="order_id">
+                  @foreach($order_ids as $order_id)
+                  <option value="{{$order_id}}">{{$order_id}}</option>
+                  @endforeach
+                </select>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('order_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('order_id') }}
                 </div>
                 @endif
             </div>
+
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>product_id</label>
+                <select class="form-control" name="product_id">
+                  @foreach($product_ids as $product_id)
+                  <option value="{{$product_id}}">{{$product_id}}</option>
+                  @endforeach
+                </select>
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('product_id'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('product_id') }}
                 </div>
                 @endif
             </div>
+            
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
+                <label>unit_price</label>
+                <input type="text" class="form-control {{ $errors->has('unit_price') ? 'error' : '' }}" name="unit_price" id="unit_price" value="{{ old('unit_price') }}">
 
                 <!-- Error -->
-                @if ($errors->has('name'))
+                @if ($errors->has('unit_price'))
                 <div class="error">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('unit_price') }}
                 </div>
                 @endif
             </div>
+
+            <div class="form-group">
+                <label>quantity</label>
+                <input type="text" class="form-control {{ $errors->has('quantity') ? 'error' : '' }}" name="quantity" id="quantity" value="{{ old('quantity') }}">
+
+                <!-- Error -->
+                @if ($errors->has('quantity'))
+                <div class="error">
+                    {{ $errors->first('quantity') }}
+                </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label>discount</label>
+                <input type="text" class="form-control {{ $errors->has('discount') ? 'error' : '' }}" name="discount" id="discount" value="{{ old('discount') }}">
+
+                <!-- Error -->
+                @if ($errors->has('discount'))
+                <div class="error">
+                    {{ $errors->first('discount') }}
+                </div>
+                @endif
+            </div>
+
             <div class="form-check form-check-info text-left">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
               <label class="form-check-label" for="flexCheckDefault">
@@ -66,7 +101,7 @@
 @endsection
 
 @section('script')
-
+<!-- 
 CREATE TABLE order_details
 (
 	order_id int,
@@ -80,4 +115,4 @@ CREATE TABLE order_details
 	CONSTRAINT fk_od_to_products 
 		FOREIGN KEY (product_id) 
 		REFERENCES products(product_id)
-);
+); -->
