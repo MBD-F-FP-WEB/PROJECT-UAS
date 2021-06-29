@@ -215,6 +215,24 @@ $total$ LANGUAGE plpgsql;
 --
 select calc_total(10248);
 
+-- F:HITUNG ORDER PRICE - DISCOUNT
+-------------------------------------------------
+CREATE OR REPLACE FUNCTION calc_diskon (o_id integer)
+RETURNS integer AS $total$
+declare
+    total integer;
+BEGIN
+   	select calc_diskon(o_id) - de.discount as totalprice into total
+	from order_details as de
+	natural join orders as o
+	where de.order_id = o_id
+	group by de.order_id;
+	RETURN total;
+END;
+$total$ LANGUAGE plpgsql;
+--
+select calc_diskon(10248);
+
 -- FT:UBAH REQUIRED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
 --------------------------------------------------
 CREATE OR REPLACE FUNCTION proses_ubah_required_date() RETURNS TRIGGER AS $$
@@ -246,6 +264,38 @@ CREATE TRIGGER ubah_shipped_date
 BEFORE INSERT OR UPDATE ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE proses_ubah_required_date();
+
+-- FT:UPDATE UNIT IN STOCK & UNIT IN ORDER
+---------------------------------------
+CREATE OR REPLACE FUNCTION jum_unit() 
+RETURNS TRIGGER AS 
+$$
+DECLARE
+	q integer;
+	p_id integer;
+BEGIN
+	q := NEW.quantity;
+	p_id := NEW.product_id;
+	UPDATE products
+	SET 
+	units_in_stock = units_in_stock - q,
+	units_on_order = units_on_order + q
+	WHERE product_id = p_id;
+	RETURN NULL;
+END;
+$$ 
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER ubah_jum_unit
+AFTER INSERT OR UPDATE ON order_details
+FOR EACH ROW
+EXECUTE PROCEDURE jum_unit();
+--
+INSERT INTO order_details VALUES (10248, 75, 8, 25, 0);
+select * 
+FROM products
+where product_id = 75
+
 
 -- P:INSERT ORDER
 ---------------------
@@ -454,20 +504,4 @@ SELECT
 	) AS order_count
 FROM products AS p;
 
--- F:HITUNG ORDER PRICE - DISCOUNT
--------------------------------------------------
-CREATE OR REPLACE FUNCTION calc_diskon (o_id integer)
-RETURNS integer AS $total$
-declare
-    total integer;
-BEGIN
-   	select calc_diskon(o_id) - de.discount as totalprice into total
-	from order_details as de
-	natural join orders as o
-	where de.order_id = o_id
-	group by de.order_id;
-	RETURN total;
-END;
-$total$ LANGUAGE plpgsql;
---
-select calc_diskon(10248);
+
