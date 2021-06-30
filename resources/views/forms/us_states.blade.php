@@ -17,7 +17,7 @@
 @section('content')
 <div class="card mt-4 z-index-0">
   <div class="card-header text-center pt-4">
-    <h5>Register with</h5>
+    <h5>State Form</h5>
   </div>
   <div class="card-body">
     <!-- Success message -->
