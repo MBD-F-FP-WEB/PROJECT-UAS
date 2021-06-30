@@ -8,6 +8,13 @@ Route::group(['prefix' => ''], function () {
 	Route::get('', [ViewController::class, 'view'])->name('home');
 });
 
+Route::group(['prefix' => 'table'], function () {
+	Route::get('employee', [ViewController::class, 'viewEmployee'])->name('table.employee');
+	Route::get('customer', [ViewController::class, 'viewCustomer'])->name('table.customer');
+	Route::get('order', [ViewController::class, 'viewOrder'])->name('table.order');
+	Route::get('product', [ViewController::class, 'viewProduct'])->name('table.product');
+});
+
 Route::group(['prefix' => 'form'], function () {
 	Route::view('category', 'forms.category')->name('form.category');
 	Route::view('customer_customer_demo', 'forms.customer_customer_demo')->name('form.customer_customer_demo');

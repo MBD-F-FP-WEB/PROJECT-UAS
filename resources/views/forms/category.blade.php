@@ -10,7 +10,7 @@
 @section('content')
 <div class="card mt-4">
   <div class="card-header text-center pt-4">
-    <h5>Register with</h5>
+    <h5>Category Form</h5>
   </div>
   <div class="card-body">
     <!-- Success message -->

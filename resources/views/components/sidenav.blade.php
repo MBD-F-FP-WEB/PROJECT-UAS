@@ -252,7 +252,7 @@
           $employee_active = 'active';
         @endphp
         @endif
-        <a class="nav-link {{$employee_active}}" href="{{ route('home') }}">
+        <a class="nav-link {{$employee_active}}" href="{{ route('table.employee') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
@@ -268,7 +268,7 @@
           $customer_active = 'active';
         @endphp
         @endif
-        <a class="nav-link {{$customer_active}}" href="../pages/tables.html">
+        <a class="nav-link {{$customer_active}}" href="{{ route('table.customer') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
@@ -284,7 +284,7 @@
           $product_active = 'active';
         @endphp
         @endif
-        <a class="nav-link {{$product_active}}" href="../pages/tables.html">
+        <a class="nav-link {{$product_active}}" href="{{ route('table.product') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
@@ -300,7 +300,7 @@
           $order_active = 'active';
         @endphp
         @endif
-        <a class="nav-link {{$order_active}}" href="../pages/tables.html">
+        <a class="nav-link {{$order_active}}" href="{{ route('table.order') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>

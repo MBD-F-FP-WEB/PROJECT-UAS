@@ -15,72 +15,72 @@
 @endsection
 
 @section('content')
-      <div class="card z-index-0">
-        <div class="card-header text-center pt-4">
-          <h5>Register with</h5>
-        </div>
-        <div class="card-body">
-          <!-- Success message -->
-          @if(Session::has('success'))
-          <div class="alert alert-success">
-              {{Session::get('success')}}
-          </div>  
+<div class="card mt-4 z-index-0">
+  <div class="card-header text-center pt-4">
+    <h5>Territory Form</h5>
+  </div>
+  <div class="card-body">
+    <!-- Success message -->
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>  
+    @endif
+    <form role="form text-left">
+      <div class="form-group">
+          <label>territory_id</label>
+          <input type="text" class="form-control {{ $errors->has('territory_id') ? 'error' : '' }}" name="territory_id" id="territory_id" value="{{ old('territory_id') }}">
+
+          <!-- Error -->
+          @if ($errors->has('territory_id'))
+          <div class="error">
+              {{ $errors->first('territory_id') }}
+          </div>
           @endif
-          <form role="form text-left">
-            <div class="form-group">
-                <label>territory_id</label>
-                <input type="text" class="form-control {{ $errors->has('territory_id') ? 'error' : '' }}" name="territory_id" id="territory_id" value="{{ old('territory_id') }}">
-
-                <!-- Error -->
-                @if ($errors->has('territory_id'))
-                <div class="error">
-                    {{ $errors->first('territory_id') }}
-                </div>
-                @endif
-            </div>
-            
-            
-            <div class="form-group">
-                <label>territory_description</label>
-                <textarea name="territory_description" id="territory_description" cols="30" rows="10" class="form-control {{ $errors->has('territory_description') ? 'error' : '' }}">{{ old('territory_description') }}</textarea>
-
-                <!-- Error -->
-                @if ($errors->has('territory_description'))
-                <div class="error">
-                    {{ $errors->first('territory_description') }}
-                </div>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label>region_id</label>
-                <select class="form-control" name="region_id">
-                  @foreach($region_ids as $region_id)
-                  <option value="{{$region_id}}">{{$region_id}}</option>
-                  @endforeach
-                </select>
-
-                <!-- Error -->
-                @if ($errors->has('region_id'))
-                <div class="error">
-                    {{ $errors->first('region_id') }}
-                </div>
-                @endif
-            </div>
-
-            <div class="form-check form-check-info text-left">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-              <label class="form-check-label" for="flexCheckDefault">
-                I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
-              </label>
-            </div>
-            <div class="text-center">
-              <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
-            </div>
-            <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
-          </form>
-        </div>
       </div>
+      
+      
+      <div class="form-group">
+          <label>territory_description</label>
+          <textarea name="territory_description" id="territory_description" cols="30" rows="10" class="form-control {{ $errors->has('territory_description') ? 'error' : '' }}">{{ old('territory_description') }}</textarea>
+
+          <!-- Error -->
+          @if ($errors->has('territory_description'))
+          <div class="error">
+              {{ $errors->first('territory_description') }}
+          </div>
+          @endif
+      </div>
+
+      <div class="form-group">
+          <label>region_id</label>
+          <select class="form-control" name="region_id">
+            @foreach($region_ids as $region_id)
+            <option value="{{$region_id}}">{{$region_id}}</option>
+            @endforeach
+          </select>
+
+          <!-- Error -->
+          @if ($errors->has('region_id'))
+          <div class="error">
+              {{ $errors->first('region_id') }}
+          </div>
+          @endif
+      </div>
+
+      <div class="form-check form-check-info text-left">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        <label class="form-check-label" for="flexCheckDefault">
+          I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+        </label>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+      </div>
+      <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
+    </form>
+  </div>
+</div>
 @endsection
 
 @section('script')
