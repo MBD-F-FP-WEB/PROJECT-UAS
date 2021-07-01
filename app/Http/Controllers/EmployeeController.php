@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Exception;
 
 class EmployeeController extends Controller
 {
@@ -21,10 +22,57 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $query = 'CALL insert_employees(\''
+            .$request->last_name.'\', \''
+            .$request->first_name.'\', \''
+            .$request->title.'\', \''
+            .$request->title_of_courtesy.'\', \''
+            .$request->birth_date.'\', \''
+            .$request->hire_date.'\', \''
+            .$request->address.'\', \''
+            .$request->city.'\', \''
+            .$request->region.'\', \''
+            .$request->postal_code.'\', \''
+            .$request->country.'\', \''
+            .$request->home_phone.'\', \''
+            .$request->extension.'\', \''
+            .$request->photo.'\', \''
+            .$request->notes.'\', \''
+            .$request->reports_to.'\', \''
+            .$request->photo_path.'\');';
+
+		try {
+			\DB::statement($query);
+
+			return back()->with('success', "Berhasil submit data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal submit data");
+		}
     }
+
+    /**
+     * insert_employees (
+            last_name varchar,
+            first_name varchar,
+            title varchar,
+            title_of_courtesy varchar,
+            birth_date date,
+            hire_date date,
+            address varchar,
+            city varchar,
+            region varchar,
+            postal_code varchar,
+            country varchar,
+            home_phone varchar,
+            extension varchar,
+            photo bytea,
+            notes text,
+            reports_to int,
+            photo_path varchar
+        )
+     */
 
     /**
      * Store a newly created resource in storage.
