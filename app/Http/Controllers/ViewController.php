@@ -12,7 +12,11 @@ class ViewController extends Controller
 {
 	public function view()
 	{
-		return view('welcome');
+        $employee = Employee::count();
+        $customer = Customer::count();
+        $order = Order::count();
+        $product = Product::count();
+		return view('welcome', compact(['employee', 'customer', 'order', 'product']));
 	}
 
 	public function viewEmployee()

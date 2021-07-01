@@ -43,6 +43,7 @@
     @include('components.navbar')
     <div class="container-fluid">
       {{-- @include('components.header.index') --}}
+      @yield('header')
       {{-- @include('components.sections.index-1')
       @include('components.sections.index-2')
       @include('components.sections.index-3') --}}
