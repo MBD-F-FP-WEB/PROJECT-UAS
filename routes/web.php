@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\CategoryController;
 
 Route::group(['prefix' => ''], function () {
 	Route::get('', [ViewController::class, 'view'])->name('home');
@@ -29,4 +30,6 @@ Route::group(['prefix' => 'form'], function () {
 	Route::view('supplier', 'forms.supplier')->name('form.supplier');
 	Route::view('territory', 'forms.territory')->name('form.territory');
 	Route::view('us_states', 'forms.us_states')->name('form.us_states');
+
+	Route::post('category', [CategoryController::class, 'store'])->name('form.category.store');
 });

@@ -17,9 +17,14 @@
     @if(Session::has('success'))
     <div class="alert alert-success">
         {{Session::get('success')}}
-    </div>  
+    </div>
+    @elseif(Session::has('error'))
+    <div class="alert alert-danger text-white">
+        {{Session::get('error')}}
+    </div>
     @endif
-    <form role="form text-left" method="POST" enctype="multipart/form-data">
+    <form role="form text-left" method="POST" enctype="multipart/form-data" action="{{ route('form.category.store') }}">
+      @csrf
       <div class="form-group">
           <label>category_id</label>
           <input type="text" class="form-control {{ $errors->has('category_id') ? 'error' : '' }}" name="category_id" id="category_id" value="{{ old('category_id') }}">
@@ -80,14 +85,8 @@
           @endif
       </div>
       
-      <div class="form-check form-check-info text-left">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-        <label class="form-check-label" for="flexCheckDefault">
-          I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
-        </label>
-      </div>
       <div class="text-center">
-        <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
       </div>
     </form>
   </div>

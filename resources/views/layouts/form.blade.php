@@ -486,7 +486,7 @@
                     </li>
                     <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                       <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownSignUp">
-                        <span>Sign Up</span>
+                        <span>Submit</span>
                         <img src="../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                       </a>
                       <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownSignUp">
@@ -584,7 +584,7 @@
                     Illustration
                   </a>
                   <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center mt-3 px-0">
-                    Sign Up
+                    Submit
                   </h6>
                   <a href="../pages/authentication/signup/basic.html" class="dropdown-item border-radius-md">
                     Basic
