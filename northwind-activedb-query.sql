@@ -222,7 +222,7 @@ RETURNS integer AS $total$
 declare
     total integer;
 BEGIN
-   	select calc_diskon(o_id) - de.discount as totalprice into total
+   	select calc_total(o_id)*(1 - de.discount) as totalprice into total
 	from order_details as de
 	natural join orders as o
 	where de.order_id = o_id
