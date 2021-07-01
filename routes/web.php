@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
-use App\Http\Controllers\CreateController;
 
 Route::group(['prefix' => ''], function () {
 	Route::get('', [ViewController::class, 'view'])->name('home');
@@ -31,5 +30,3 @@ Route::group(['prefix' => 'form'], function () {
 	Route::view('territory', 'forms.territory')->name('form.territory');
 	Route::view('us_states', 'forms.us_states')->name('form.us_states');
 });
-
-Route::get('/form', [CreateController::class, 'view'])->name('form');

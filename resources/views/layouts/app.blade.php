@@ -41,8 +41,8 @@
   @yield('navbar')
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     @include('components.navbar')
-    <div class="container-fluid py-4">
-      @include('components.header.index')
+    <div class="container-fluid">
+      {{-- @include('components.header.index') --}}
       {{-- @include('components.sections.index-1')
       @include('components.sections.index-2')
       @include('components.sections.index-3') --}}

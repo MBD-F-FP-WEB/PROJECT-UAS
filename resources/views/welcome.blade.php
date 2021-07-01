@@ -38,41 +38,6 @@
               </div>
             </div>
           </div>
-          <div>
-            <!-- Projects table -->
-						<table class="table align-items-center table-flush">
-							<thead class="thead-light">
-								<tr>
-									<th scope="col">id</th>
-                  <th scope="col">Name</th>
-									<th scope="col">Title</th>
-									<th scope="col">City</th>
-                  <th scope="col">Country</th>
-								</tr>
-							</thead>
-							<tbody>
-                @foreach($employees as $employee)
-								<tr>
-									<td>
-										{{ $employee->employee_id }}
-									</td>
-                  <td>
-                    {{ $employee->title_of_courtesy }} {{ $employee->first_name }} {{ $employee->last_name }}
-									</td>
-                  <td>
-                    {{ $employee->title }}
-									</td>
-									<td>
-                    {{ $employee->city }}
-									</td>
-									<td>
-                    {{ $employee->country }}
-									</td>
-								</tr>
-                @endforeach
-							</tbody>
-						</table>
-          </div>
         </div>
         
         <!-- End bootstrap marketplace -->
