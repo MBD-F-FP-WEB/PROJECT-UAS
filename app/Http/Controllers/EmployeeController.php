@@ -7,53 +7,47 @@ use Exception;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		//
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        $query = 'CALL insert_employees(\''
-            .$request->last_name.'\', \''
-            .$request->first_name.'\', \''
-            .$request->title.'\', \''
-            .$request->title_of_courtesy.'\', \''
-            .$request->birth_date.'\', \''
-            .$request->hire_date.'\', \''
-            .$request->address.'\', \''
-            .$request->city.'\', \''
-            .$request->region.'\', \''
-            .$request->postal_code.'\', \''
-            .$request->country.'\', \''
-            .$request->home_phone.'\', \''
-            .$request->extension.'\', \''
-            .$request->photo.'\', \''
-            .$request->notes.'\', \''
-            .$request->reports_to.'\', \''
-            .$request->photo_path.'\');';
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create(Request $request)
+	{
+		$query = 'CALL insert_employees(\''
+			. $request->last_name . '\', \''
+			. $request->first_name . '\', \''
+			. $request->title . '\', \''
+			. $request->title_of_courtesy . '\', \''
+			. $request->birth_date . '\', \''
+			. $request->hire_date . '\', \''
+			. $request->address . '\', \''
+			. $request->city . '\', \''
+			. $request->region . '\', \''
+			. $request->postal_code . '\', \''
+			. $request->country . '\', \''
+			. $request->home_phone . '\', \''
+			. $request->extension . '\', \''
+			. $request->photo . '\', \''
+			. $request->notes . '\', \''
+			. $request->reports_to . '\', \''
+			. $request->photo_path . '\');';
 
-		try {
-			\DB::statement($query);
+		return $this->callProcedure($query);
+	}
 
-			return back()->with('success', "Berhasil submit data");
-		} catch (Exception $e) {
-			return back()->with('error', "Gagal submit data");
-		}
-    }
-
-    /**
-     * insert_employees (
+	/**
+	 * insert_employees (
             last_name varchar,
             first_name varchar,
             title varchar,
@@ -72,61 +66,61 @@ class EmployeeController extends Controller
             reports_to int,
             photo_path varchar
         )
-     */
+	 */
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		//
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		//
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id)
+	{
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id)
+	{
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id)
+	{
+		//
+	}
 }

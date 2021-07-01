@@ -410,26 +410,6 @@ INSERT INTO customers(company_name, contact_name, contact_title, address, city, 
 VALUES (company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax);
 $$
 
--- P:INSERT CUSTOMER
----------------------
-CREATE OR REPLACE PROCEDURE insert_customers (
-	company_name varchar,
-	contact_name varchar,
-	contact_title varchar,
-	address varchar,
-	city varchar,
-	region varchar,
-	postal_code varchar,
-	country varchar,
-	phone varchar,
-	fax varchar
-)
-LANGUAGE SQL
-AS $$
-INSERT INTO customers(company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax)
-VALUES (company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax);
-$$
-
 -- P:INSERT PRODUCT
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_products (

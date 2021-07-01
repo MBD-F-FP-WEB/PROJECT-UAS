@@ -25,13 +25,7 @@ class CategoryController extends Controller
 			.$request->description.'\', \''
 			.$request->picture.'\');';
 
-		try {
-			\DB::statement($query);
-
-			return back()->with('success', "Berhasil submit data");
-		} catch (Exception $e) {
-			return back()->with('error', "Gagal submit data");
-		}
+		return $this->callProcedure($query);
 	}
 
 	public function show($id)
