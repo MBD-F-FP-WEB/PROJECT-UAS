@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCustomerRequest;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -23,7 +24,7 @@ class CustomersController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('forms.customer');
 	}
 
 	/**
@@ -32,7 +33,7 @@ class CustomersController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(StoreCustomerRequest $request)
 	{
 		$query = 'CALL insert_customers(\''
 		. $request->company_name .'\', \''

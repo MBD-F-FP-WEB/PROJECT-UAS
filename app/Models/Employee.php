@@ -11,6 +11,10 @@ class Employee extends Model
 
 	protected $table = 'employees';
 
+	protected $primaryKey = 'employee_id';
+
+	public $timestamps = false;
+
 	protected $fillable = [
 		'last_name',
 		'first_name',

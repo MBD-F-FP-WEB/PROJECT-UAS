@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -24,6 +25,18 @@ class EmployeeController extends Controller
 	 */
 	public function create(Request $request)
 	{
+		$reports_tos = Employee::all()->modelKeys();
+		return view('forms.employee', compact('reports_tos'));
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
 		$query = 'CALL insert_employees(\''
 			. $request->last_name . '\', \''
 			. $request->first_name . '\', \''
@@ -44,39 +57,6 @@ class EmployeeController extends Controller
 			. $request->photo_path . '\');';
 
 		return $this->callProcedure($query);
-	}
-
-	/**
-	 * insert_employees (
-            last_name varchar,
-            first_name varchar,
-            title varchar,
-            title_of_courtesy varchar,
-            birth_date date,
-            hire_date date,
-            address varchar,
-            city varchar,
-            region varchar,
-            postal_code varchar,
-            country varchar,
-            home_phone varchar,
-            extension varchar,
-            photo bytea,
-            notes text,
-            reports_to int,
-            photo_path varchar
-        )
-	 */
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
-		//
 	}
 
 	/**

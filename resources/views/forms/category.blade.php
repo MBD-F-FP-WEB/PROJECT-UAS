@@ -23,6 +23,7 @@
         {{Session::get('error')}}
     </div>
     @endif
+    
     <form role="form text-left" method="POST" enctype="multipart/form-data" action="{{ route('form.category.store') }}">
       @csrf
       <div class="form-group">

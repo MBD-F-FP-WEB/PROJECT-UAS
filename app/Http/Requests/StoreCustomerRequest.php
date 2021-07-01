@@ -24,16 +24,16 @@ class StoreCustomerRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'company_name',
-			'contact_name',
-			'contact_title',
-			'address',
-			'city',
-			'region',
-			'postal_code',
-			'country',
-			'phone',
-			'fax'
+			'company_name' => 'required',
+			'contact_name' => 'required',
+			'contact_title' => 'required',
+			'address' => 'required',
+			'city' => 'required',
+			'region' => 'required',
+			'postal_code' => 'required',
+			'country' => 'required',
+			'phone' => 'required',
+			'fax' => 'required'
 		];
 	}
 }

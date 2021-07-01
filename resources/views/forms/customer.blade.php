@@ -21,12 +21,18 @@
 	</div>
 	<div class="card-body">
 		<!-- Success message -->
-		@if(Session::has('success'))
-		<div class="alert alert-success">
-				{{Session::get('success')}}
-		</div>  
-		@endif
-		<form role="form text-left">
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>
+    @elseif(Session::has('error'))
+    <div class="alert alert-danger text-white">
+        {{Session::get('error')}}
+    </div>
+    @endif
+
+		<form role="form text-left" method="POST" enctype="multipart/form-data" action="{{ route('form.customer.store') }}">
+			@csrf
 			<div class="form-group">
 					<label>customer_id</label>
 					<input type="text" class="form-control {{ $errors->has('customer_id') ? 'error' : '' }}" name="customer_id" id="customer_id" value="{{ old('customer_id') }}">
@@ -159,16 +165,9 @@
 					@endif
 			</div>
 
-			<div class="form-check form-check-info text-left">
-				<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-				<label class="form-check-label" for="flexCheckDefault">
-					I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
-				</label>
-			</div>
 			<div class="text-center">
-				<button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+				<button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
 			</div>
-			<p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
 		</form>
 	</div>
 </div>
