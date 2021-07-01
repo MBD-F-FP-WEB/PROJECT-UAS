@@ -25,7 +25,6 @@
     @endif
 
 		<form role="form text-left">
-
 			<div class="form-group">
 					<label>last_name</label>
 					<input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name" id="last_name" value="{{ old('last_name') }}">
@@ -97,9 +96,6 @@
 					</div>
 					@endif
 			</div>
-
-
-
 
 			<div class="form-group">
 					<label>address</label>

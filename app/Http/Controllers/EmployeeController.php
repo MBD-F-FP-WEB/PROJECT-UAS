@@ -15,7 +15,9 @@ class EmployeeController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$reports_tos = Employee::all()->modelKeys();
+		$employees = Employee::paginate(30);
+		return view('tables.employee', compact(['employees', 'reports_tos']));
 	}
 
 	/**
@@ -90,7 +92,13 @@ class EmployeeController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Employee::where('employee_id', $id)->update($request->except(['_method', '_token']));
+
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
