@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +16,8 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$products = Product::all();
+		return view('tables.product', compact('products'));
 	}
 
 	/**
@@ -23,7 +27,10 @@ class ProductController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$supplier_ids = Supplier::all()->pluck('supplier_id');
+		$category_ids = Category::all()->pluck('category_id');
+
+		return view('forms.product', compact(['supplier_ids', 'category_ids']));
 	}
 
 	/**

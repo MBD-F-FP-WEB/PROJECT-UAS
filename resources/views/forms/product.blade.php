@@ -26,7 +26,7 @@
         {{Session::get('success')}}
     </div>  
     @endif
-    <form role="form text-left">
+    <form role="form text-left" method="POST" action="{{ route('form.product.store') }}">
 
       <div class="form-group">
           <label>product_name</label>
@@ -46,6 +46,7 @@
             @foreach($supplier_ids as $supplier_id)
             <option value="{{$supplier_id}}">{{$supplier_id}}</option>
             @endforeach
+            <option value="null"></option>
           </select>
 
           <!-- Error -->
@@ -62,6 +63,7 @@
             @foreach($category_ids as $category_id)
             <option value="{{$category_id}}">{{$category_id}}</option>
             @endforeach
+            <option value="null"></option>
           </select>
 
           <!-- Error -->

@@ -11,6 +11,8 @@ class Region extends Model
 
 	protected $table = 'region';
 
+	protected $primaryKey = 'region_id';
+
 	protected $fillable = [
 		'region_description'
 	];

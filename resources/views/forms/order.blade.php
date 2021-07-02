@@ -26,7 +26,7 @@
 				{{Session::get('success')}}
 		</div>  
 		@endif
-		<form role="form text-left">
+		<form role="form text-left" method="POST" action="{{ route('form.order.store') }}">
 			<div class="form-group">
 					<label>customer_id</label>
 					<select class="form-control" name="customer_id">
@@ -49,12 +49,13 @@
 						@foreach($employee_ids as $employee_id)
 						<option value="{{$employee_id}}">{{$employee_id}}</option>
 						@endforeach
+            <option value="null"></option>
 					</select>
 
 					<!-- Error -->
-					@if ($errors->has('supplier_id'))
+					@if ($errors->has('employee_id'))
 					<div class="error">
-							{{ $errors->first('supplier_id') }}
+							{{ $errors->first('employee_id') }}
 					</div>
 					@endif
 			</div>
@@ -101,6 +102,7 @@
 						@foreach($shipper_ids as $shipper_id)
 						<option value="{{$shipper_id}}">{{$shipper_id}}</option>
 						@endforeach
+            <option value="null"></option>
 					</select>
 
 					<!-- Error -->

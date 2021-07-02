@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UsState;
 use Illuminate\Http\Request;
 
 class UsStatesController extends Controller
@@ -13,7 +14,8 @@ class UsStatesController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$us_states = UsState::all();
+		return view('tables.us_state', compact('us_states'));
 	}
 
 	/**
@@ -23,7 +25,7 @@ class UsStatesController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('forms.us_states');
 	}
 
 	/**

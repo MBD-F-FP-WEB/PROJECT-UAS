@@ -11,6 +11,8 @@ class Shipper extends Model
 
 	protected $table = 'shippers';
 
+	protected $primaryKey = 'shipper_id';
+
 	protected $fillable = [
 		'company_name',
 		'phone'

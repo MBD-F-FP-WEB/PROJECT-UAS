@@ -12,6 +12,7 @@ class CustomerDemographic extends Model
 	protected $table = 'customer_demographics';
 
 	protected $fillable = [
+		'customer_type_id',
 		'customer_desc'
 	];
 }

@@ -26,6 +26,8 @@ Route::group(['prefix' => 'table'], function () {
 	Route::get('customer', [ViewController::class, 'viewCustomer'])->name('table.customer');
 	Route::get('order', [ViewController::class, 'viewOrder'])->name('table.order');
 	Route::get('product', [ViewController::class, 'viewProduct'])->name('table.product');
+
+	Route::get('category', [CategoryController::class, 'index'])->name('table.category');
 });
 
 Route::group(['prefix' => 'form'], function () {
@@ -58,6 +60,8 @@ Route::group(['prefix' => 'form'], function () {
 	Route::post('supplier', [SupplierController::class, 'store'])->name('form.supplier.store');
 	Route::post('territory', [TerritoryController::class, 'store'])->name('form.territory.store');
 	Route::post('us_states', [UsStatesController::class, 'store'])->name('form.us_states.store');
+
+	Route::get('category/{id}', [CategoryController::class, 'edit'])->name('form.category.edit');
 
 	Route::put('employee/update/{id}', [EmployeeController::class, 'update'])->name('form.employee.update');
 });

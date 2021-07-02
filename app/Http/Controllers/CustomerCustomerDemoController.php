@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\CustomerCustomerDemo;
+use App\Models\CustomerDemographic;
 use Illuminate\Http\Request;
 
 class CustomerCustomerDemoController extends Controller
@@ -13,7 +16,8 @@ class CustomerCustomerDemoController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$customer_customer_demo = CustomerCustomerDemo::all();
+		return view('tables.customer_customer_demo', compact('customer_customer_demo'));
 	}
 
 	/**
@@ -23,7 +27,10 @@ class CustomerCustomerDemoController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$customer_ids = Customer::all()->pluck('customer_id');
+		$customer_type_ids = CustomerDemographic::all()->pluck('customer_type_id');
+		
+		return view('forms.customer_customer_demo', compact(['customer_ids', 'customer_type_ids']));
 	}
 
 	/**
@@ -34,11 +41,12 @@ class CustomerCustomerDemoController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'CALL insert_categories(\''
-			.$request->category_name.'\', \''
-			.$request->description.'\', \''
-			.$request->picture.'\');';
-
+		$id = CustomerCustomerDemo::last()->id;
+		$query = 'INSERT INTO customer_customer_demo VALUE('
+			.$id.', \''
+			.$request->customer_id.'\', \''
+			.$request->customer_type_id.'\');';
+		
 		return $this->callProcedure($query);
 	}
 

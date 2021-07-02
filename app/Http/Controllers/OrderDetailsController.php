@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderDetailsController extends Controller
@@ -13,7 +16,8 @@ class OrderDetailsController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$order_details = OrderDetail::all();
+		return view('tables.order_details', compact('order_details'));
 	}
 
 	/**
@@ -23,7 +27,10 @@ class OrderDetailsController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$order_ids = Order::all()->pluck('order_id');
+		$product_ids = Product::all()->pluck('product_id');
+
+		return view('forms.order_detail', compact(['order_ids', 'product_ids']));
 	}
 
 	/**
@@ -34,10 +41,12 @@ class OrderDetailsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'CALL insert_categories(\''
-			.$request->category_name.'\', \''
-			.$request->description.'\', \''
-			.$request->picture.'\');';
+		$query = 'INSERT INTO order_details VALUE(\''
+			.$request->order_id.'\', \''
+			.$request->product_id.'\', \''
+			.$request->unit_price.'\', \''
+			.$request->quantity.'\', \''
+			.$request->discount.'\');';
 
 		return $this->callProcedure($query);
 	}

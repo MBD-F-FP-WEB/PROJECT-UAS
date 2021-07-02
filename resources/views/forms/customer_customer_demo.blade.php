@@ -27,12 +27,13 @@
     </div>  
     @endif
     <form role="form text-left">
-      <div class="form-group">
+      <div class="form-group" method="POST" action="{{ route('form.customer_customer_demo.store') }}">
           <label>customer_id</label>
           <select class="form-control" name="customer_id">
             @foreach($customer_ids as $customer_id)
             <option value="{{$customer_id}}">{{$customer_id}}</option>
             @endforeach
+            <option value="null"></option>
           </select>
 
           <!-- Error -->
@@ -49,6 +50,7 @@
             @foreach($customer_type_ids as $customer_type_id)
             <option value="{{$customer_type_id}}">{{$customer_type_id}}</option>
             @endforeach
+            <option value="null"></option>
           </select>
 
           <!-- Error -->

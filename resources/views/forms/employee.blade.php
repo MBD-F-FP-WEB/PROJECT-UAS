@@ -24,7 +24,7 @@
     </div>
     @endif
 
-		<form role="form text-left">
+		<form role="form text-left"  method="POST" action="{{ route('form.employee.store') }}" enctype="multipart/form-data">
 			<div class="form-group">
 					<label>last_name</label>
 					<input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name" id="last_name" value="{{ old('last_name') }}">
@@ -211,6 +211,7 @@
 						@foreach($reports_tos as $reports_to)
 						<option value="{{$reports_to}}">{{$reports_to}}</option>
 						@endforeach
+            <option value="null"></option>
 					</select>
 
 					<!-- Error -->

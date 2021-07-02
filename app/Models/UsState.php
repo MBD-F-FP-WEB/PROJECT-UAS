@@ -10,6 +10,8 @@ class UsState extends Model
 	use HasFactory;
 
 	protected $table = 'us_states';
+	
+	protected $primaryKey = 'state_id';
 
 	protected $fillable = [
 		'state_name',

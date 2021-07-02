@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\EmployeeTerritories;
+use App\Models\Territory;
 use Illuminate\Http\Request;
 
 class EmployeeTerritoriesController extends Controller
@@ -13,7 +16,8 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$employee_territories = EmployeeTerritories::all();
+		return view('tables.employee_territories', compact('employee_territories'));
 	}
 
 	/**
@@ -23,7 +27,10 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$employee_ids = Employee::all()->pluck('employee_id');
+		$territory_ids = Territory::all()->pluck('territory_id');
+
+		return view('forms.employee_territories', compact(['employee_ids', 'territory_ids']));
 	}
 
 	/**
@@ -34,10 +41,9 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'CALL insert_categories(\''
-			.$request->category_name.'\', \''
-			.$request->description.'\', \''
-			.$request->picture.'\');';
+		$query = 'INSERT INTO employee_territories VALUE(\''
+			.$request->employee_id.'\', \''
+			.$request->territory_id.'\');';
 
 		return $this->callProcedure($query);
 	}

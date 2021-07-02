@@ -19,7 +19,7 @@ class Controller extends BaseController
 
 			return back()->with('success', "Berhasil submit data");
 		} catch (Exception $e) {
-			return back()->with('error', "Gagal submit data");
+			return back()->with('error', "Gagal submit data".$e->getMessage());
 		}
 	}
 }

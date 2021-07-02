@@ -26,7 +26,7 @@
         {{Session::get('success')}}
     </div>  
     @endif
-    <form role="form text-left">
+    <form role="form text-left" method="POST" action="{{ route('form.employee_territories.store') }}">
       <div class="form-group">
           <label>employee_id</label>
           <select class="form-control" name="employee_id">

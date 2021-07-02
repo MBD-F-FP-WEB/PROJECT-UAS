@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Employee;
+use App\Models\Order;
+use App\Models\Shipper;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +17,8 @@ class OrderController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$orders = Order::all();
+		return view('tables.order', compact('order'));
 	}
 
 	/**
@@ -23,7 +28,11 @@ class OrderController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$customer_ids = Customer::all()->pluck('customer_id');
+		$shipper_ids = Shipper::all()->pluck('shipper_id');
+		$employee_ids = Employee::all()->pluck('employee_id');
+
+		return view('forms.order', compact(['customer_ids', 'shipper_ids', 'employee_ids']));
 	}
 
 	/**

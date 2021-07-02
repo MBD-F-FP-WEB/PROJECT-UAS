@@ -26,7 +26,7 @@
         {{Session::get('success')}}
     </div>  
     @endif
-    <form role="form text-left">
+    <form role="form text-left" method="POST" action="{{ route('form.territory.store') }}">
       <div class="form-group">
           <label>territory_id</label>
           <input type="text" class="form-control {{ $errors->has('territory_id') ? 'error' : '' }}" name="territory_id" id="territory_id" value="{{ old('territory_id') }}">

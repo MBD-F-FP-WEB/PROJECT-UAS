@@ -10,4 +10,8 @@ class EmployeeTerritories extends Model
 	use HasFactory;
 
 	protected $table = 'employee_territories';
+	protected $fillable = [
+		'employee_id',
+		'territory_id'
+	];
 }

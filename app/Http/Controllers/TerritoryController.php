@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
+use App\Models\Territory;
 use Illuminate\Http\Request;
 
 class TerritoryController extends Controller
@@ -13,7 +15,8 @@ class TerritoryController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$territories = Territory::all();
+		return view('table.territory', compact('territories'));
 	}
 
 	/**
@@ -23,7 +26,9 @@ class TerritoryController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$region_ids = Region::all()->plcuk('region_id');
+
+		return view('forms.territory', compact(['region_ids']));
 	}
 
 	/**

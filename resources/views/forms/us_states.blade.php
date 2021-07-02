@@ -26,7 +26,7 @@
         {{Session::get('success')}}
     </div>  
     @endif
-    <form role="form text-left">
+    <form role="form text-left" method="POST" action="{{ route('form.us_states.store') }}">
       <div class="form-group">
           <label>state_name</label>
           <input type="text" class="form-control {{ $errors->has('state_name') ? 'error' : '' }}" name="state_name" id="state_name" value="{{ old('state_name') }}">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerDemographic;
 use Illuminate\Http\Request;
 
 class CustomerDemographicsController extends Controller
@@ -13,7 +14,8 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$customer_demographics = CustomerDemographic::all();
+		return view('tables.customer_demographics', compact('customer_demographics'));
 	}
 
 	/**
@@ -23,7 +25,7 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('forms.customer_demographics');
 	}
 
 	/**
@@ -34,11 +36,10 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'CALL insert_categories(\''
-			.$request->category_name.'\', \''
-			.$request->description.'\', \''
-			.$request->picture.'\');';
-
+		$query = 'INSERT INTO customer_demographics VALUE(\''
+			.$request->customer_type_id.'\', \''
+			.$request->customer_desc.'\');';
+			
 		return $this->callProcedure($query);
 	}
 

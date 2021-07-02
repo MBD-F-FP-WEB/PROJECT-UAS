@@ -10,6 +10,8 @@ class Territory extends Model
 	use HasFactory;
 
 	protected $table = 'territories';
+	
+	protected $primaryKey = 'territory_id';
 
 	protected $fillable = [
 		'teritory_description',

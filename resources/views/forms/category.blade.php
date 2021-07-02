@@ -95,6 +95,19 @@
 @endsection
 
 @section('script')
+<script>
+<?php if ($is_editing) { ?>
+  var input_category_id = document.getElementById('category_id');
+  var input_category_name = document.getElementById('category_name');
+  var input_description = document.getElementById('description');
+  var input_name = document.getElementById('name');
+    input_category_id.value = <?php echo '\'' . $category->category_id . '\'' ;?>;
+    input_category_name.value = <?php echo '\'' . $category->category_name . '\'' ;?>;
+    input_description.value = <?php echo '\'' . $category->description . '\'' ;?>;
+    input_name.value = <?php echo '\'' . $category->category_name . '\'' ;?>;
+<?php } ?>
+</script>
+@endsection
 
 <!-- CREATE TABLE categories
 (
