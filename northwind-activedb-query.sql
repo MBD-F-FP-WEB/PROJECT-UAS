@@ -520,3 +520,24 @@ SELECT
 FROM products AS p;
 
 
+-- I:
+customer:
+CREATE INDEX idx_cutomer_contact_name ON customer(contact_name);
+CREATE INDEX idx_cutomer_id ON customer(customer_id);
+CREATE INDEX idx_cutomer_region ON customer(region);
+
+product:
+CREATE INDEX idx_product_name_product ON products(product_name);
+CREATE INDEX idx_supplier_id_product ON products(supplier_id);
+
+supplier:
+CREATE INDEX idx_company_name_supplier ON supplers(company_name);
+CREATE INDEX idx_contact_name_supplier ON supplers(contact_name);
+
+order:
+CREATE INDEX idx_customer_id_order ON orders(customer_id);
+CREATE INDEX idx_employee_id_order ON orders(employee_id);
+
+order_details:
+CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
+CREATE INDEX idx_discount_orderdetails ON order_details(discount_order);
