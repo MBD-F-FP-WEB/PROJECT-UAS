@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class CustomersController extends Controller
 {
@@ -16,9 +17,8 @@ class CustomersController extends Controller
 	 */
 	public function index()
 	{
-		$customers = Customer::all();
-
-		return view('table.customer', compact('customers'));
+		$customers = Customer::paginate(30);
+		return view('tables.customer', compact(['customers']));
 	}
 
 	/**
@@ -85,7 +85,12 @@ class CustomersController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Customer::where('customer_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -99,3 +104,20 @@ class CustomersController extends Controller
 		//
 	}
 }
+/**
+ * CREATE TABLE customers
+(
+	customer_id varchar(255),
+	company_name varchar(255),
+	contact_name varchar(255),
+	contact_title varchar(255),
+	address varchar(255),
+	city varchar(255),
+	region varchar(255),
+	postal_code varchar(255),
+	country varchar(255),
+	phone varchar(255),
+	fax varchar(255),
+	PRIMARY KEY (customer_id)
+);
+ */

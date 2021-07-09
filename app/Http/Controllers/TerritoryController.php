@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Region;
 use App\Models\Territory;
 use Illuminate\Http\Request;
+use Exception;
 
 class TerritoryController extends Controller
 {
@@ -15,7 +16,7 @@ class TerritoryController extends Controller
 	 */
 	public function index()
 	{
-		$territories = Territory::all();
+		$territories = Territory::paginate(30);
 		return view('table.territory', compact('territories'));
 	}
 
@@ -77,7 +78,12 @@ class TerritoryController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Territory::where('territory_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -91,3 +97,15 @@ class TerritoryController extends Controller
 		//
 	}
 }
+/**
+ * CREATE TABLE territories
+(
+	territory_id varchar(255),
+	territory_description varchar(255),
+	region_id int,
+	PRIMARY KEY (territory_id),
+	CONSTRAINT fk_t_to_region 
+		FOREIGN KEY (region_id) 
+		REFERENCES region(region_id)
+);
+ */

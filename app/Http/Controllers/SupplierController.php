@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Exception;
 
 class SupplierController extends Controller
 {
@@ -14,7 +15,7 @@ class SupplierController extends Controller
 	 */
 	public function index()
 	{
-		$suppliers = Supplier::all();
+		$suppliers = Supplier::paginate(30);
 		return view('tables.supplier', compact('suppliers'));
 	}
 
@@ -83,7 +84,12 @@ class SupplierController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Supplier::where('supplier_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -97,3 +103,21 @@ class SupplierController extends Controller
 		//
 	}
 }
+/**
+ * CREATE TABLE suppliers
+(
+	supplier_id int,
+	company_name varchar(255),
+	contact_name varchar(255),
+	contact_title varchar(255),
+	address varchar(255),
+	city varchar(255),
+	region varchar(255),
+	postal_code varchar(255),
+	country varchar(255),
+	phone varchar(255),
+	fax varchar(255),
+	homepage varchar(255),
+	PRIMARY KEY (supplier_id)
+);
+ */

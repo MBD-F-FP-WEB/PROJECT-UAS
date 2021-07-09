@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\CustomerCustomerDemo;
 use App\Models\CustomerDemographic;
 use Illuminate\Http\Request;
+use Exception;
 
 class CustomerCustomerDemoController extends Controller
 {
@@ -16,7 +17,7 @@ class CustomerCustomerDemoController extends Controller
 	 */
 	public function index()
 	{
-		$customer_customer_demo = CustomerCustomerDemo::all();
+		$customer_customer_demo = CustomerCustomerDemo::paginate(30);
 		return view('tables.customer_customer_demo', compact('customer_customer_demo'));
 	}
 
@@ -81,7 +82,12 @@ class CustomerCustomerDemoController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			CustomerCustomerDemo::where('customer_id', $request->customer_id)->where('customer_type_id', $request->customer_type_id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -95,3 +101,18 @@ class CustomerCustomerDemoController extends Controller
 		//
 	}
 }
+/*
+CREATE TABLE customer_customer_demo
+(
+  id int,
+	customer_id varchar(255),
+	customer_type_id varchar(255),
+  PRIMARY KEY (id),
+	CONSTRAINT fk_ccd_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_ccd_to_customer_demographics 
+		FOREIGN KEY (customer_type_id) 
+		REFERENCES customer_demographics(customer_type_id)
+);
+ */

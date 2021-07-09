@@ -23,11 +23,18 @@ Route::group(['prefix' => ''], function () {
 
 Route::group(['prefix' => 'table'], function () {
 	Route::get('employee', [EmployeeController::class, 'index'])->name('table.employee');
-	Route::get('customer', [ViewController::class, 'viewCustomer'])->name('table.customer');
-	Route::get('order', [ViewController::class, 'viewOrder'])->name('table.order');
-	Route::get('product', [ViewController::class, 'viewProduct'])->name('table.product');
-
+	Route::get('customer', [CustomersController::class, 'index'])->name('table.customer');
+	Route::get('order', [OrderController::class, 'index'])->name('table.order');
+	Route::get('product', [ProductController::class, 'index'])->name('table.product');
 	Route::get('category', [CategoryController::class, 'index'])->name('table.category');
+	Route::get('customer_customer_demo', [CustomerCustomerDemoController::class, 'index'])->name('table.customer_customer_demo');
+	Route::get('customer_demographics', [CustomerDemographicsController::class, 'index'])->name('table.customer_demographics');
+	Route::get('employee_territories', [EmployeeTerritoriesController::class, 'index'])->name('table.employee_territories');
+	Route::get('order_detail', [OrderDetailsController::class, 'index'])->name('table.order_detail');
+	Route::get('region', [RegionController::class, 'index'])->name('table.region');
+	Route::get('shipper', [ShippersController::class, 'index'])->name('table.shipper');
+	Route::get('territory', [TerritoryController::class, 'index'])->name('table.territory');
+	Route::get('us_states', [UsStatesController::class, 'index'])->name('table.us_states');
 });
 
 Route::group(['prefix' => 'form'], function () {
@@ -61,7 +68,18 @@ Route::group(['prefix' => 'form'], function () {
 	Route::post('territory', [TerritoryController::class, 'store'])->name('form.territory.store');
 	Route::post('us_states', [UsStatesController::class, 'store'])->name('form.us_states.store');
 
-	Route::get('category/{id}', [CategoryController::class, 'edit'])->name('form.category.edit');
-
 	Route::put('employee/update/{id}', [EmployeeController::class, 'update'])->name('form.employee.update');
+	Route::put('category/update/{id}', [CategoryController::class, 'update'])->name('form.category.update');
+	Route::put('customer_customer_demo/update/{id}', [CustomerCustomerDemoController::class, 'update'])->name('form.customer_customer_demo.update');
+	Route::put('customer_demographics/update/{id}', [CustomerDemographicsController::class, 'update'])->name('form.customer_demographics.update');
+	Route::put('customer/update/{id}', [CustomersController::class, 'update'])->name('form.customer.update');
+	Route::put('employee_territories/update/{id}', [EmployeeTerritoriesController::class, 'update'])->name('form.employee_territories.update');
+	Route::put('order_detail/update/{id}', [OrderDetailsController::class, 'update'])->name('form.order_detail.update');
+	Route::put('order/update/{id}', [OrderController::class, 'update'])->name('form.order.update');
+	Route::put('product/update/{id}', [ProductController::class, 'update'])->name('form.product.update');
+	Route::put('region/update/{id}', [RegionController::class, 'update'])->name('form.region.update');
+	Route::put('shipper/update/{id}', [ShippersController::class, 'update'])->name('form.shipper.update');
+	Route::put('supplier/update/{id}', [SupplierController::class, 'update'])->name('form.supplier.update');
+	Route::put('territory/update/{id}', [TerritoryController::class, 'update'])->name('form.territory.update');
+	Route::put('us_states/update/{id}', [UsStatesController::class, 'update'])->name('form.us_states.update');
 });

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Exception;
 
 class OrderDetailsController extends Controller
 {
@@ -16,7 +17,7 @@ class OrderDetailsController extends Controller
 	 */
 	public function index()
 	{
-		$order_details = OrderDetail::all();
+		$order_details = OrderDetail::paginate(30);
 		return view('tables.order_details', compact('order_details'));
 	}
 
@@ -82,7 +83,12 @@ class OrderDetailsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			OrderDetail::where('order_id', $request->order_id)->where('product_id', $request->product_id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -96,3 +102,19 @@ class OrderDetailsController extends Controller
 		//
 	}
 }
+/**
+ * CREATE TABLE order_details
+(
+	order_id int,
+	product_id int,
+	unit_price int,
+	quantity int,
+	discount int,
+	CONSTRAINT fk_od_to_orders 
+		FOREIGN KEY (order_id) 
+		REFERENCES orders(order_id),
+	CONSTRAINT fk_od_to_products 
+		FOREIGN KEY (product_id) 
+		REFERENCES products(product_id)
+);
+ */

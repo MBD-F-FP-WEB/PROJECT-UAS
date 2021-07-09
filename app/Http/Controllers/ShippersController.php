@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipper;
 use Illuminate\Http\Request;
+use Exception;
 
 class ShippersController extends Controller
 {
@@ -14,7 +15,7 @@ class ShippersController extends Controller
 	 */
 	public function index()
 	{
-		$shippers = Shipper::all();
+		$shippers = Shipper::paginate(30);
 		return view('tables.shipper', compact('shippers'));
 	}
 
@@ -74,7 +75,12 @@ class ShippersController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Shipper::where('shipper_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -88,3 +94,12 @@ class ShippersController extends Controller
 		//
 	}
 }
+/**
+ * CREATE TABLE shippers
+(
+	shipper_id int,
+	company_name varchar(255),
+	phone varchar(255),
+	PRIMARY KEY (shipper_id)
+);
+ */

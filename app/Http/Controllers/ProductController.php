@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -16,8 +17,8 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		$products = Product::all();
-		return view('tables.product', compact('products'));
+		$products = Product::paginate(30);
+		return view('tables.product', compact(['products']));
 	}
 
 	/**
@@ -86,7 +87,12 @@ class ProductController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Product::where('product_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -100,3 +106,26 @@ class ProductController extends Controller
 		//
 	}
 }
+
+/**
+ * CREATE TABLE products
+(
+	product_id int,
+	product_name varchar(255),
+	supplier_id int,
+	category_id int,
+	quantity_per_unit varchar(255),
+	unit_price int,
+	units_in_stock int,
+	units_on_order int,
+	reorder_level int,
+	discontined int,
+	PRIMARY KEY (product_id),
+	CONSTRAINT fk_p_to_suppliers 
+		FOREIGN KEY (supplier_id) 
+		REFERENCES suppliers(supplier_id),
+	CONSTRAINT fk_p_to_categories 
+		FOREIGN KEY (category_id) 
+		REFERENCES categories(category_id)
+);
+ */

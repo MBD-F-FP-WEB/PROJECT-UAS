@@ -58,3 +58,14 @@ class CategoryController extends Controller
 		//
 	}
 }
+
+/*
+CREATE TABLE categories
+(
+	category_id int,
+	category_name varchar(255),
+	description varchar(255),
+	picture bytea,
+	PRIMARY KEY (category_id)
+);
+*/

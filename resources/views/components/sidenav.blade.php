@@ -21,7 +21,7 @@
           $forms_show = 'show';
         @endphp
         @endif
-        <a class="nav-link {{$forms_active}}" data-bs-toggle="collapse" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html#dashboardsExamples" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+        <a class="nav-link {{$forms_active}}" data-bs-toggle="collapse" href="#dashboardsExamples" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
             @include('icons.shop')
           </div>
@@ -307,6 +307,172 @@
           <span class="nav-link-text ms-1">Order</span>
         </a>
       </li>
+
+
+      
+      <li class="nav-item">
+        @php
+          $forms_active = '';
+          $table_show = '';
+        @endphp
+        @if ($active == "forms")
+        @php
+          $forms_active = 'active';
+          $table_show = 'show';
+        @endphp
+        @endif
+        <a class="nav-link {{$forms_active}}" data-bs-toggle="collapse" href="#other-tables" aria-controls="other-tables" role="button" aria-expanded="false">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">Other Tables</span>
+        </a>
+        <div class="collapse {{$table_show}}" id="other-tables">
+          <ul class="nav ms-4 ps-3">
+
+            @php
+              $customer_customer_demo_form_active = '';
+            @endphp
+            @if ($form == "customer_customer_demo")
+            @php
+              $customer_customer_demo_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$customer_customer_demo_form_active}}">
+              <a class="nav-link {{$customer_customer_demo_form_active}}" href="{{ route('form.customer_customer_demo') }}">
+                <span class="sidenav-mini-icon"> CCD </span>
+                <span class="sidenav-normal"> Customer Customer Demo </span>
+              </a>
+            </li>
+
+            @php
+              $customer_demographics_form_active = '';
+            @endphp
+            @if ($form == "customer_demographics")
+            @php
+              $customer_demographics_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$customer_demographics_form_active}}">
+              <a class="nav-link {{$customer_demographics_form_active}}" href="{{ route('form.customer_demographics') }}">
+                <span class="sidenav-mini-icon"> CD </span>
+                <span class="sidenav-normal"> Customer Demographics </span>
+              </a>
+            </li>
+            
+            @php
+              $employee_territories_form_active = '';
+            @endphp
+            @if ($form == "employee_territories")
+            @php
+              $employee_territories_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$employee_territories_form_active}}">
+              <a class="nav-link {{$employee_territories_form_active}}" href="{{ route('form.employee_territories') }}">
+                <span class="sidenav-mini-icon"> ET </span>
+                <span class="sidenav-normal"> Employee Territories </span>
+              </a>
+            </li>
+            
+            @php
+              $order_detail_form_active = '';
+            @endphp
+            @if ($form == "order_detail")
+            @php
+              $order_detail_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$order_detail_form_active}}">
+              <a class="nav-link {{$order_detail_form_active}}" href="{{ route('form.order_detail') }}">
+                <span class="sidenav-mini-icon"> OD </span>
+                <span class="sidenav-normal"> Order Detail </span>
+              </a>
+            </li>
+            
+            @php
+              $region_form_active = '';
+            @endphp
+            @if ($form == "region")
+            @php
+              $region_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$region_form_active}}">
+              <a class="nav-link {{$region_form_active}}" href="{{ route('form.region') }}">
+                <span class="sidenav-mini-icon"> R </span>
+                <span class="sidenav-normal"> Region </span>
+              </a>
+            </li>
+            
+            @php
+              $shipper_form_active = '';
+            @endphp
+            @if ($form == "shipper")
+            @php
+              $shipper_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$shipper_form_active}}">
+              <a class="nav-link {{$shipper_form_active}}" href="{{ route('form.shipper') }}">
+                <span class="sidenav-mini-icon"> Sh </span>
+                <span class="sidenav-normal"> Shipper </span>
+              </a>
+            </li>
+            
+            @php
+              $supplier_form_active = '';
+            @endphp
+            @if ($form == "supplier")
+            @php
+              $supplier_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$supplier_form_active}}">
+              <a class="nav-link {{$supplier_form_active}}" href="{{ route('form.supplier') }}">
+                <span class="sidenav-mini-icon"> Su </span>
+                <span class="sidenav-normal"> Supplier </span>
+              </a>
+            </li>
+            
+            @php
+              $territory_form_active = '';
+            @endphp
+            @if ($form == "territory")
+            @php
+              $territory_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$territory_form_active}}">
+              <a class="nav-link {{$territory_form_active}}" href="{{ route('form.territory') }}">
+                <span class="sidenav-mini-icon"> T </span>
+                <span class="sidenav-normal"> Territory </span>
+              </a>
+            </li>
+            
+            @php
+              $us_states_form_active = '';
+            @endphp
+            @if ($form == "us_states")
+            @php
+              $us_states_form_active = 'active';
+            @endphp
+            @endif
+            <li class="nav-item {{$us_states_form_active}}">
+              <a class="nav-link {{$us_states_form_active}}" href="{{ route('form.us_states') }}">
+                <span class="sidenav-mini-icon"> US </span>
+                <span class="sidenav-normal"> US States </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+
+
+
+
+
       
       {{-- <li class="nav-item">
         <a class="nav-link  " href="{{ asset('pages/billing.html') }}">

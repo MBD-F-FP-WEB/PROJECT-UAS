@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Region;
 use Illuminate\Http\Request;
+use Exception;
 
 class RegionController extends Controller
 {
@@ -14,7 +15,7 @@ class RegionController extends Controller
 	 */
 	public function index()
 	{
-		$region = Region::all();
+		$region = Region::paginate(30);
 		return view('tables.region', compact('region'));
 	}
 
@@ -73,7 +74,12 @@ class RegionController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Region::where('region_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -87,3 +93,11 @@ class RegionController extends Controller
 		//
 	}
 }
+/**
+ * CREATE TABLE region
+(
+	region_id int,
+	region_description varchar(255),
+	PRIMARY KEY (region_id)
+);
+ */
