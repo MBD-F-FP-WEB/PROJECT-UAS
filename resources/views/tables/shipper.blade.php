@@ -20,7 +20,7 @@
 @endif
 <div class="container mt-5">
   <div class="my-4 w-25">
-    <h3>Shipper Data</h3>
+    <h3>Shippers Data</h3>
   </div>
   <div class="row">
     <div class="col-lg-12 mx-auto">      
@@ -31,7 +31,7 @@
               {{-- <p class="lead text-dark pt-1 mb-0">Category</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Categories</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Shippers</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
               {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All

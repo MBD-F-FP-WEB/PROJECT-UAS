@@ -27,7 +27,7 @@ class TerritoryController extends Controller
 	 */
 	public function create()
 	{
-		$region_ids = Region::all()->plcuk('region_id');
+		$region_ids = Region::all()->pluck('region_id');
 
 		return view('forms.territory', compact(['region_ids']));
 	}
@@ -41,8 +41,8 @@ class TerritoryController extends Controller
 	public function store(Request $request)
 	{
 		$query = 'CALL insert_territories(\''
-			. $request->territory_description .'\', \''
-			. $request->region_id .'\');';
+			. $request->territory_description . '\', \''
+			. $request->region_id . '\');';
 
 		return $this->callProcedure($query);
 	}

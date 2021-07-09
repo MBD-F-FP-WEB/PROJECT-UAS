@@ -29,18 +29,7 @@
     <form role="form text-left" method="POST" action="{{ route('form.region.store') }}">
     @csrf
       <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
-
-          <!-- Error -->
-          @if ($errors->has('name'))
-          <div class="error">
-              {{ $errors->first('name') }}
-          </div>
-          @endif
-      </div>
-      <div class="form-group">
-          <label>region_description</label>
+          <label>Region Description</label>
           <textarea name="region_description" id="region_description" cols="30" rows="10" class="form-control {{ $errors->has('region_description') ? 'error' : '' }}">{{ old('region_description') }}</textarea>
 
           <!-- Error -->
@@ -61,9 +50,9 @@
 
 @section('script')
 
-CREATE TABLE region
+{{-- CREATE TABLE region
 (
 	region_id int,
 	region_description varchar(255),
 	PRIMARY KEY (region_id)
-);
+); --}}

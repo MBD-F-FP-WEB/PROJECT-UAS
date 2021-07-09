@@ -26,7 +26,7 @@ class RegionController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('forms.region');
 	}
 
 	/**
@@ -38,7 +38,7 @@ class RegionController extends Controller
 	public function store(Request $request)
 	{
 		$query = 'CALL insert_region(\''
-			. $request->region_description .'\');';
+			. $request->region_description . '\');';
 
 		return $this->callProcedure($query);
 	}

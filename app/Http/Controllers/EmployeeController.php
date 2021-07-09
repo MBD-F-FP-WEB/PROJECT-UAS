@@ -18,6 +18,11 @@ class EmployeeController extends Controller
 	{
 		$reports_tos = Employee::all()->modelKeys();
 		$employees = Employee::paginate(30);
+		// $employees = DB::table('employees')
+		// 	->select('*')
+		// 	->join('profiles','profiles.id','=','users.id')
+		// 	->where(['something' => 'something', 'otherThing' => 'otherThing'])
+		// 	->get();
 		$stats = DB::select('select e.last_name, count(o.employee_id) as juml
 		from orders o
 		join employees e

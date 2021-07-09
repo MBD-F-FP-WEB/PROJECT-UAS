@@ -43,10 +43,10 @@
         </div>
         <div class="overflow-scroll">
           <!-- Projects table -->
-          <table class="table align-items-center table-flush text-center" id="data-table" style="font-size: 10px">
+          <table class="table align-items-center table-flush text-center " id="data-table" style="font-size: 12px">
             <thead class="thead-light">
               <tr>
-                <th scope="col">id</th>
+                <th scope="col" class="px-2">id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Company</th>
                 <th scope="col">Title</th>
@@ -61,7 +61,7 @@
             <tbody>
               @foreach($customers as $customer)
               <tr>
-                <td>
+                <td class="px-4">
                   {{ $customer->customer_id }}
                 </td>
                 <td>

@@ -18,32 +18,24 @@
 </div>
 @endif
 <div class="container mt-5">
+  <div class="my-4 w-25">
+    <h3>Order Details Data</h3>
+  </div>
   <div class="row">
     <div class="col-lg-12 mx-auto">
-      <div class="mb-4 w-25">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../presentation.html">Page Sections</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Features</li>
-          </ol>
-        </nav>
-        <h3>Features</h3>
-      </div>
-      <!-- Else bootstrap marketplace -->
-      
       <div class="position-relative border-radius-xl shadow-lg mb-7">
         <div class="container border-bottom">
           <div class="row py-3">
             <div class="col-lg-4 text-start">
-              <p class="lead text-dark pt-1 mb-0">order_detail</p>
+              {{-- <p class="lead text-dark pt-1 mb-0">order_detail</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i> Data order_detail</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Order Details</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
-              <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+              {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-              </a>
+              </a> --}}
             </div>
           </div>
         </div>
@@ -51,18 +43,18 @@
           <!-- Projects table -->
           <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
-              <tr>
-                <th scope="col">order_id</th>
-                <th scope="col">product_id</th>
-                <th scope="col">unit_price</th>
-                <th scope="col">quantity</th>
-                <th scope="col">discount</th>
+              <tr class="text-center">
+                <th scope="col">Order Id</th>
+                <th scope="col">Product Id</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Discount</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               @foreach($order_details as $order_detail)
-              <tr>
+              <tr class="text-center">
                 <td>
                   {{ $order_detail->order_id }}
                 </td>

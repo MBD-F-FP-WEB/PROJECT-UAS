@@ -20,7 +20,7 @@
 @endif
 <div class="container mt-5">
   <div class="my-4 w-25">
-    <h3>Supplier Data</h3>
+    <h3>Suppliers Data</h3>
   </div>
   <div class="row">
     <div class="col-lg-12 mx-auto">      
