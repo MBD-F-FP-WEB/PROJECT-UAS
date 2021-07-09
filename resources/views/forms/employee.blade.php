@@ -209,10 +209,10 @@
 			<div class="form-group">
 					<label>reports_to</label>
 					<select class="form-control" name="reports_to">
+						<option value="null"></option>
 						@foreach($reports_tos as $reports_to)
 						<option value="{{$reports_to}}">{{$reports_to}}</option>
 						@endforeach
-            <option value="null"></option>
 					</select>
 
 					<!-- Error -->
