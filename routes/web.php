@@ -95,7 +95,7 @@ Route::group(['prefix' => 'form'], function () {
 	Route::put('customer_demographics/update/{id}', [CustomerDemographicsController::class, 'update'])->name('form.customer_demographics.update');
 	Route::put('customer/update/{id}', [CustomersController::class, 'update'])->name('form.customer.update');
 	Route::put('employee_territories/update/{id}', [EmployeeTerritoriesController::class, 'update'])->name('form.employee_territories.update');
-	Route::put('order_detail/update/{id}', [OrderDetailsController::class, 'update'])->name('form.order_detail.update');
+	Route::put('order_detail/update/{order_id}/{product_id}', [OrderDetailsController::class, 'update'])->name('form.order_detail.update');
 	Route::put('order/update/{id}', [OrderController::class, 'update'])->name('form.order.update');
 	Route::put('product/update/{id}', [ProductController::class, 'update'])->name('form.product.update');
 	Route::put('region/update/{id}', [RegionController::class, 'update'])->name('form.region.update');
