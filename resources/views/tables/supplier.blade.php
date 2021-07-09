@@ -19,32 +19,24 @@
 </div>
 @endif
 <div class="container mt-5">
+  <div class="my-4 w-25">
+    <h3>Supplier Data</h3>
+  </div>
   <div class="row">
-    <div class="col-lg-12 mx-auto">
-      <div class="mb-4 w-25">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../presentation.html">Page Sections</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Features</li>
-          </ol>
-        </nav>
-        <h3>Features</h3>
-      </div>
-      <!-- Else bootstrap marketplace -->
-      
+    <div class="col-lg-12 mx-auto">      
       <div class="position-relative border-radius-xl shadow-lg mb-7">
         <div class="container border-bottom">
           <div class="row py-3">
             <div class="col-lg-4 text-start">
-              <p class="lead text-dark pt-1 mb-0">Supplier</p>
+              {{-- <p class="lead text-dark pt-1 mb-0">Supplier</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i> Data Supplier</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Suppliers</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
-              <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+              {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-              </a>
+              </a> --}}
             </div>
           </div>
         </div>
@@ -52,25 +44,25 @@
           <!-- Projects table -->
           <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
-              <tr>
-                <th scope="col">supplier_id</th>
-                <th scope="col">company_name</th>
-                <th scope="col">contact_name</th>
-                <th scope="col">contact_title</th>
-                <th scope="col">address</th>
-                <th scope="col">city</th>
-                <th scope="col">region</th>
-                <th scope="col">postal_code</th>
-                <th scope="col">country</th>
-                <th scope="col">phone</th>
-                <th scope="col">fax</th>
-                <th scope="col">homepage</th>
+              <tr class="text-center">
+                <th scope="col">Supplier Id</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Contact Name</th>
+                <th scope="col">Contact Title</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">Region</th>
+                <th scope="col">Postal Code</th>
+                <th scope="col">Country</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Fax</th>
+                <th scope="col">Homepage</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               @foreach($suppliers as $supplier)
-              <tr>
+              <tr class="text-center">
                 <td>
                   {{ $supplier->supplier_id }}
                 </td>

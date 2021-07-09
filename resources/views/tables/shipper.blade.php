@@ -19,32 +19,24 @@
 </div>
 @endif
 <div class="container mt-5">
+  <div class="my-4 w-25">
+    <h3>Shipper Data</h3>
+  </div>
   <div class="row">
-    <div class="col-lg-12 mx-auto">
-      <div class="mb-4 w-25">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../presentation.html">Page Sections</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Features</li>
-          </ol>
-        </nav>
-        <h3>Features</h3>
-      </div>
-      <!-- Else bootstrap marketplace -->
-      
+    <div class="col-lg-12 mx-auto">      
       <div class="position-relative border-radius-xl shadow-lg mb-7">
         <div class="container border-bottom">
           <div class="row py-3">
             <div class="col-lg-4 text-start">
-              <p class="lead text-dark pt-1 mb-0">Category</p>
+              {{-- <p class="lead text-dark pt-1 mb-0">Category</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i> Data Category</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Categories</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
-              <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+              {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-              </a>
+              </a> --}}
             </div>
           </div>
         </div>
@@ -52,16 +44,16 @@
           <!-- Projects table -->
           <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
-              <tr>
-                <th scope="col">shipper_id</th>
-                <th scope="col">company_name</th>
-                <th scope="col">phone</th>
+              <tr class="text-center">
+                <th scope="col">Shipper Id</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Phone</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               @foreach($shippers as $shipper)
-              <tr>
+              <tr class="text-center">
                 <td>
                   {{ $shipper->shipper_id }}
                 </td>
@@ -95,7 +87,7 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modalshipperEdit">Edit shipper</h5>
+                      <h5 class="modal-title" id="modalshipperEdit">Edit Shipper</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -103,7 +95,7 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label>company_name</label>
+                            <label>Company Name</label>
                             <input type="text" class="form-control {{ $errors->has('company_name') ? 'error' : '' }}" name="company_name" id="company_name" value="{{ $shipper->company_name ?? "" }}">
 
                             <!-- Error -->
@@ -114,7 +106,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label>phone</label>
+                            <label>Phone</label>
                             <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value="{{ $shipper->phone ?? "" }}">
 
                             <!-- Error -->
