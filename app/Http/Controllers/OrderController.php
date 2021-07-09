@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Order;
 use App\Models\Shipper;
 use Illuminate\Http\Request;
+use Exception;
 
 class OrderController extends Controller
 {
@@ -17,8 +18,11 @@ class OrderController extends Controller
 	 */
 	public function index()
 	{
-		$orders = Order::all();
-		return view('tables.order', compact('order'));
+		$customer_ids = Customer::all()->pluck('customer_id');
+		$employee_ids = Employee::all()->pluck('employee_id');
+		$shipper_ids = Shipper::all()->pluck('shipper_id');
+		$orders = Order::paginate(30);
+		return view('tables.order', compact(['orders', 'shipper_ids', 'customer_ids', 'employee_ids']));
 	}
 
 	/**
@@ -91,7 +95,12 @@ class OrderController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			Order::where('order_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data" . $e->getMessage());
+		}
 	}
 
 	/**
@@ -102,6 +111,36 @@ class OrderController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Order::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
+/**
+ * CREATE TABLE orders
+(
+	order_id int,
+	customer_id varchar(255),
+	employee_id int,
+	order_date date,
+	required_date date,
+	shipped_date date,
+	ship_via int,
+	freight int,
+	ship_name varchar(255),
+	ship_address varchar(255),
+	ship_city varchar(255),
+	ship_region varchar(255),
+	ship_postal_code varchar(255),
+	ship_country varchar(255),
+	PRIMARY KEY (order_id),
+	CONSTRAINT fk_o_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_o_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employees(employee_id),
+	CONSTRAINT fk_o_to_shippers 
+		FOREIGN KEY (ship_via) 
+		REFERENCES shippers(shipper_id)
+);
+ */

@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\EmployeeTerritories;
 use App\Models\Territory;
 use Illuminate\Http\Request;
+use Exception;
 
 class EmployeeTerritoriesController extends Controller
 {
@@ -16,7 +17,7 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function index()
 	{
-		$employee_territories = EmployeeTerritories::all();
+		$employee_territories = EmployeeTerritories::paginate(30);
 		return view('tables.employee_territories', compact('employee_territories'));
 	}
 
@@ -41,7 +42,7 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'INSERT INTO employee_territories VALUE(\''
+		$query = 'INSERT INTO employee_territories VALUES(\''
 			.$request->employee_id.'\', \''
 			.$request->territory_id.'\');';
 
@@ -79,7 +80,12 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			EmployeeTerritories::where('employee_id', $request->employee_id)->where('territory_id', $request->territory_id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -88,8 +94,23 @@ class EmployeeTerritoriesController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($employee_id, $territory_id)
 	{
-		//
+		EmployeeTerritories::where('employee_id', $employee_id)->where('territory_id', $territory_id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
+/**
+ * 
+CREATE TABLE employee_territories
+(
+	employee_id int,
+	territory_id varchar(255),
+	CONSTRAINT fk_et_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employees(employee_id),
+	CONSTRAINT fk_et_to_territory 
+		FOREIGN KEY (territory_id) 
+		REFERENCES territories(territory_id)
+);
+ */

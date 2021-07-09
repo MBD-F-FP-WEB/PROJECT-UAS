@@ -17,4 +17,5 @@ class Shipper extends Model
 		'company_name',
 		'phone'
 	];
+	public $timestamps = false;
 }

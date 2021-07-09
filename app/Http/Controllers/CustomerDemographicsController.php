@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerDemographic;
 use Illuminate\Http\Request;
+use Exception;
 
 class CustomerDemographicsController extends Controller
 {
@@ -14,7 +15,7 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function index()
 	{
-		$customer_demographics = CustomerDemographic::all();
+		$customer_demographics = CustomerDemographic::paginate(30);
 		return view('tables.customer_demographics', compact('customer_demographics'));
 	}
 
@@ -36,7 +37,7 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'INSERT INTO customer_demographics VALUE(\''
+		$query = 'INSERT INTO customer_demographics VALUES(\''
 			.$request->customer_type_id.'\', \''
 			.$request->customer_desc.'\');';
 			
@@ -74,7 +75,12 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		try {
+			CustomerDemographic::where('customer_type_id', $id)->update($request->except(['_method', '_token']));
+			return back()->with('success', "Berhasil update data");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal update data");
+		}
 	}
 
 	/**
@@ -85,6 +91,15 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		CustomerDemographic::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
+/*
+CREATE TABLE customer_demographics
+(
+	customer_type_id varchar(255),
+	customer_desc varchar(255),
+	PRIMARY KEY (customer_type_id)
+);
+ */

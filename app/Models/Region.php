@@ -16,4 +16,5 @@ class Region extends Model
 	protected $fillable = [
 		'region_description'
 	];
+	public $timestamps = false;
 }

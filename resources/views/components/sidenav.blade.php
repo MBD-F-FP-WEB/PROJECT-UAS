@@ -21,7 +21,7 @@
           $forms_show = 'show';
         @endphp
         @endif
-        <a class="nav-link {{$forms_active}}" data-bs-toggle="collapse" href="https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html#dashboardsExamples" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+        <a class="nav-link {{$forms_active}}" data-bs-toggle="collapse" href="#dashboardsExamples" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
             @include('icons.shop')
           </div>
@@ -305,6 +305,70 @@
             @include('icons.office')
           </div>
           <span class="nav-link-text ms-1">Order</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        @php
+          $shipper_active = '';
+        @endphp
+        @if ($active == "shipper")
+        @php
+          $shipper_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$shipper_active}}" href="{{ route('table.shipper') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">Shipper</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        @php
+          $supplier_active = '';
+        @endphp
+        @if ($active == "supplier")
+        @php
+          $supplier_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$supplier_active}}" href="{{ route('table.supplier') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">Supplier</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        @php
+          $order_detail_active = '';
+        @endphp
+        @if ($active == "order_detail")
+        @php
+          $order_detail_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$order_detail_active}}" href="{{ route('table.order_detail') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">Order Detail</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        @php
+          $category_active = '';
+        @endphp
+        @if ($active == "category")
+        @php
+          $category_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$category_active}}" href="{{ route('table.category') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">Category</span>
         </a>
       </li>
       

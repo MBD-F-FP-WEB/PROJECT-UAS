@@ -17,4 +17,5 @@ class Territory extends Model
 		'teritory_description',
 		'region_id'
 	];
+	public $timestamps = false;
 }

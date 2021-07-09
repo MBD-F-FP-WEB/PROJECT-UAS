@@ -8,33 +8,50 @@
 @endsection
 
 @section('content')
-<div class="container mt-5">
+@if(Session::has('success'))
+<div class="alert alert-success">
+    {{Session::get('success')}}
+</div>
+@elseif(Session::has('error'))
+<div class="alert alert-danger text-white">
+    {{Session::get('error')}}
+</div>
+@endif
+<div class="container my-3">
+  <div class="my-4 w-25">
+    <h3>Employees Statistics</h3>
+  </div>
   <div class="row">
-    <div class="col-lg-12 mx-auto">
-      <div class="mb-4 w-25">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../presentation.html">Page Sections</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Features</li>
-          </ol>
-        </nav>
-        <h3>Features</h3>
+    @foreach ($stats as $stat)
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>{{$stat->last_name}}</h5>
+          <p class="card-text">#{{$loop->iteration}} Most Orders Employee</p>
+          <a href="#" class="btn btn-primary">{{$stat->juml}}</a>
+        </div>
       </div>
-      <!-- Else bootstrap marketplace -->
-      
+    </div>
+    @endforeach
+  
+  <div class="my-4 w-25">
+    <h3>Employees Data</h3>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-12 mx-auto">
       <div class="position-relative border-radius-xl shadow-lg mb-7">
         <div class="container border-bottom">
           <div class="row py-3">
             <div class="col-lg-4 text-start">
-              <p class="lead text-dark pt-1 mb-0">Employee</p>
+              {{-- <p class="lead text-dark pt-1 mb-0">Employee</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-lock me-1" aria-hidden="true"></i> Screenshot</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-lock me-1" aria-hidden="true"></i>Employees</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
-              <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+              {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-              </a>
+              </a> --}}
             </div>
           </div>
         </div>
@@ -52,7 +69,7 @@
 
         <div class="overflow-scroll">
           <!-- Projects table -->
-          <table class="table align-items-center table-flush" id="data-table">
+          <table class="table align-items-center table-flush text-center" id="data-table" style="font-size: 16px">
             <thead class="thead-light">
               <tr>
                 <th scope="col">id</th>
@@ -83,9 +100,24 @@
                 </td>
                 <td>
                   <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalEmployeeEdit-{{ $employee->employee_id }}">Edit</button>
-                  <button class="btn btn-danger">Hapus</button>
+                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalemployeeDelete-{{ $employee->employee_id }}">Hapus</button>
                 </td>
               </tr>
+
+              <div class="modal fade" id="modalemployeeDelete-{{ $employee->employee_id }}" tabindex="-1" aria-labelledby="modalemployeeDelete" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalemployeeDelete">Yakin Hapus?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <a class="btn btn-danger" href="{{ route('table.employee.delete', ['id'=>$employee->employee_id]) }}">Hapus</a>
+										</div>
+                  </div>
+                </div>
+              </div>
+
               <div class="modal fade" id="modalEmployeeEdit-{{ $employee->employee_id }}" tabindex="-1" aria-labelledby="modalEmployeeEdit" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">

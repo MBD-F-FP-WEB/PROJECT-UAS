@@ -25,6 +25,7 @@
     @endif
 
 		<form role="form text-left"  method="POST" action="{{ route('form.employee.store') }}" enctype="multipart/form-data">
+			@csrf
 			<div class="form-group">
 					<label>last_name</label>
 					<input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name" id="last_name" value="{{ old('last_name') }}">
@@ -208,10 +209,10 @@
 			<div class="form-group">
 					<label>reports_to</label>
 					<select class="form-control" name="reports_to">
+						<option value="null"></option>
 						@foreach($reports_tos as $reports_to)
 						<option value="{{$reports_to}}">{{$reports_to}}</option>
 						@endforeach
-            <option value="null"></option>
 					</select>
 
 					<!-- Error -->
@@ -235,7 +236,7 @@
 			</div>
 
 			<div class="text-center">
-				<button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+				<button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
 			</div>
 		</form>
 	</div>

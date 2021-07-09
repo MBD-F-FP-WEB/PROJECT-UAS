@@ -55,6 +55,18 @@ class CategoryController extends Controller
 
 	public function destroy($id)
 	{
-		//
+		Category::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
+
+/*
+CREATE TABLE categories
+(
+	category_id int,
+	category_name varchar(255),
+	description varchar(255),
+	picture bytea,
+	PRIMARY KEY (category_id)
+);
+*/

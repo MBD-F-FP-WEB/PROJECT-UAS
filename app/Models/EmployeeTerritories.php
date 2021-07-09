@@ -14,4 +14,5 @@ class EmployeeTerritories extends Model
 		'employee_id',
 		'territory_id'
 	];
+	public $timestamps = false;
 }

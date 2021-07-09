@@ -63,18 +63,6 @@
       </div>
 
       <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name" value="{{ old('name') }}">
-
-          <!-- Error -->
-          @if ($errors->has('name'))
-          <div class="error">
-              {{ $errors->first('name') }}
-          </div>
-          @endif
-      </div>
-
-      <div class="form-group">
           <label>picture</label>
           <input type="file" name="picture" id="picture" cols="30" rows="10" class="form-control {{ $errors->has('picture') ? 'error' : '' }}" value="{{ old('picture') }}">
 

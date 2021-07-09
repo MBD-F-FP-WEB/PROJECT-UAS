@@ -24,4 +24,5 @@ class Product extends Model
 		'recorder_level',
 		'discontinued'
 	];
+	public $timestamps = false;
 }

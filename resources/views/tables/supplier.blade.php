@@ -2,12 +2,13 @@
 
 @section('navbar')
 @include('components.sidenav', [
-  'active' => "customer",
+  'active' => "supplier",
   'form' => ""
 ])
 @endsection
 
 @section('content')
+<!-- Success message -->
 @if(Session::has('success'))
 <div class="alert alert-success">
     {{Session::get('success')}}
@@ -18,21 +19,19 @@
 </div>
 @endif
 <div class="container mt-5">
+  <div class="my-4 w-25">
+    <h3>Suppliers Data</h3>
+  </div>
   <div class="row">
-    <div class="col-lg-12 mx-auto">
-      <div class="mb-4 w-25">
-        <h3>Customers Data</h3>
-      </div>
-      <!-- Else bootstrap marketplace -->
-      
+    <div class="col-lg-12 mx-auto">      
       <div class="position-relative border-radius-xl shadow-lg mb-7">
         <div class="container border-bottom">
           <div class="row py-3">
             <div class="col-lg-4 text-start">
-              {{-- <p class="lead text-dark pt-1 mb-0">Customer</p> --}}
+              {{-- <p class="lead text-dark pt-1 mb-0">Supplier</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Customers</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-user me-1" aria-hidden="true"></i>Suppliers</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
               {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
@@ -43,98 +42,98 @@
         </div>
         <div class="overflow-scroll">
           <!-- Projects table -->
-          <table class="table align-items-center table-flush text-center " id="data-table" style="font-size: 12px">
+          <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
-              <tr>
-                <th scope="col" class="px-2">id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Company</th>
-                <th scope="col">Title</th>
+              <tr class="text-center">
+                <th scope="col">Supplier Id</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Contact Name</th>
+                <th scope="col">Contact Title</th>
                 <th scope="col">Address</th>
                 <th scope="col">City</th>
                 <th scope="col">Region</th>
+                <th scope="col">Postal Code</th>
+                <th scope="col">Country</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Fax</th>
+                <th scope="col">Homepage</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($customers as $customer)
-              <tr>
-                <td class="px-4">
-                  {{ $customer->customer_id }}
+              @foreach($suppliers as $supplier)
+              <tr class="text-center">
+                <td>
+                  {{ $supplier->supplier_id }}
                 </td>
                 <td>
-                  {{ $customer->company_name }} 
+                  {{ $supplier->company_name }} 
                 </td>
                 <td>
-                  {{ $customer->contact_name }} 
+                  {{ $supplier->contact_name }} 
                 </td>
                 <td>
-                  {{ $customer->contact_title }}
-                </td>
-                <td class="text-wrap">
-                  {{ $customer->address }}
-                </td>
-                <td class="text-wrap">
-                  {{ $customer->city }}
+                  {{ $supplier->contact_title }} 
                 </td>
                 <td>
-                  {{ $customer->region }}
+                  {{ $supplier->address }} 
                 </td>
                 <td>
-                  {{ $customer->phone }}
-                </td> 
-                <td class="text-wrap">
-                  {{ $customer->fax }}
+                  {{ $supplier->city }} 
                 </td>
                 <td>
-                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerEdit-{{ $customer->customer_id }}">Edit</button>
-                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerDelete-{{ $customer->customer_id }}">Hapus</button>
+                  {{ $supplier->region }} 
+                </td>
+                <td>
+                  {{ $supplier->postal_code }} 
+                </td>
+                <td>
+                  {{ $supplier->country }} 
+                </td>
+                <td>
+                  {{ $supplier->phone }} 
+                </td>
+                <td>
+                  {{ $supplier->fax }} 
+                </td>
+                <td>
+                  {{ $supplier->homepage }} 
+                </td>
+                <td>
+                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalsupplierEdit-{{ $supplier->supplier_id }}">Edit</button>
+                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalsupplierDelete-{{ $supplier->supplier_id }}">Hapus</button>
                 </td>
               </tr>
 
-              <div class="modal fade" id="modalCustomerDelete-{{ $customer->customer_id }}" tabindex="-1" aria-labelledby="modalCustomerDelete" aria-hidden="true">
+              <div class="modal fade" id="modalsupplierDelete-{{ $supplier->supplier_id }}" tabindex="-1" aria-labelledby="modalsupplierDelete" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modalCustomerDelete">Yakin Hapus?</h5>
+                      <h5 class="modal-title" id="modalsupplierDelete">Yakin Hapus?</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <a class="btn btn-danger" href="{{ route('table.customer.delete', ['id'=>$customer->customer_id]) }}">Hapus</a>
+                      <a class="btn btn-danger" href="{{ route('table.supplier.delete', ['id'=>$supplier->supplier_id]) }}">Hapus</a>
 										</div>
                   </div>
                 </div>
               </div>
 
-              <div class="modal fade" id="modalCustomerEdit-{{ $customer->customer_id }}" tabindex="-1" aria-labelledby="modalCustomerEdit" aria-hidden="true">
+              <div class="modal fade" id="modalsupplierEdit-{{ $supplier->supplier_id }}" tabindex="-1" aria-labelledby="modalsupplierEdit" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modalCustomerEdit">Edit customer</h5>
+                      <h5 class="modal-title" id="modalsupplierEdit">Edit supplier</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form role="form text-left" method="POST" action="{{ route('form.customer.update', $customer->customer_id) }}">
+                      <form role="form text-left" method="POST" action="{{ route('form.supplier.update', $supplier->supplier_id) }}">
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                          <label>Customer Id</label>
-                          <input type="text" class="form-control {{ $errors->has('customer_id') ? 'error' : '' }}" name="customer_id" id="customer_id" value="{{ $customer->customer_id }}">
-                
-                          <!-- Error -->
-                          @if ($errors->has('customer_id'))
-                          <div class="error">
-                              {{ $errors->first('customer_id') }}
-                          </div>
-                          @endif
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Company Name</label>
-                            <input type="text" class="form-control {{ $errors->has('company_name') ? 'error' : '' }}" name="company_name" id="company_name" value="{{ $customer->company_name }}">
-                  
+                            <label>company_name</label>
+                            <input type="text" class="form-control {{ $errors->has('company_name') ? 'error' : '' }}" name="company_name" id="company_name" value="{{ $supplier->company_name }}">
+
                             <!-- Error -->
                             @if ($errors->has('company_name'))
                             <div class="error">
@@ -142,11 +141,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Contact Name</label>
-                            <input type="text" class="form-control {{ $errors->has('contact_name') ? 'error' : '' }}" name="contact_name" id="contact_name" value="{{ $customer->contact_name }}">
-                  
+                            <label>contact_name</label>
+                            <input type="text" class="form-control {{ $errors->has('contact_name') ? 'error' : '' }}" name="contact_name" id="contact_name" value="{{ $supplier->contact_name }}">
+
                             <!-- Error -->
                             @if ($errors->has('contact_name'))
                             <div class="error">
@@ -154,11 +153,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Contact Title</label>
-                            <input type="text" class="form-control {{ $errors->has('contact_title') ? 'error' : '' }}" name="contact_title" id="contact_title" value="{{ $customer->contact_title }}">
-                  
+                            <label>contact_title</label>
+                            <input type="text" class="form-control {{ $errors->has('contact_title') ? 'error' : '' }}" name="contact_title" id="contact_title" value="{{ $supplier->contact_title }}">
+
                             <!-- Error -->
                             @if ($errors->has('contact_title'))
                             <div class="error">
@@ -166,11 +165,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Address</label>
-                            <input type="text" class="form-control {{ $errors->has('address') ? 'error' : '' }}" name="address" id="address" value="{{ $customer->address}}">
-                  
+                            <label>address</label>
+                            <input type="text" class="form-control {{ $errors->has('address') ? 'error' : '' }}" name="address" id="address" value="{{ $supplier->address }}">
+
                             <!-- Error -->
                             @if ($errors->has('address'))
                             <div class="error">
@@ -178,11 +177,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>City</label>
-                            <input type="text" class="form-control {{ $errors->has('city') ? 'error' : '' }}" name="city" id="city" value="{{ $customer->city }}">
-                  
+                            <label>city</label>
+                            <input type="text" class="form-control {{ $errors->has('city') ? 'error' : '' }}" name="city" id="city" value="{{ $supplier->city }}">
+
                             <!-- Error -->
                             @if ($errors->has('city'))
                             <div class="error">
@@ -190,11 +189,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Region</label>
-                            <input type="text" class="form-control {{ $errors->has('region') ? 'error' : '' }}" name="region" id="region" value="{{ $customer->region }}">
-                  
+                            <label>region</label>
+                            <input type="text" class="form-control {{ $errors->has('region') ? 'error' : '' }}" name="region" id="region" value="{{ $supplier->region }}">
+
                             <!-- Error -->
                             @if ($errors->has('region'))
                             <div class="error">
@@ -202,11 +201,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Postal Code</label>
-                            <input type="text" class="form-control {{ $errors->has('postal_code') ? 'error' : '' }}" name="postal_code" id="postal_code" value="{{ $customer->postal_code }}">
-                  
+                            <label>postal_code</label>
+                            <input type="text" class="form-control {{ $errors->has('postal_code') ? 'error' : '' }}" name="postal_code" id="postal_code" value="{{ $supplier->postal_code }}">
+
                             <!-- Error -->
                             @if ($errors->has('postal_code'))
                             <div class="error">
@@ -214,11 +213,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Country</label>
-                            <input type="text" class="form-control {{ $errors->has('country') ? 'error' : '' }}" name="country" id="country" value="{{ $customer->country }}">
-                  
+                            <label>country</label>
+                            <input type="text" class="form-control {{ $errors->has('country') ? 'error' : '' }}" name="country" id="country" value="{{ $supplier->country }}">
+
                             <!-- Error -->
                             @if ($errors->has('country'))
                             <div class="error">
@@ -226,11 +225,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value="{{ $customer->phone }}">
-                  
+                            <label>phone</label>
+                            <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value="{{ $supplier->phone }}">
+
                             <!-- Error -->
                             @if ($errors->has('phone'))
                             <div class="error">
@@ -238,11 +237,11 @@
                             </div>
                             @endif
                         </div>
-                  
+
                         <div class="form-group">
-                            <label>Fax</label>
-                            <input type="text" class="form-control {{ $errors->has('fax') ? 'error' : '' }}" name="fax" id="fax" value="{{ $customer->fax }}">
-                  
+                            <label>fax</label>
+                            <input type="text" class="form-control {{ $errors->has('fax') ? 'error' : '' }}" name="fax" id="fax" value="{{ $supplier->fax }}">
+
                             <!-- Error -->
                             @if ($errors->has('fax'))
                             <div class="error">
@@ -250,8 +249,20 @@
                             </div>
                             @endif
                         </div>
+
+                        <div class="form-group">
+                            <label>homepage</label>
+                            <input type="text" class="form-control {{ $errors->has('homepage') ? 'error' : '' }}" name="homepage" id="homepage" value="{{ $supplier->homepage }}">
+
+                            <!-- Error -->
+                            @if ($errors->has('homepage'))
+                            <div class="error">
+                                {{ $errors->first('homepage') }}
+                            </div>
+                            @endif
+                        </div>
                         <div class="text-center">
-                          <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2" data-bs-dismiss="modal">Submit</button>
+                          <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
                         </div>
                       </form>
 										</div>
@@ -267,16 +278,15 @@
     </div>
   </div>
   <div class="row mx-auto">
-    {{ $customers->links() }}
+    {{ $suppliers->links() }}
   </div>
 </div>
 @endsection
 
 @section('script')
-<!-- 
-CREATE TABLE customers
+<!-- CREATE TABLE suppliers
 (
-	customer_id varchar(255),
+	supplier_id int,
 	company_name varchar(255),
 	contact_name varchar(255),
 	contact_title varchar(255),
@@ -287,5 +297,6 @@ CREATE TABLE customers
 	country varchar(255),
 	phone varchar(255),
 	fax varchar(255),
-	PRIMARY KEY (customer_id)
+	homepage varchar(255),
+	PRIMARY KEY (supplier_id)
 ); -->

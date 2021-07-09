@@ -20,10 +20,6 @@
 8. php artisan migrate
 
 ## TODO
-1. Sequence: each table (v)
-2. function: date diubah ke tanggal sekarang misal kosong (v)
-3. function: required date diubah ke tanggal sekarang misal kurang dari order date (v)
-4. procedure: INSERT order (v)
-5. procedure: INSERT order_details
-6. mentrigger (function: menghitung total price) bila ada order masuk
-7. mengecek adanya diskon
+1. Fungsi perubahan tanggal dirubah ke front end saja. Procedure + 1.
+2. Belum Indexing
+3. Website hanya bisa menampilkan 1 tabel dan create data dlm tabel tsb.

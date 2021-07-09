@@ -26,8 +26,13 @@
         {{Session::get('success')}}
     </div>  
     @endif
+    @if(Session::has('error'))
+    <div class="alert alert-danger">
+        {{Session::get('error')}}
+    </div>  
+    @endif
     <form role="form text-left" method="POST" action="{{ route('form.product.store') }}">
-
+    @csrf
       <div class="form-group">
           <label>product_name</label>
           <input type="text" class="form-control {{ $errors->has('product_name') ? 'error' : '' }}" name="product_name" id="product_name" value="{{ old('product_name') }}">
@@ -148,7 +153,7 @@
 
 
       <div class="text-center">
-        <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
       </div>
       <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
     </form>
