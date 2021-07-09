@@ -545,3 +545,43 @@ CREATE INDEX idx_employee_id_order ON orders(employee_id);
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
 CREATE INDEX idx_discount_orderdetails ON order_details(discount);
 
+
+
+
+--------------------------------------------
+-- aggregate
+--------------------------------------------
+-- order per bulannya
+select to_char(order_date,'Mon') as mon,
+       extract(year from order_date) as yyyy,
+       count(order_id) as jml
+from orders
+group by mon, yyyy;
+
+-- shipper paling diminati
+select s.company_name as PT, count(order_id) as jml
+from orders o 
+join shippers s on o.ship_via = s.shipper_id
+group by PT
+
+-- category yg paling banyak penjualannya
+select ca.category_name, count(order_id) as jml
+from products pr
+join order_details od on pr.product_id = od.product_id
+join categories ca on pr.category_id = ca.category_id
+group by ca.category_name
+
+-- order tiap customer
+select c.contact_name, count(o.order_id)
+from customers c
+join orders o on c.customer_id = o.customer_id
+group by contact_name
+
+-- kategori yg paling sering dibeli tiap customer nya
+select cu.contact_name, max(ca.category_name), count(ca.category_name)
+from customers cu
+natural join orders o
+natural join order_details od
+natural join products p
+natural join categories ca
+group by cu.contact_name
