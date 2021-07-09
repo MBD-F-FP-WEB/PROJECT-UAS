@@ -18,7 +18,7 @@ class OrderDetailsController extends Controller
 	public function index()
 	{
 		$order_details = OrderDetail::paginate(30);
-		return view('tables.order_details', compact('order_details'));
+		return view('tables.order_detail', compact('order_details'));
 	}
 
 	/**
@@ -81,10 +81,10 @@ class OrderDetailsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request, $order_id, $product_id)
 	{
 		try {
-			OrderDetail::where('order_id', $request->order_id)->where('product_id', $request->product_id)->update($request->except(['_method', '_token']));
+			OrderDetail::where('order_id', $order_id)->where('product_id', $product_id)->update($request->except(['_method', '_token']));
 			return back()->with('success', "Berhasil update data");
 		} catch (Exception $e) {
 			return back()->with('error', "Gagal update data");
@@ -103,15 +103,6 @@ class OrderDetailsController extends Controller
 		return back()->with('success', "Berhasil menghapus");
 	}
 }
-
-OrderDetail::create([
-	'order_id' => $request->order_id,
-	'product_id' => $request->product_id,
-	'unit_price' => $request->unit_price,
-	'quantity' => $request->quantity,
-	'discount' => $request->discount
-]);
-
 /**
  * CREATE TABLE order_details
 (

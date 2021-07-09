@@ -8,6 +8,15 @@
 @endsection
 
 @section('content')
+@if(Session::has('success'))
+<div class="alert alert-success">
+    {{Session::get('success')}}
+</div>
+@elseif(Session::has('error'))
+<div class="alert alert-danger text-white">
+    {{Session::get('error')}}
+</div>
+@endif
 <div class="container my-3">
   <div class="my-4 w-25">
     <h3>Employees Statistics</h3>
