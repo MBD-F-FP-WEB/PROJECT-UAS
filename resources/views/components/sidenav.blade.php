@@ -320,7 +320,7 @@
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
-          <span class="nav-link-text ms-1">shipper</span>
+          <span class="nav-link-text ms-1">Shipper</span>
         </a>
       </li>
       <li class="nav-item">
@@ -336,7 +336,7 @@
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
-          <span class="nav-link-text ms-1">supplier</span>
+          <span class="nav-link-text ms-1">Supplier</span>
         </a>
       </li>
       <li class="nav-item">
@@ -352,7 +352,7 @@
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
-          <span class="nav-link-text ms-1">order_detail</span>
+          <span class="nav-link-text ms-1">Order Detail</span>
         </a>
       </li>
       <li class="nav-item">
@@ -368,7 +368,7 @@
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             @include('icons.office')
           </div>
-          <span class="nav-link-text ms-1">category</span>
+          <span class="nav-link-text ms-1">Category</span>
         </a>
       </li>
       

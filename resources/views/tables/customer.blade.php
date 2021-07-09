@@ -55,6 +55,7 @@
                 <th scope="col">Region</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Fax</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -86,8 +87,177 @@
                 </td> 
                 <td class="text-wrap">
                   {{ $customer->fax }}
-                </td> 
+                </td>
+                <td>
+                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerEdit-{{ $customer->customer_id }}">Edit</button>
+                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerDelete-{{ $customer->customer_id }}">Hapus</button>
+                </td>
               </tr>
+
+              <div class="modal fade" id="modalCustomerDelete-{{ $customer->customer_id }}" tabindex="-1" aria-labelledby="modalCustomerDelete" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCustomerDelete">Yakin Hapus?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <a class="btn btn-danger" href="{{ route('table.customer.delete', ['id'=>$customer->customer_id]) }}">Hapus</a>
+										</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="modalCustomerEdit-{{ $customer->customer_id }}" tabindex="-1" aria-labelledby="modalCustomerEdit" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCustomerEdit">Edit customer</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form role="form text-left" method="POST" action="{{ route('form.customer.update', $customer->customer_id) }}">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-group">
+                          <label>Customer Id</label>
+                          <input type="text" class="form-control {{ $errors->has('customer_id') ? 'error' : '' }}" name="customer_id" id="customer_id" value="{{ $customer->customer_id }}">
+                
+                          <!-- Error -->
+                          @if ($errors->has('customer_id'))
+                          <div class="error">
+                              {{ $errors->first('customer_id') }}
+                          </div>
+                          @endif
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" class="form-control {{ $errors->has('company_name') ? 'error' : '' }}" name="company_name" id="company_name" value="{{ $customer->company_name }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('company_name'))
+                            <div class="error">
+                                {{ $errors->first('company_name') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Contact Name</label>
+                            <input type="text" class="form-control {{ $errors->has('contact_name') ? 'error' : '' }}" name="contact_name" id="contact_name" value="{{ $customer->contact_name }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('contact_name'))
+                            <div class="error">
+                                {{ $errors->first('contact_name') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Contact Title</label>
+                            <input type="text" class="form-control {{ $errors->has('contact_title') ? 'error' : '' }}" name="contact_title" id="contact_title" value="{{ $customer->contact_title }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('contact_title'))
+                            <div class="error">
+                                {{ $errors->first('contact_title') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control {{ $errors->has('address') ? 'error' : '' }}" name="address" id="address" value="{{ $customer->address}}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('address'))
+                            <div class="error">
+                                {{ $errors->first('address') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" class="form-control {{ $errors->has('city') ? 'error' : '' }}" name="city" id="city" value="{{ $customer->city }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('city'))
+                            <div class="error">
+                                {{ $errors->first('city') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Region</label>
+                            <input type="text" class="form-control {{ $errors->has('region') ? 'error' : '' }}" name="region" id="region" value="{{ $customer->region }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('region'))
+                            <div class="error">
+                                {{ $errors->first('region') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Postal Code</label>
+                            <input type="text" class="form-control {{ $errors->has('postal_code') ? 'error' : '' }}" name="postal_code" id="postal_code" value="{{ $customer->postal_code }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('postal_code'))
+                            <div class="error">
+                                {{ $errors->first('postal_code') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" class="form-control {{ $errors->has('country') ? 'error' : '' }}" name="country" id="country" value="{{ $customer->country }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('country'))
+                            <div class="error">
+                                {{ $errors->first('country') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone" value="{{ $customer->phone }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('phone'))
+                            <div class="error">
+                                {{ $errors->first('phone') }}
+                            </div>
+                            @endif
+                        </div>
+                  
+                        <div class="form-group">
+                            <label>Fax</label>
+                            <input type="text" class="form-control {{ $errors->has('fax') ? 'error' : '' }}" name="fax" id="fax" value="{{ $customer->fax }}">
+                  
+                            <!-- Error -->
+                            @if ($errors->has('fax'))
+                            <div class="error">
+                                {{ $errors->first('fax') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="text-center">
+                          <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2" data-bs-dismiss="modal">Submit</button>
+                        </div>
+                      </form>
+										</div>
+                  </div>
+                </div>
+              </div>
               @endforeach
             </tbody>
           </table>

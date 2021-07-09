@@ -40,6 +40,7 @@ class CustomersController extends Controller
 	public function store(StoreCustomerRequest $request)
 	{
 		$query = 'CALL insert_customers(\''
+			. $request->customer_id . '\', \''
 			. $request->company_name . '\', \''
 			. $request->contact_name . '\', \''
 			. $request->contact_title . '\', \''
@@ -101,7 +102,7 @@ class CustomersController extends Controller
 	 */
 	public function destroy($id)
 	{
-		Customer::findOrFail($id)->delete();
+		Customer::where('customer_id', $id)->delete();
 		return back()->with('success', "Berhasil menghapus");
 	}
 }

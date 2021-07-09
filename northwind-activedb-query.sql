@@ -206,7 +206,7 @@ BEGIN
 	from order_details as de
 	natural join orders as o
 	where de.order_id = o_id
-	group by de.order_id;
+	group by de.order_id, de.discount;
 	RETURN total;
 END;
 $total$ LANGUAGE plpgsql;
@@ -471,6 +471,27 @@ INSERT INTO territories(territory_description, region_id)
 VALUES (territory_description, region_id);
 $$
 
+-- P:INSERT CUSTOMER
+---------------------
+CREATE OR REPLACE PROCEDURE insert_customers (
+	customer_id varchar,
+    company_name varchar,
+    contact_name varchar,
+    contact_title varchar,
+    address varchar,
+    city varchar,
+    region varchar,
+    postal_code varchar,
+    country varchar,
+    phone varchar,
+    fax varchar
+)
+LANGUAGE SQL
+AS $$
+INSERT INTO customers(customer_id, company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax)
+VALUES (customer_id, company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax);
+$$
+
 -- P:SET DISCOUNT diskon PADA ORDER YANG quantity nya >= jml_produk
 ---------------------
 CREATE OR REPLACE PROCEDURE add_discount(jml_produk INTEGER, diskon NUMERIC)
@@ -523,3 +544,4 @@ CREATE INDEX idx_employee_id_order ON orders(employee_id);
 --order_details:
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
 CREATE INDEX idx_discount_orderdetails ON order_details(discount);
+
