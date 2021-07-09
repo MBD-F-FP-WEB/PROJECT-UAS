@@ -2,7 +2,7 @@
 
 @section('navbar')
 @include('components.sidenav', [
-  'active' => "category",
+  'active' => "customer_customer_demo",
   'form' => ""
 ])
 @endsection
@@ -43,29 +43,46 @@
           <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
               <tr>
-                <th scope="col">category_id</th>
-                <th scope="col">category_name</th>
-                <th scope="col">description</th>
+                <th scope="col">id</th>
+                <th scope="col">customer_id</th>
+                <th scope="col">customer_type_id</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($categories as $category)
+              @foreach($customer_customer_demos as $customer_customer_demo)
               <tr>
                 <td>
-                  {{ $category->category_id }}
+                  {{ $customer_customer_demo->id }}
                 </td>
                 <td>
-                  {{ $category->category_name }} 
+                  {{ $customer_customer_demo->customer_id }} 
                 </td>
                 <td class="text-wrap">
-                  {{ $category->description }} 
+                  {{ $customer_customer_demo->customer_type_id }} 
                 </td>
                 <td>
                   <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCategoryEdit-{{ $category->category_id }}">Edit</button>
-                  <a class="btn btn-danger" href="{{ route('table.category.delete', ['id'=>$category->category_id]) }}">Hapus</a>
+                  <button class="btn btn-danger">Hapus</button>
                 </td>
               </tr>
+
+							<div class="modal fade" id="modalEmployeeEdit-{{ $employee->employee_id }}" tabindex="-1" aria-labelledby="modalEmployeeEdit" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalEmployeeEdit">Edit Employee</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+										<form role="form text-left" method="POST" action="{{ route('form.employee.update', $employee->employee_id) }}">
+                        @method('PUT')
+                        @csrf
+										</form>
+										</div>
+                  </div>
+                </div>
+              </div>
               @endforeach
             </tbody>
           </table>
@@ -81,11 +98,18 @@
 @endsection
 
 @section('script')
-<!-- CREATE TABLE categories
+<!-- 
+  CREATE TABLE customer_customer_demo
 (
-	category_id int,
-	category_name varchar(255),
-	description varchar(255),
-	picture bytea,
-	PRIMARY KEY (category_id)
-); -->
+  id int,
+	customer_id varchar(255),
+	customer_type_id varchar(255),
+  PRIMARY KEY (id),
+	CONSTRAINT fk_ccd_to_customers 
+		FOREIGN KEY (customer_id) 
+		REFERENCES customers(customer_id),
+	CONSTRAINT fk_ccd_to_customer_demographics 
+		FOREIGN KEY (customer_type_id) 
+		REFERENCES customer_demographics(customer_type_id)
+);
+ -->

@@ -63,7 +63,7 @@
                 </td>
                 <td>
                   <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCategoryEdit-{{ $category->category_id }}">Edit</button>
-                  <a class="btn btn-danger" href="{{ route('table.category.delete', ['id'=>$category->category_id]) }}">Hapus</a>
+                  <button class="btn btn-danger">Hapus</button>
                 </td>
               </tr>
               @endforeach
@@ -81,11 +81,16 @@
 @endsection
 
 @section('script')
-<!-- CREATE TABLE categories
+<!-- 
+  CREATE TABLE employee_territories
 (
-	category_id int,
-	category_name varchar(255),
-	description varchar(255),
-	picture bytea,
-	PRIMARY KEY (category_id)
-); -->
+	employee_id int,
+	territory_id varchar(255),
+	CONSTRAINT fk_et_to_employee 
+		FOREIGN KEY (employee_id) 
+		REFERENCES employees(employee_id),
+	CONSTRAINT fk_et_to_territory 
+		FOREIGN KEY (territory_id) 
+		REFERENCES territories(territory_id)
+);
+ -->

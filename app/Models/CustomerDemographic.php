@@ -15,4 +15,5 @@ class CustomerDemographic extends Model
 		'customer_type_id',
 		'customer_desc'
 	];
+	public $timestamps = false;
 }

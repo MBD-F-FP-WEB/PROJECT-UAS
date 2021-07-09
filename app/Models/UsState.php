@@ -18,4 +18,5 @@ class UsState extends Model
 		'state_abbr',
 		'state_region'
 	];
+	public $timestamps = false;
 }

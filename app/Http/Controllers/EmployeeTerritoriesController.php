@@ -42,7 +42,7 @@ class EmployeeTerritoriesController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'INSERT INTO employee_territories VALUE(\''
+		$query = 'INSERT INTO employee_territories VALUES(\''
 			.$request->employee_id.'\', \''
 			.$request->territory_id.'\');';
 

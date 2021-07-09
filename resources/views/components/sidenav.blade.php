@@ -307,6 +307,38 @@
           <span class="nav-link-text ms-1">Order</span>
         </a>
       </li>
+      <li class="nav-item">
+        @php
+          $shipper_active = '';
+        @endphp
+        @if ($active == "shipper")
+        @php
+          $shipper_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$shipper_active}}" href="{{ route('table.shipper') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">shipper</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        @php
+          $supplier_active = '';
+        @endphp
+        @if ($active == "supplier")
+        @php
+          $supplier_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$supplier_active}}" href="{{ route('table.supplier') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.office')
+          </div>
+          <span class="nav-link-text ms-1">supplier</span>
+        </a>
+      </li>
 
 
       
@@ -402,36 +434,6 @@
               <a class="nav-link {{$region_form_active}}" href="{{ route('form.region') }}">
                 <span class="sidenav-mini-icon"> R </span>
                 <span class="sidenav-normal"> Region </span>
-              </a>
-            </li>
-            
-            @php
-              $shipper_form_active = '';
-            @endphp
-            @if ($form == "shipper")
-            @php
-              $shipper_form_active = 'active';
-            @endphp
-            @endif
-            <li class="nav-item {{$shipper_form_active}}">
-              <a class="nav-link {{$shipper_form_active}}" href="{{ route('form.shipper') }}">
-                <span class="sidenav-mini-icon"> Sh </span>
-                <span class="sidenav-normal"> Shipper </span>
-              </a>
-            </li>
-            
-            @php
-              $supplier_form_active = '';
-            @endphp
-            @if ($form == "supplier")
-            @php
-              $supplier_form_active = 'active';
-            @endphp
-            @endif
-            <li class="nav-item {{$supplier_form_active}}">
-              <a class="nav-link {{$supplier_form_active}}" href="{{ route('form.supplier') }}">
-                <span class="sidenav-mini-icon"> Su </span>
-                <span class="sidenav-normal"> Supplier </span>
               </a>
             </li>
             

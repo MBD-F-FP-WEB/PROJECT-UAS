@@ -18,4 +18,5 @@ class OrderDetail extends Model
 		'quantity',
 		'discount'
 	];
+	public $timestamps = false;
 }

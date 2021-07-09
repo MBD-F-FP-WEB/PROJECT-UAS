@@ -26,4 +26,5 @@ class Supplier extends Model
 		'fax',
 		'homepage'
 	];
+	public $timestamps = false;
 }

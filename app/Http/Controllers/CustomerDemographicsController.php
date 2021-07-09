@@ -37,7 +37,7 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'INSERT INTO customer_demographics VALUE(\''
+		$query = 'INSERT INTO customer_demographics VALUES(\''
 			.$request->customer_type_id.'\', \''
 			.$request->customer_desc.'\');';
 			

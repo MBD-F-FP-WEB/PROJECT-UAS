@@ -15,4 +15,5 @@ class CustomerCustomerDemo extends Model
 		'customer_id',
 		'customer_type_id'
 	];
+	public $timestamps = false;
 }

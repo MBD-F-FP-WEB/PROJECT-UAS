@@ -42,9 +42,9 @@ class OrderDetailsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$query = 'INSERT INTO order_details VALUE(\''
-			.$request->order_id.'\', \''
-			.$request->product_id.'\', \''
+		$query = 'INSERT INTO order_details VALUES('
+			.$request->order_id.', '
+			.$request->product_id.', \''
 			.$request->unit_price.'\', \''
 			.$request->quantity.'\', \''
 			.$request->discount.'\');';
@@ -103,6 +103,15 @@ class OrderDetailsController extends Controller
 		return back()->with('success', "Berhasil menghapus");
 	}
 }
+
+OrderDetail::create([
+	'order_id' => $request->order_id,
+	'product_id' => $request->product_id,
+	'unit_price' => $request->unit_price,
+	'quantity' => $request->quantity,
+	'discount' => $request->discount
+]);
+
 /**
  * CREATE TABLE order_details
 (

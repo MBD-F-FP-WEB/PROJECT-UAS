@@ -17,8 +17,8 @@ class CustomerCustomerDemoController extends Controller
 	 */
 	public function index()
 	{
-		$customer_customer_demo = CustomerCustomerDemo::paginate(30);
-		return view('tables.customer_customer_demo', compact('customer_customer_demo'));
+		$customer_customer_demos = CustomerCustomerDemo::paginate(30);
+		return view('tables.customer_customer_demo', compact('customer_customer_demos'));
 	}
 
 	/**
@@ -43,7 +43,7 @@ class CustomerCustomerDemoController extends Controller
 	public function store(Request $request)
 	{
 		$id = CustomerCustomerDemo::last()->id;
-		$query = 'INSERT INTO customer_customer_demo VALUE('
+		$query = 'INSERT INTO customer_customer_demo VALUES('
 			.$id.', \''
 			.$request->customer_id.'\', \''
 			.$request->customer_type_id.'\');';
@@ -96,9 +96,9 @@ class CustomerCustomerDemoController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($customer_id, $customer_type_id)
 	{
-		CustomerCustomerDemo::findOrFail($id)->delete();
+		CustomerCustomerDemo::where('customer_id', $customer_id)->where('customer_type_id', $customer_type_id)->delete();
 		return back()->with('success', "Berhasil menghapus");
 	}
 }

@@ -26,7 +26,7 @@ class ShippersController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('forms.shipper');
 	}
 
 	/**
@@ -76,10 +76,10 @@ class ShippersController extends Controller
 	public function update(Request $request, $id)
 	{
 		try {
-			Shipper::where('shipper_id', $id)->update($request->except(['_method', '_token']));
+			Shipper::where('shipper_id', $id)->update(['company_name'=>$request->company_name, 'phone'=>$request->phone]);
 			return back()->with('success', "Berhasil update data");
 		} catch (Exception $e) {
-			return back()->with('error', "Gagal update data");
+			return back()->with('error', "Gagal update data" . $e->getMessage());
 		}
 	}
 

@@ -94,7 +94,8 @@ class TerritoryController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Territory::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

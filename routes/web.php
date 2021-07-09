@@ -34,24 +34,25 @@ Route::group(['prefix' => 'table'], function () {
 	Route::get('order_detail', [OrderDetailsController::class, 'index'])->name('table.order_detail');
 	Route::get('region', [RegionController::class, 'index'])->name('table.region');
 	Route::get('shipper', [ShippersController::class, 'index'])->name('table.shipper');
+	Route::get('supplier', [SupplierController::class, 'index'])->name('table.supplier');
 	Route::get('territory', [TerritoryController::class, 'index'])->name('table.territory');
 	Route::get('us_states', [UsStatesController::class, 'index'])->name('table.us_states');
 	
 	/* destroy / delete */
-	Route::delete('employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('form.employee.delete');
-	Route::delete('category/delete/{id}', [CategoryController::class, 'destroy'])->name('form.category.delete');
-	Route::delete('customer_customer_demo/delete/{id}', [CustomerCustomerDemoController::class, 'destroy'])->name('form.customer_customer_demo.delete');
-	Route::delete('customer_demographics/delete/{id}', [CustomerDemographicsController::class, 'destroy'])->name('form.customer_demographics.delete');
-	Route::delete('customer/delete/{id}', [CustomersController::class, 'destroy'])->name('form.customer.delete');
-	Route::delete('employee_territories/delete/{employee_id}/{territory_id}', [EmployeeTerritoriesController::class, 'destroy'])->name('form.employee_territories.delete');
-	Route::delete('order_detail/delete/{id}', [OrderDetailsController::class, 'destroy'])->name('form.order_detail.delete');
-	Route::delete('order/delete/{id}', [OrderController::class, 'destroy'])->name('form.order.delete');
-	Route::delete('product/delete/{id}', [ProductController::class, 'destroy'])->name('form.product.delete');
-	Route::delete('region/delete/{id}', [RegionController::class, 'destroy'])->name('form.region.delete');
-	Route::delete('shipper/delete/{id}', [ShippersController::class, 'destroy'])->name('form.shipper.delete');
-	Route::delete('supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('form.supplier.delete');
-	Route::delete('territory/delete/{id}', [TerritoryController::class, 'destroy'])->name('form.territory.delete');
-	Route::delete('us_states/delete/{id}', [UsStatesController::class, 'destroy'])->name('form.us_states.delete');
+	Route::get('employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('table.employee.delete');
+	Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('table.category.delete');
+	Route::get('customer_customer_demo/delete/{customer_id}/{customer_type_id}', [CustomerCustomerDemoController::class, 'destroy'])->name('table.customer_customer_demo.delete');
+	Route::get('customer_demographics/delete/{id}', [CustomerDemographicsController::class, 'destroy'])->name('table.customer_demographics.delete');
+	Route::get('customer/delete/{id}', [CustomersController::class, 'destroy'])->name('table.customer.delete');
+	Route::get('employee_territories/delete/{employee_id}/{territory_id}', [EmployeeTerritoriesController::class, 'destroy'])->name('table.employee_territories.delete');
+	Route::get('order_detail/delete/{order_id}/{product_id}', [OrderDetailsController::class, 'destroy'])->name('table.order_detail.delete');
+	Route::get('order/delete/{id}', [OrderController::class, 'destroy'])->name('table.order.delete');
+	Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('table.product.delete');
+	Route::get('region/delete/{id}', [RegionController::class, 'destroy'])->name('table.region.delete');
+	Route::get('shipper/delete/{id}', [ShippersController::class, 'destroy'])->name('table.shipper.delete');
+	Route::get('supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('table.supplier.delete');
+	Route::get('territory/delete/{id}', [TerritoryController::class, 'destroy'])->name('table.territory.delete');
+	Route::get('us_states/delete/{id}', [UsStatesController::class, 'destroy'])->name('table.us_states.delete');
 });
 
 Route::group(['prefix' => 'form'], function () {
