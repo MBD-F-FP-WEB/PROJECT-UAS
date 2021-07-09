@@ -277,7 +277,7 @@
       <!-- End bootstrap marketplace -->
     </div>
   </div>
-  <div class="row mx-auto">
+  <div class="row mx-auto  text-center">
     {{ $suppliers->links() }}
   </div>
 </div>

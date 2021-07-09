@@ -545,3 +545,14 @@ CREATE INDEX idx_employee_id_order ON orders(employee_id);
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
 CREATE INDEX idx_discount_orderdetails ON order_details(discount);
 
+--
+
+select * from customers
+where customer_id like 'IWN%'
+
+-- produk paling laku
+select  order_details.product_id, count(orders.order_id) as orderedtime
+from order_details
+natural join orders
+group by  order_details.product_id
+order by orderedtime desc
