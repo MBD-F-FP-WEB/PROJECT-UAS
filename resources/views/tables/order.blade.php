@@ -12,13 +12,8 @@
   <div class="row">
     <div class="col-lg-12 mx-auto">
       <div class="mb-4 w-25">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../presentation.html">Page Sections</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Features</li>
-          </ol>
-        </nav>
-        <h3>Features</h3>
+
+        <h3>Orders Data</h3>
       </div>
       <!-- Else bootstrap marketplace -->
       
@@ -26,23 +21,23 @@
         <div class="container border-bottom">
           <div class="row py-3">
             <div class="col-lg-4 text-start">
-              <p class="lead text-dark pt-1 mb-0">Employee</p>
+              {{-- <p class="lead text-dark pt-1 mb-0">Employee</p> --}}
             </div>
             <div class="col-lg-4 mt-1 text-center">
-              <span class="badge bg-light text-dark"><i class="fas fa-lock me-1" aria-hidden="true"></i> Screenshot</span>
+              <span class="badge bg-light text-dark"><i class="fas fa-lock me-1" aria-hidden="true"></i>Orders</span>
             </div>
             <div class="col-lg-4 text-end my-auto">
-              <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+              {{-- <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-              </a>
+              </a> --}}
             </div>
           </div>
         </div>
         <div class="overflow-scroll">
           <!-- Projects table -->
-          <table class="table align-items-center table-flush" id="data-table">
+          <table class="table align-items-center table-flush" id="data-table" style="font-size: 9px;">
             <thead class="thead-light">
-              <tr>
+              <tr class="text-center">
                 <th scope="col">id</th>
                 <th scope="col">customer_id</th>
                 <th scope="col">order_date</th>
@@ -60,7 +55,7 @@
             </thead>
             <tbody>
               @foreach($orders as $order)
-              <tr>
+              <tr class="text-center">
                 <td>
                   {{ $order->order_id }}
                 </td>

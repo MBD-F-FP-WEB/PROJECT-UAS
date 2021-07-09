@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller
 {
@@ -16,6 +17,7 @@ class CustomersController extends Controller
 	public function index()
 	{
 		$customers = Customer::all();
+
 		return view('table.customer', compact('customers'));
 	}
 
@@ -38,16 +40,16 @@ class CustomersController extends Controller
 	public function store(StoreCustomerRequest $request)
 	{
 		$query = 'CALL insert_customers(\''
-		. $request->company_name .'\', \''
-		. $request->contact_name .'\', \''
-		. $request->contact_title .'\', \''
-		. $request->address .'\', \''
-		. $request->city .'\', \''
-		. $request->region .'\', \''
-		. $request->postal_code .'\', \''
-		. $request->country .'\', \''
-		. $request->phone .'\', \''
-		. $request->fax .'\');';
+			. $request->company_name . '\', \''
+			. $request->contact_name . '\', \''
+			. $request->contact_title . '\', \''
+			. $request->address . '\', \''
+			. $request->city . '\', \''
+			. $request->region . '\', \''
+			. $request->postal_code . '\', \''
+			. $request->country . '\', \''
+			. $request->phone . '\', \''
+			. $request->fax . '\');';
 
 		return $this->callProcedure($query);
 	}

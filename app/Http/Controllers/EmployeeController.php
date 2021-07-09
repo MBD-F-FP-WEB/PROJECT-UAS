@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -17,7 +18,15 @@ class EmployeeController extends Controller
 	{
 		$reports_tos = Employee::all()->modelKeys();
 		$employees = Employee::paginate(30);
-		return view('tables.employee', compact(['employees', 'reports_tos']));
+		$stats = DB::select('select e.last_name, count(o.employee_id) as juml
+		from orders o
+		join employees e
+		on (e.employee_id = o.employee_id)
+		group by o.employee_id, e.last_name
+		order by juml desc
+		limit 3');
+		// dd($stat);
+		return view('tables.employee', compact(['employees', 'reports_tos', 'stats']));
 	}
 
 	/**
