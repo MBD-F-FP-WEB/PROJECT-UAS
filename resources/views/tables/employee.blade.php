@@ -91,9 +91,24 @@
                 </td>
                 <td>
                   <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalEmployeeEdit-{{ $employee->employee_id }}">Edit</button>
-                  <button class="btn btn-danger">Hapus</button>
+                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalemployeeDelete-{{ $employee->employee_id }}">Hapus</button>
                 </td>
               </tr>
+
+              <div class="modal fade" id="modalemployeeDelete-{{ $employee->employee_id }}" tabindex="-1" aria-labelledby="modalemployeeDelete" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalemployeeDelete">Yakin Hapus?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <a class="btn btn-danger" href="{{ route('table.employee.delete', ['id'=>$employee->employee_id]) }}">Hapus</a>
+										</div>
+                  </div>
+                </div>
+              </div>
+
               <div class="modal fade" id="modalEmployeeEdit-{{ $employee->employee_id }}" tabindex="-1" aria-labelledby="modalEmployeeEdit" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">

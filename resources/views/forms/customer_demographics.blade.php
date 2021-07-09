@@ -27,6 +27,7 @@
     </div>  
     @endif
     <form role="form text-left" method="POST" action="{{ route('form.customer_demographics.store') }}">
+    @csrf
       <div class="form-group">
           <label>customer_type_id</label>
           <input type="text" class="form-control {{ $errors->has('customer_type_id') ? 'error' : '' }}" name="customer_type_id" id="customer_type_id" value="{{ old('customer_type_id') }}">

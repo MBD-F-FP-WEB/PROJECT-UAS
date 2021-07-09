@@ -27,7 +27,7 @@
     </div>  
     @endif
     <form role="form text-left" method="POST" action="{{ route('form.product.store') }}">
-
+    @csrf
       <div class="form-group">
           <label>product_name</label>
           <input type="text" class="form-control {{ $errors->has('product_name') ? 'error' : '' }}" name="product_name" id="product_name" value="{{ old('product_name') }}">

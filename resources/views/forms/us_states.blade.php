@@ -27,6 +27,7 @@
     </div>  
     @endif
     <form role="form text-left" method="POST" action="{{ route('form.us_states.store') }}">
+    @csrf
       <div class="form-group">
           <label>state_name</label>
           <input type="text" class="form-control {{ $errors->has('state_name') ? 'error' : '' }}" name="state_name" id="state_name" value="{{ old('state_name') }}">

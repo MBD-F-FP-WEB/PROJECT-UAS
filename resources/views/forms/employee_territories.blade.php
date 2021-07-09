@@ -27,6 +27,7 @@
     </div>  
     @endif
     <form role="form text-left" method="POST" action="{{ route('form.employee_territories.store') }}">
+    @csrf
       <div class="form-group">
           <label>employee_id</label>
           <select class="form-control" name="employee_id">
