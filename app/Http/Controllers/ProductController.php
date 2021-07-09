@@ -17,8 +17,10 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
+		$supplier_ids = Supplier::all()->pluck('supplier_id');
+		$category_ids = Category::all()->pluck('category_id');
 		$products = Product::paginate(30);
-		return view('tables.product', compact(['products']));
+		return view('tables.product', compact(['products', 'supplier_ids', 'category_ids']));
 	}
 
 	/**
