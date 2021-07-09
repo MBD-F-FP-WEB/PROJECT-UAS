@@ -25,9 +25,9 @@ class CategoryController extends Controller
 	{
 		$pics = addslashes($request->picture);
 		$query = 'CALL insert_categories(\''
-			.$request->category_name.'\', \''
-			.$request->description.'\', \''
-			.$pics.'\');';
+			. $request->category_name . '\', \''
+			. $request->description . '\', \''
+			. $pics . '\');';
 
 		return $this->callProcedure($query);
 	}
