@@ -1,5 +1,6 @@
 -- SFT:INCREMENT EMPLOYEE ID
 --------------------------------
+-- select * from shippers order by shipper_id desc
 CREATE SEQUENCE employee_seq
 AS INTEGER
 INCREMENT BY 1
@@ -26,12 +27,13 @@ EXECUTE PROCEDURE add_new_employee_func();
 
 -- SFT:INCREMENT SHIPPER ID
 --------------------------------
+-- select * from shippers order by shipper_id desc
 CREATE SEQUENCE shipper_seq
 AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
 MAXVALUE 9999
-START WITH 10;
+START WITH 7;
  
 CREATE OR REPLACE FUNCTION add_new_shipper_func()
 RETURNS TRIGGER
@@ -52,12 +54,13 @@ EXECUTE PROCEDURE add_new_shipper_func();
  
 -- SFT:INCREMENT CATEGORY ID
 --------------------------------
+-- select * from categories order by category_id desc
 CREATE SEQUENCE category_seq
 AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
 MAXVALUE 9999
-START WITH 10;
+START WITH 9;
  
 CREATE OR REPLACE FUNCTION add_new_category_func()
 RETURNS TRIGGER
@@ -78,12 +81,13 @@ EXECUTE PROCEDURE add_new_category_func();
  
 -- SFT:INCREMENT SUPPLIER ID
 --------------------------------
+-- select * from suppliers order by supplier_id desc
 CREATE SEQUENCE supplier_seq
 AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
 MAXVALUE 9999
-START WITH 100;
+START WITH 30;
  
 CREATE OR REPLACE FUNCTION add_new_supplier_func()
 RETURNS TRIGGER
@@ -104,12 +108,13 @@ EXECUTE PROCEDURE add_new_supplier_func();
  
 -- SFT:INCREMENT PRODUCT ID
 --------------------------------
+-- select * from products order by product_id desc
 CREATE SEQUENCE product_seq
 AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
 MAXVALUE 9999
-START WITH 10;
+START WITH 78;
  
 CREATE OR REPLACE FUNCTION add_new_product_func()
 RETURNS TRIGGER
@@ -130,12 +135,13 @@ EXECUTE PROCEDURE add_new_product_func();
  
 -- SFT:INCREMENT ORDER ID
 --------------------------------
+-- select * from orders order by order_id desc
 CREATE SEQUENCE order_seq
 AS INTEGER
 INCREMENT BY 1
 MINVALUE 1
-MAXVALUE 9999
-START WITH 10;
+MAXVALUE 99999
+START WITH 11081;
  
 CREATE OR REPLACE FUNCTION add_new_order_func()
 RETURNS TRIGGER
@@ -153,32 +159,6 @@ CREATE TRIGGER add_new_order
 BEFORE INSERT ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_order_func();
-
--- SFT:INCREMENT CUSTOMER ID
---------------------------------
-CREATE SEQUENCE customer_seq
-AS INTEGER
-INCREMENT BY 1
-MINVALUE 1
-MAXVALUE 9999
-START WITH 10;
- 
-CREATE OR REPLACE FUNCTION add_new_customer_func()
-RETURNS TRIGGER
-AS $add_new_customer_func$
-BEGIN
-  IF NEW.order_id IS NULL
-  THEN
-    NEW.order_id := NEXTVAL('customer_seq');
-  END IF;
-  RETURN NEW;
-END;
-$add_new_customer_func$ LANGUAGE PLPGSQL;
- 
-CREATE TRIGGER add_new_customer
-BEFORE INSERT ON customers
-FOR EACH ROW
-EXECUTE PROCEDURE add_new_customer_func();
 
 -- FT:MENGISI TANGGAL ORDER SESUAI NOW
 --------------------------------
@@ -324,7 +304,7 @@ $$
 LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trig_cek_continu
-BEFORE INSERT OR UPDATE ON order_details
+BEFORE INSERT ON order_details
 FOR EACH ROW
 EXECUTE PROCEDURE cek_continu();
 --
@@ -491,53 +471,55 @@ INSERT INTO territories(territory_description, region_id)
 VALUES (territory_description, region_id);
 $$
 
--- V:REKAP PEMASUKAN
-----------------------------------------
-CREATE OR REPLACE VIEW rekap_pemasukan_bulanan AS
-SELECT
-	order_date,
-	SUM(t1.total_price)
-FROM orders
-JOIN (
-	SELECT
-		order_id,
-		SUM(quantity * unit_price) AS total_price
-	FROM order_details
-	GROUP BY order_id
-) AS t1 USING(order_id)
-GROUP BY order_date;
+-- P:SET DISCOUNT diskon PADA ORDER YANG quantity nya >= jml_produk
+---------------------
+CREATE OR REPLACE PROCEDURE add_discount(jml_produk INTEGER, diskon NUMERIC)
+LANGUAGE plpgsql
+AS $$
+	DECLARE
+		cari_discount CURSOR FOR
+			SELECT order_id
+			FROM order_details
+			GROUP BY order_id
+			HAVING SUM(quantity) >= jml_produk AND SUM(discount) = 0;
+		d_id INTEGER;
+	BEGIN
+		OPEN cari_discount;
+		LOOP
+			FETCH cari_discount INTO d_id;
+			
+			UPDATE order_details
+			SET discount = diskon
+			WHERE order_id = d_id;
+			
+			EXIT WHEN NOT FOUND;
+		END LOOP;
+	END;
+	$$
+--
+CALL add_discount(100, 0.15);
+select * from order_details
+where quantity = 100
 
--- V:REKAP PEMBELIAN PER PRODUK
+-- I:INDEXING EACH IMPORTANT TABLE
 ---------------------------------------
-CREATE OR REPLACE VIEW rekap_pembelian_per_produk AS
-SELECT
-	product_name,
-	COUNT(
-		SELECT COUNT(od.order_id)
-		FROM order_details
-		WHERE od.product_id=p.product_id
-	) AS order_count
-FROM products AS p;
+--customers:
+CREATE INDEX idx_customer_contact_name ON customers(contact_name);
+CREATE INDEX idx_customer_id ON customers(customer_id);
+CREATE INDEX idx_customer_region ON customers(region);
 
-
--- I:
-customer:
-CREATE INDEX idx_cutomer_contact_name ON customer(contact_name);
-CREATE INDEX idx_cutomer_id ON customer(customer_id);
-CREATE INDEX idx_cutomer_region ON customer(region);
-
-product:
+--products:
 CREATE INDEX idx_product_name_product ON products(product_name);
 CREATE INDEX idx_supplier_id_product ON products(supplier_id);
 
-supplier:
-CREATE INDEX idx_company_name_supplier ON supplers(company_name);
-CREATE INDEX idx_contact_name_supplier ON supplers(contact_name);
+--suppliers:
+CREATE INDEX idx_company_name_supplier ON suppliers(company_name);
+CREATE INDEX idx_contact_name_supplier ON suppliers(contact_name);
 
-order:
+--order:
 CREATE INDEX idx_customer_id_order ON orders(customer_id);
 CREATE INDEX idx_employee_id_order ON orders(employee_id);
 
-order_details:
+--order_details:
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
-CREATE INDEX idx_discount_orderdetails ON order_details(discount_order);
+CREATE INDEX idx_discount_orderdetails ON order_details(discount);
