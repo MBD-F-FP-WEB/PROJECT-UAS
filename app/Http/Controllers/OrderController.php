@@ -18,8 +18,11 @@ class OrderController extends Controller
 	 */
 	public function index()
 	{
+		$customer_ids = Customer::all()->pluck('customer_id');
+		$employee_ids = Employee::all()->pluck('employee_id');
+		$shipper_ids = Shipper::all()->pluck('shipper_id');
 		$orders = Order::paginate(30);
-		return view('tables.order', compact(['orders']));
+		return view('tables.order', compact(['orders', 'shipper_ids', 'customer_ids', 'employee_ids']));
 	}
 
 	/**
@@ -96,7 +99,7 @@ class OrderController extends Controller
 			Order::where('order_id', $id)->update($request->except(['_method', '_token']));
 			return back()->with('success', "Berhasil update data");
 		} catch (Exception $e) {
-			return back()->with('error', "Gagal update data");
+			return back()->with('error', "Gagal update data" . $e->getMessage());
 		}
 	}
 
