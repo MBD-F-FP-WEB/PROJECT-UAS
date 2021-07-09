@@ -7,13 +7,6 @@
 ])
 @endsection
 
-@section('navbar')
-@include('components.sidenav', [
-  'active' => "forms",
-  'form' => "category"
-])
-@endsection
-
 @section('content')
 <div class="card mt-4 z-index-0">
 	<div class="card-header text-center pt-4">
@@ -26,8 +19,14 @@
 				{{Session::get('success')}}
 		</div>  
 		@endif
+		@if(Session::has('error'))
+		<div class="alert alert-danger">
+				{{Session::get('error')}}
+		</div>  
+		@endif
 		<form role="form text-left" method="POST" action="{{ route('form.supplier.store') }}">
-		<div class="form-group">
+			@csrf
+			<div class="form-group">
 					<label>company_name</label>
 					<input type="text" class="form-control {{ $errors->has('company_name') ? 'error' : '' }}" name="company_name" id="company_name" value="{{ old('company_name') }}">
 
@@ -159,7 +158,7 @@
 					@endif
 			</div>
 			<div class="text-center">
-				<button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+				<button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
 			</div>
 		</form>
 	</div>
