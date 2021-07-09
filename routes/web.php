@@ -22,6 +22,7 @@ Route::group(['prefix' => ''], function () {
 });
 
 Route::group(['prefix' => 'table'], function () {
+	/* view / read */
 	Route::get('employee', [EmployeeController::class, 'index'])->name('table.employee');
 	Route::get('customer', [CustomersController::class, 'index'])->name('table.customer');
 	Route::get('order', [OrderController::class, 'index'])->name('table.order');
@@ -35,9 +36,26 @@ Route::group(['prefix' => 'table'], function () {
 	Route::get('shipper', [ShippersController::class, 'index'])->name('table.shipper');
 	Route::get('territory', [TerritoryController::class, 'index'])->name('table.territory');
 	Route::get('us_states', [UsStatesController::class, 'index'])->name('table.us_states');
+	
+	/* destroy / delete */
+	Route::delete('employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('form.employee.delete');
+	Route::delete('category/delete/{id}', [CategoryController::class, 'destroy'])->name('form.category.delete');
+	Route::delete('customer_customer_demo/delete/{id}', [CustomerCustomerDemoController::class, 'destroy'])->name('form.customer_customer_demo.delete');
+	Route::delete('customer_demographics/delete/{id}', [CustomerDemographicsController::class, 'destroy'])->name('form.customer_demographics.delete');
+	Route::delete('customer/delete/{id}', [CustomersController::class, 'destroy'])->name('form.customer.delete');
+	Route::delete('employee_territories/delete/{employee_id}/{territory_id}', [EmployeeTerritoriesController::class, 'destroy'])->name('form.employee_territories.delete');
+	Route::delete('order_detail/delete/{id}', [OrderDetailsController::class, 'destroy'])->name('form.order_detail.delete');
+	Route::delete('order/delete/{id}', [OrderController::class, 'destroy'])->name('form.order.delete');
+	Route::delete('product/delete/{id}', [ProductController::class, 'destroy'])->name('form.product.delete');
+	Route::delete('region/delete/{id}', [RegionController::class, 'destroy'])->name('form.region.delete');
+	Route::delete('shipper/delete/{id}', [ShippersController::class, 'destroy'])->name('form.shipper.delete');
+	Route::delete('supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('form.supplier.delete');
+	Route::delete('territory/delete/{id}', [TerritoryController::class, 'destroy'])->name('form.territory.delete');
+	Route::delete('us_states/delete/{id}', [UsStatesController::class, 'destroy'])->name('form.us_states.delete');
 });
 
 Route::group(['prefix' => 'form'], function () {
+	/* create */
 	Route::get('category', [CategoryController::class, 'create'])->name('form.category');
 	Route::get('customer_customer_demo', [CustomerCustomerDemoController::class, 'create'])->name('form.customer_customer_demo');
 	Route::get('customer_demographics', [CustomerDemographicsController::class, 'create'])->name('form.customer_demographics');
@@ -53,6 +71,7 @@ Route::group(['prefix' => 'form'], function () {
 	Route::get('territory', [TerritoryController::class, 'create'])->name('form.territory');
 	Route::get('us_states', [UsStatesController::class, 'create'])->name('form.us_states');
 
+	/* store */
 	Route::post('category', [CategoryController::class, 'store'])->name('form.category.store');
 	Route::post('customer_customer_demo', [CustomerCustomerDemoController::class, 'store'])->name('form.customer_customer_demo.store');
 	Route::post('customer_demographics', [CustomerDemographicsController::class, 'store'])->name('form.customer_demographics.store');
@@ -68,6 +87,7 @@ Route::group(['prefix' => 'form'], function () {
 	Route::post('territory', [TerritoryController::class, 'store'])->name('form.territory.store');
 	Route::post('us_states', [UsStatesController::class, 'store'])->name('form.us_states.store');
 
+	/* update */
 	Route::put('employee/update/{id}', [EmployeeController::class, 'update'])->name('form.employee.update');
 	Route::put('category/update/{id}', [CategoryController::class, 'update'])->name('form.category.update');
 	Route::put('customer_customer_demo/update/{id}', [CustomerCustomerDemoController::class, 'update'])->name('form.customer_customer_demo.update');
@@ -83,3 +103,5 @@ Route::group(['prefix' => 'form'], function () {
 	Route::put('territory/update/{id}', [TerritoryController::class, 'update'])->name('form.territory.update');
 	Route::put('us_states/update/{id}', [UsStatesController::class, 'update'])->name('form.us_states.update');
 });
+// 
+//Route::put('employee_territories/update/{employee_id}/{territory_id}', [EmployeeTerritoriesController::class, 'update'])->name('form.employee_territories.update');

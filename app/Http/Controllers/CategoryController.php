@@ -55,7 +55,8 @@ class CategoryController extends Controller
 
 	public function destroy($id)
 	{
-		//
+		Category::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 

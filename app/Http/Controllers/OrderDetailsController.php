@@ -97,9 +97,10 @@ class OrderDetailsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($order_id, $product_id)
 	{
-		//
+		OrderDetail::where('order_id', $order_id)->where('product_id', $product_id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

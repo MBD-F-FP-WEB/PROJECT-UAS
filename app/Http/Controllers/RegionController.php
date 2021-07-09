@@ -90,7 +90,8 @@ class RegionController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Region::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

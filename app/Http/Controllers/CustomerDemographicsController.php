@@ -91,7 +91,8 @@ class CustomerDemographicsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		CustomerDemographic::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /*

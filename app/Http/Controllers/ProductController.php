@@ -103,7 +103,8 @@ class ProductController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Product::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 

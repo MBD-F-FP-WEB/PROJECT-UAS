@@ -91,7 +91,8 @@ class ShippersController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Shipper::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

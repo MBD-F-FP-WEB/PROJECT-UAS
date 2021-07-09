@@ -100,7 +100,8 @@ class SupplierController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Supplier::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

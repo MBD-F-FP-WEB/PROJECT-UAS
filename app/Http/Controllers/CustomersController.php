@@ -101,7 +101,8 @@ class CustomersController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		Customer::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

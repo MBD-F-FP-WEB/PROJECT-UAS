@@ -92,7 +92,8 @@ class UsStatesController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		UsState::findOrFail($id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**

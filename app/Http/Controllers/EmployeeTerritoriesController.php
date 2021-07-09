@@ -94,9 +94,10 @@ class EmployeeTerritoriesController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($employee_id, $territory_id)
 	{
-		//
+		EmployeeTerritories::where('employee_id', $employee_id)->where('territory_id', $territory_id)->delete();
+		return back()->with('success', "Berhasil menghapus");
 	}
 }
 /**
@@ -105,7 +106,6 @@ CREATE TABLE employee_territories
 (
 	employee_id int,
 	territory_id varchar(255),
-	PRIMARY KEY (id),
 	CONSTRAINT fk_et_to_employee 
 		FOREIGN KEY (employee_id) 
 		REFERENCES employees(employee_id),
