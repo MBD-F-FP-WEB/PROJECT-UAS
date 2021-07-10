@@ -93,8 +93,8 @@
                   {{ $customer->jml }}
                 </td>
                 <td>
-                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerEdit-{{ $customer->customer_id }}">Edit</button>
-                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerDelete-{{ $customer->customer_id }}">Hapus</button>
+                  <button class="btn btn-success p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerEdit-{{ $customer->customer_id }}"><i class="bi-pencil"></i></button>
+                  <button class="btn btn-danger p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerDelete-{{ $customer->customer_id }}"><i class="bi-trash"></i></button>
                 </td>
               </tr>
 

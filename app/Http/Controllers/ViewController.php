@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
@@ -53,7 +54,25 @@ class ViewController extends Controller
 		return view('welcome', compact(['employee', 'customer', 'order', 'product', 'cus_cats', 'order_pm']));
 	}
 
-	public function showCusCat() {
+	public function setDiskon(Request $request)
+	{
+		// dd($request->min . '|' . $request->disc);
+		try {
+			DB::statement(
+				'
+				CALL add_discount(:min, :disc);
+				',
+				['min' => $request->min, 'disc' => $request->disc]
+			);
+
+			return back()->with('success', "Berhasil Set Diskon");
+		} catch (Exception $e) {
+			return back()->with('error', "Gagal Set Diskon : " . $e->getMessage());
+		}
+	}
+
+	public function showCusCat()
+	{
 		// $cus_cats = DB::table('customers')
 		// 	->select('customers.contact_name', DB::raw('max(categories.category_name)'), DB::raw('count(categories.category_name)'))
 		// 	->join('orders', 'customers.customer_id', '=', 'orders.customer_id')

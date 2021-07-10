@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,16 @@ class ProductController extends Controller
 		$supplier_ids = Supplier::all()->pluck('supplier_id');
 		$category_ids = Category::all()->pluck('category_id');
 		$products = Product::paginate(30);
-		return view('tables.product', compact(['products', 'supplier_ids', 'category_ids']));
+		$stats = DB::select('
+		select  products.product_name, count(orders.order_id) as orderedtime
+		from order_details
+		join orders on (orders.order_id = order_details.order_id)
+		join products on (products.product_id = order_details.product_id)
+		group by  products.product_name
+		order by orderedtime desc
+		limit 3
+	');
+		return view('tables.product', compact(['products', 'supplier_ids', 'category_ids', 'stats']));
 	}
 
 	/**
@@ -45,15 +55,15 @@ class ProductController extends Controller
 	public function store(Request $request)
 	{
 		$query = 'CALL insert_products(\''
-			. $request->product_name .'\', \''
-			. $request->supplier_id .'\', \''
-			. $request->category_id .'\', \''
-			. $request->quantity_per_unit .'\', \''
-			. $request->unit_price .'\', \''
-			. $request->units_in_stock .'\', \''
-			. $request->units_on_order .'\', \''
-			. $request->reorder_level .'\', \''
-			. $request->discontined .'\');';
+			. $request->product_name . '\', \''
+			. $request->supplier_id . '\', \''
+			. $request->category_id . '\', \''
+			. $request->quantity_per_unit . '\', \''
+			. $request->unit_price . '\', \''
+			. $request->units_in_stock . '\', \''
+			. $request->units_on_order . '\', \''
+			. $request->reorder_level . '\', \''
+			. $request->discontined . '\');';
 
 		return $this->callProcedure($query);
 	}

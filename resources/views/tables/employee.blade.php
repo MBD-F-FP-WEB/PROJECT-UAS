@@ -99,8 +99,8 @@
                   {{ $employee->country }}
                 </td>
                 <td>
-                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalEmployeeEdit-{{ $employee->employee_id }}">Edit</button>
-                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalemployeeDelete-{{ $employee->employee_id }}">Hapus</button>
+                  <button class="btn btn-success p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalEmployeeEdit-{{ $employee->employee_id }}"><i class="bi-pencil"></i></button>
+                  <button class="btn btn-danger p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalemployeeDelete-{{ $employee->employee_id }}"><i class="bi-trash"></i></button>
                 </td>
               </tr>
 

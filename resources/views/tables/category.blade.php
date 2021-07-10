@@ -79,8 +79,8 @@
                   {{ $category->description }} 
                 </td>
                 <td>
-                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCategoryEdit-{{ $category->category_id }}">Edit</button>
-                  <a class="btn btn-danger" href="{{ route('table.category.delete', ['id'=>$category->category_id]) }}">Hapus</a>
+                  <button class="btn btn-success p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalCategoryEdit-{{ $category->category_id }}"><i class="bi-pencil"></i></button>
+                  <a class="btn btn-danger p-2" href="{{ route('table.category.delete', ['id'=>$category->category_id]) }}"><i class="bi-trash"></i></a>
                 </td>
               </tr>
               @endforeach

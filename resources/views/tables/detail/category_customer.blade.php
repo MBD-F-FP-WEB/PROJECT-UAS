@@ -41,7 +41,7 @@
             </div>
           </div>
         </div>
-        <div>
+        <div class="overflow-scroll">
           <!-- Projects table -->
           <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
