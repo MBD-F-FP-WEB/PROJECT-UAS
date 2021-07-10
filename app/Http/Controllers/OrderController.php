@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Shipper;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -22,7 +24,36 @@ class OrderController extends Controller
 		$employee_ids = Employee::all()->pluck('employee_id');
 		$shipper_ids = Shipper::all()->pluck('shipper_id');
 		$orders = Order::paginate(30);
+		// $prices = DB::select('
+		// 	select order_id, calc_total(order_id), calc_diskon(order_id)
+		// 	from orders
+		// ');
+		// $pricol = collect($prices);
+		// dd($pricol);
+
 		return view('tables.order', compact(['orders', 'shipper_ids', 'customer_ids', 'employee_ids']));
+	}
+
+	public function orderperid($id)
+	{
+		$order = Order::findOrFail($id);
+		$price = DB::select('
+			select order_id, calc_total(:id), calc_diskon(:id)
+			from orders
+			where order_id = :id
+		', ['id' => $id]);
+		$price = $price[0];
+		// $odets = OrderDetail::all()->where('order_id', $id);
+
+		$odets = DB::select('
+		select products.product_name, products.unit_price, order_details.quantity, order_details.discount
+		from order_details
+		join products on (order_details.product_id = products.product_id)
+		where order_details.order_id = :id
+	', ['id' => $id]);
+		// dd($odets);
+
+		return view('tables.orderperid', compact(['order', 'price', 'odets']));
 	}
 
 	/**
@@ -48,18 +79,18 @@ class OrderController extends Controller
 	public function store(Request $request)
 	{
 		$query = 'CALL insert_orders(\''
-			. $request->customer_id .'\', \''
-			. $request->employee_id .'\', \''
-			. $request->required_date .'\', \''
-			. $request->shipped_date .'\', \''
-			. $request->ship_via .'\', \''
-			. $request->freight .'\', \''
-			. $request->ship_name .'\', \''
-			. $request->ship_address .'\', \''
-			. $request->ship_city .'\', \''
-			. $request->ship_region .'\', \''
-			. $request->ship_postal_code .'\', \''
-			. $request->ship_country .'\');';
+			. $request->customer_id . '\', \''
+			. $request->employee_id . '\', \''
+			. $request->required_date . '\', \''
+			. $request->shipped_date . '\', \''
+			. $request->ship_via . '\', \''
+			. $request->freight . '\', \''
+			. $request->ship_name . '\', \''
+			. $request->ship_address . '\', \''
+			. $request->ship_city . '\', \''
+			. $request->ship_region . '\', \''
+			. $request->ship_postal_code . '\', \''
+			. $request->ship_country . '\');';
 
 		return $this->callProcedure($query);
 	}

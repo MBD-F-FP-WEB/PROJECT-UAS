@@ -19,6 +19,7 @@ use App\Http\Controllers\UsStatesController;
 
 Route::group(['prefix' => ''], function () {
 	Route::get('', [ViewController::class, 'view'])->name('home');
+	Route::put('/setdiskon', [ViewController::class, 'setDiskon'])->name('setDiskon');
 });
 
 Route::group(['prefix' => 'table'], function () {
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'table'], function () {
 	Route::get('employee', [EmployeeController::class, 'index'])->name('table.employee');
 	Route::get('customer', [CustomersController::class, 'index'])->name('table.customer');
 	Route::get('order', [OrderController::class, 'index'])->name('table.order');
+	Route::get('order/{id}', [OrderController::class, 'orderperid'])->name('table.orderperid');
 	Route::get('product', [ProductController::class, 'index'])->name('table.product');
 	Route::get('category', [CategoryController::class, 'index'])->name('table.category');
 	Route::get('customer_customer_demo', [CustomerCustomerDemoController::class, 'index'])->name('table.customer_customer_demo');
@@ -37,7 +39,7 @@ Route::group(['prefix' => 'table'], function () {
 	Route::get('supplier', [SupplierController::class, 'index'])->name('table.supplier');
 	Route::get('territory', [TerritoryController::class, 'index'])->name('table.territory');
 	Route::get('us_states', [UsStatesController::class, 'index'])->name('table.us_states');
-	
+
 	/* destroy / delete */
 	Route::get('employee/delete/{id}', [EmployeeController::class, 'destroy'])->name('table.employee.delete');
 	Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('table.category.delete');

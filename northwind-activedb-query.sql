@@ -160,6 +160,33 @@ BEFORE INSERT ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_order_func();
 
+-- SFT:INCREMENT REGION ID
+--------------------------------
+-- select * from region order by region_id desc
+CREATE SEQUENCE region_seq
+AS INTEGER
+INCREMENT BY 1
+MINVALUE 1
+MAXVALUE 99999
+START WITH 5;
+ 
+CREATE OR REPLACE FUNCTION add_new_region_func()
+RETURNS TRIGGER
+AS $add_new_region_func$
+BEGIN
+  IF NEW.region_id IS NULL
+  THEN
+    NEW.region_id := NEXTVAL('region_seq');
+  END IF;
+  RETURN NEW;
+END;
+$add_new_region_func$ LANGUAGE PLPGSQL;
+ 
+CREATE TRIGGER add_new_region
+BEFORE INSERT ON region
+FOR EACH ROW
+EXECUTE PROCEDURE add_new_region_func();
+
 -- FT:MENGISI TANGGAL ORDER SESUAI NOW
 --------------------------------
 CREATE OR REPLACE FUNCTION proses_ubah_tgl_order() 
@@ -193,7 +220,7 @@ BEGIN
 END;
 $total$ LANGUAGE plpgsql;
 --
-select calc_total(10248);
+select calc_total(11030);
 
 -- F:HITUNG ORDER PRICE - DISCOUNT
 -------------------------------------------------
@@ -202,7 +229,7 @@ RETURNS integer AS $total$
 declare
     total integer;
 BEGIN
-   	select calc_total(o_id)*(1 - de.discount) as totalprice into total
+   	select calc_total(o_id)*(100 - de.discount)/100 as totalprice into total
 	from order_details as de
 	natural join orders as o
 	where de.order_id = o_id
@@ -211,39 +238,7 @@ BEGIN
 END;
 $total$ LANGUAGE plpgsql;
 --
-select calc_diskon(10248);
-
--- FT:UBAH REQUIRED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
---------------------------------------------------
-CREATE OR REPLACE FUNCTION proses_ubah_required_date() RETURNS TRIGGER AS $$
-BEGIN
-IF (TG_OP = 'INSERT' OR NEW.required_date < NEW.order_date) THEN
-	NEW.required_date := NEW.order_date + INTERVAL '1' DAY;
-	RETURN NEW;
-END IF;
-END;
-$$ LANGUAGE 'plpgsql';
-
-CREATE TRIGGER ubah_required_date
-BEFORE INSERT OR UPDATE ON orders
-FOR EACH ROW
-EXECUTE PROCEDURE proses_ubah_required_date();
-
--- FT:UBAH SHIPPED DATE TO TOMORROW OF ORDER DATE IF < ORDER DATE
---------------------------------------------------
-CREATE OR REPLACE FUNCTION proses_ubah_shipped_date() RETURNS TRIGGER AS $$
-BEGIN
-IF (TG_OP = 'INSERT' OR NEW.shipped_date < NEW.order_date) THEN
-	NEW.shipped_date := NEW.order_date + INTERVAL '1' DAY;
-	RETURN NEW;
-END IF;
-END;
-$$ LANGUAGE 'plpgsql';
-
-CREATE TRIGGER ubah_shipped_date
-BEFORE INSERT OR UPDATE ON orders
-FOR EACH ROW
-EXECUTE PROCEDURE proses_ubah_required_date();
+select calc_diskon(11030);
 
 -- FT:UPDATE UNIT IN STOCK & UNIT IN ORDER
 ---------------------------------------
@@ -459,6 +454,9 @@ INSERT INTO region(region_description)
 VALUES (region_description);
 $$
 
+CALL insert_region('Jawa Timur');
+select * from region
+
 -- P:INSERT TERRITORIES
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_territories (
@@ -492,9 +490,9 @@ INSERT INTO customers(customer_id, company_name, contact_name, contact_title, ad
 VALUES (customer_id, company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax);
 $$
 
--- P:SET DISCOUNT diskon PADA ORDER YANG quantity nya >= jml_produk
+-- P:SET DISCOUNT diskon PADA ORDER YANG quantity nya >= jml_produk OG
 ---------------------
-CREATE OR REPLACE PROCEDURE add_discount(jml_produk INTEGER, diskon NUMERIC)
+CREATE OR REPLACE PROCEDURE add_discount(jml_produk INTEGER, diskon INTEGER)
 LANGUAGE plpgsql
 AS $$
 	DECLARE
@@ -502,7 +500,7 @@ AS $$
 			SELECT order_id
 			FROM order_details
 			GROUP BY order_id
-			HAVING SUM(quantity) >= jml_produk AND SUM(discount) = 0;
+			HAVING SUM(quantity) >= 100 AND SUM(discount) = 0;
 		d_id INTEGER;
 	BEGIN
 		OPEN cari_discount;
@@ -518,63 +516,62 @@ AS $$
 	END;
 	$$
 --
-CALL add_discount(100, 0.15);
+CALL add_discount(100, 5);
 select * from order_details
-where quantity = 100
+where quantity >= 100
 
 -- I:INDEXING EACH IMPORTANT TABLE
 ---------------------------------------
---customers:
+--customers: vv
 CREATE INDEX idx_customer_contact_name ON customers(contact_name);
 CREATE INDEX idx_customer_id ON customers(customer_id);
 CREATE INDEX idx_customer_region ON customers(region);
 
---products:
+--products: vv
 CREATE INDEX idx_product_name_product ON products(product_name);
 CREATE INDEX idx_supplier_id_product ON products(supplier_id);
 
---suppliers:
+--suppliers: vv
 CREATE INDEX idx_company_name_supplier ON suppliers(company_name);
 CREATE INDEX idx_contact_name_supplier ON suppliers(contact_name);
 
---order:
+--order: vv
 CREATE INDEX idx_customer_id_order ON orders(customer_id);
 CREATE INDEX idx_employee_id_order ON orders(employee_id);
 
---order_details:
+--order_details: vv
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
 CREATE INDEX idx_discount_orderdetails ON order_details(discount);
 
+-- A:Aggregate
 --------------------------------------------
--- aggregate
---------------------------------------------
--- order per bulannya
+-- Order per bulannya vv
 select to_char(order_date,'Mon') as mon,
        extract(year from order_date) as yyyy,
        count(order_id) as jml
 from orders
 group by mon, yyyy;
 
--- shipper paling diminati
+-- Shipper paling diminati vv
 select s.company_name as PT, count(order_id) as jml
 from orders o 
 join shippers s on o.ship_via = s.shipper_id
 group by PT
 
--- category yg paling banyak penjualannya
+-- Category yg paling banyak penjualannya vv
 select ca.category_name, count(order_id) as jml
 from products pr
 join order_details od on pr.product_id = od.product_id
 join categories ca on pr.category_id = ca.category_id
 group by ca.category_name
 
--- order tiap customer
+-- Order tiap customer vv
 select c.contact_name, count(o.order_id)
 from customers c
 join orders o on c.customer_id = o.customer_id
 group by contact_name
 
--- kategori yg paling sering dibeli tiap customer nya
+-- Category yg paling sering dibeli tiap customer nya vv
 select cu.contact_name, max(ca.category_name), count(ca.category_name)
 from customers cu
 natural join orders o
@@ -583,9 +580,13 @@ natural join products p
 natural join categories ca
 group by cu.contact_name
 
--- produk paling laku
-select  order_details.product_id, count(orders.order_id) as orderedtime
+-- Produk paling laku vv
+select  products.product_name, count(orders.order_id) as orderedtime
 from order_details
-natural join orders
-group by  order_details.product_id
+join orders on (orders.order_id = order_details.order_id)
+join products on (products.product_id = order_details.product_id)
+group by  products.product_name
 order by orderedtime desc
+limit 3
+
+

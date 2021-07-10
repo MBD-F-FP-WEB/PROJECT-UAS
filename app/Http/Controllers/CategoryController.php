@@ -19,9 +19,10 @@ class CategoryController extends Controller
 			join order_details od on pr.product_id = od.product_id
 			join categories ca on pr.category_id = ca.category_id
 			group by ca.category_name
-			order by jml desc;
+			order by jml desc
+			limit 3;
 		');
-			
+
 		return view('tables.category', compact(['categories', 'stats']));
 	}
 

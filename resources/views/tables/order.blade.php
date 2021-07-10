@@ -17,11 +17,9 @@
     {{Session::get('error')}}
 </div>
 @endif
-<div class="container mt-5">
   <div class="row">
     <div class="col-lg-12 mx-auto">
       <div class="mb-4 w-25">
-
         <h3>Orders Data</h3>
       </div>
       <!-- Else bootstrap marketplace -->
@@ -65,6 +63,7 @@
             </thead>
             <tbody>
               @foreach($orders as $order)
+              {{-- {{dd($order)}} --}}
               <tr class="text-center">
                 <td>
                   {{ $order->order_id }}
@@ -108,6 +107,9 @@
                 <td>
                   <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalorderEdit-{{ $order->order_id }}">Edit</button>
                   <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalorderDelete-{{ $order->order_id }}">Delete</button>
+                  <a href="{{route('table.orderperid', $order->order_id)}}">
+                    <button class="btn btn-primary" type="button">See</button>
+                  </a>
                 </td>
               </tr>
 
@@ -136,6 +138,7 @@
                       <form role="form text-left" method="POST" action="{{ route('form.order.update', ['id'=>$order->order_id]) }}">
                         @method('PUT')
                         @csrf
+                        
                         <div class="form-group">
                             <label>customer_id</label>
                             <select class="form-control" name="customer_id">
@@ -321,6 +324,7 @@
                   </div>
                 </div>
               </div>
+              {{-- @endforeach --}}
               @endforeach
             </tbody>
           </table>
