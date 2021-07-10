@@ -19,6 +19,22 @@
 @endif
 <div class="container mt-5">
   <div class="my-4 w-25">
+    <h3>Categories Statistics</h3>
+  </div>
+  <div class="row">
+    @foreach ($stats as $stat)
+    <div class="col-lg-4 mb-2">
+      <div class="card">
+        <div class="card-body">
+          <h5>{{$stat->category_name}}</h5>
+          <p class="card-text">#{{$loop->iteration}} Most Popular Category</p>
+          <a href="#" class="btn btn-primary">{{$stat->jml}}</a>
+        </div>
+      </div>
+    </div>
+    @endforeach
+  </div>
+  <div class="my-4 w-25">
     <h3>Categories Data</h3>
   </div>
   <div class="row">

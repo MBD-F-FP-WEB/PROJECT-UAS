@@ -33,7 +33,7 @@
       </div>
     </div>
     @endforeach
-  
+  </div>
   <div class="my-4 w-25">
     <h3>Employees Data</h3>
   </div>
