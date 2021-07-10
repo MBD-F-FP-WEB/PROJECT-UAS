@@ -585,4 +585,11 @@ natural join orders o
 natural join order_details od
 natural join products p
 natural join categories ca
-group by cu.contact_name;
+group by cu.contact_name
+
+-- produk paling laku
+select  order_details.product_id, count(orders.order_id) as orderedtime
+from order_details
+natural join orders
+group by  order_details.product_id
+order by orderedtime desc
