@@ -80,8 +80,8 @@
                   {{ $shipper->phone }} 
                 </td>
                 <td>
-                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalshipperEdit-{{ $shipper->shipper_id }}">Edit</button>
-                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalshipperDelete-{{ $shipper->shipper_id }}">Hapus</button>
+                  <button class="btn btn-success p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalshipperEdit-{{ $shipper->shipper_id }}"><i class="bi-pencil"></i></button>
+                  <button class="btn btn-danger p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalshipperDelete-{{ $shipper->shipper_id }}"><i class="bi-trash"></i></button>
                 </td>
               </tr>
 

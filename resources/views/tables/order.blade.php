@@ -105,10 +105,10 @@
                   {{ $order->ship_country }}
                 </td>
                 <td>
-                  <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalorderEdit-{{ $order->order_id }}">Edit</button>
-                  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalorderDelete-{{ $order->order_id }}">Delete</button>
+                  <button class="btn btn-success p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalorderEdit-{{ $order->order_id }}"><i class="bi-pencil"></i></button>
+                  <button class="btn btn-danger p-2" type="button" data-bs-toggle="modal" data-bs-target="#modalorderDelete-{{ $order->order_id }}"><i class="bi-trash"></i></button>
                   <a href="{{route('table.orderperid', $order->order_id)}}">
-                    <button class="btn btn-primary" type="button">See</button>
+                    <button class="btn btn-primary p-2" type="button"><i class="bi-eye"></i></button>
                   </a>
                 </td>
               </tr>

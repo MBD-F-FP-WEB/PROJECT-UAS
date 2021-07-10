@@ -1,4 +1,4 @@
--- SFT:INCREMENT EMPLOYEE ID
+-- SFT:INCREMENT EMPLOYEE ID vv
 --------------------------------
 -- select * from shippers order by shipper_id desc
 CREATE SEQUENCE employee_seq
@@ -25,7 +25,7 @@ BEFORE INSERT ON employees
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_employee_func();
 
--- SFT:INCREMENT SHIPPER ID
+-- SFT:INCREMENT SHIPPER ID vv
 --------------------------------
 -- select * from shippers order by shipper_id desc
 CREATE SEQUENCE shipper_seq
@@ -52,7 +52,7 @@ BEFORE INSERT ON shippers
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_shipper_func();
  
--- SFT:INCREMENT CATEGORY ID
+-- SFT:INCREMENT CATEGORY ID vv
 --------------------------------
 -- select * from categories order by category_id desc
 CREATE SEQUENCE category_seq
@@ -79,7 +79,7 @@ BEFORE INSERT ON categories
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_category_func();
  
--- SFT:INCREMENT SUPPLIER ID
+-- SFT:INCREMENT SUPPLIER ID vv
 --------------------------------
 -- select * from suppliers order by supplier_id desc
 CREATE SEQUENCE supplier_seq
@@ -106,7 +106,7 @@ BEFORE INSERT ON suppliers
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_supplier_func();
  
--- SFT:INCREMENT PRODUCT ID
+-- SFT:INCREMENT PRODUCT ID vv
 --------------------------------
 -- select * from products order by product_id desc
 CREATE SEQUENCE product_seq
@@ -133,7 +133,7 @@ BEFORE INSERT ON products
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_product_func();
  
--- SFT:INCREMENT ORDER ID
+-- SFT:INCREMENT ORDER ID vv
 --------------------------------
 -- select * from orders order by order_id desc
 CREATE SEQUENCE order_seq
@@ -160,7 +160,7 @@ BEFORE INSERT ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_order_func();
 
--- SFT:INCREMENT REGION ID
+-- SFT:INCREMENT REGION ID vv
 --------------------------------
 -- select * from region order by region_id desc
 CREATE SEQUENCE region_seq
@@ -187,7 +187,7 @@ BEFORE INSERT ON region
 FOR EACH ROW
 EXECUTE PROCEDURE add_new_region_func();
 
--- FT:MENGISI TANGGAL ORDER SESUAI NOW
+-- FT:MENGISI TANGGAL ORDER SESUAI NOW vv
 --------------------------------
 CREATE OR REPLACE FUNCTION proses_ubah_tgl_order() 
 RETURNS TRIGGER AS 
@@ -204,7 +204,7 @@ BEFORE INSERT OR UPDATE ON orders
 FOR EACH ROW
 EXECUTE PROCEDURE proses_ubah_tgl_order();
 
--- F:HITUNG ORDER PRICE
+-- F:HITUNG ORDER PRICE vv
 -------------------------------------------------
 CREATE OR REPLACE FUNCTION calc_total (o_id integer)
 RETURNS integer AS $total$
@@ -222,7 +222,7 @@ $total$ LANGUAGE plpgsql;
 --
 select calc_total(11030);
 
--- F:HITUNG ORDER PRICE - DISCOUNT
+-- F:HITUNG ORDER PRICE - DISCOUNT vv
 -------------------------------------------------
 CREATE OR REPLACE FUNCTION calc_diskon (o_id integer)
 RETURNS integer AS $total$
@@ -240,7 +240,7 @@ $total$ LANGUAGE plpgsql;
 --
 select calc_diskon(11030);
 
--- FT:UPDATE UNIT IN STOCK & UNIT IN ORDER
+-- FT:UPDATE UNIT IN STOCK & UNIT IN ORDER ??
 ---------------------------------------
 CREATE OR REPLACE FUNCTION jum_unit() 
 RETURNS TRIGGER AS 
@@ -271,7 +271,7 @@ select *
 FROM products
 where product_id = 75
 
--- FT:CEK DETAIL ORDER YANG DISCONTINU
+-- FT:CEK DETAIL ORDER YANG DISCONTINU ??
 -------------------------------------------------
 CREATE OR REPLACE FUNCTION cek_continu() 
 RETURNS TRIGGER AS 
@@ -307,7 +307,7 @@ INSERT INTO order_details VALUES (10248, 1, 18, 1, 0);
 select * from products
 
 
--- P:INSERT ORDER
+-- P:INSERT ORDER vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_orders (
 	customer_id varchar,
@@ -331,7 +331,7 @@ $$
 --
 CALL insert_orders('WOLZA', 2, '1998-06-07', NULL, 2, 8, 'Ship Name', 'Ship Address', 'Ship City', 'NM', '87110', 'ID');
 
--- P:INSERT SUPPLIER
+-- P:INSERT SUPPLIER vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_suppliers (
 	company_name varchar,
@@ -352,7 +352,7 @@ INSERT INTO suppliers(company_name, contact_name, contact_title, address, city, 
 VALUES (company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax, homepage);
 $$
 
--- P:INSERT CATEGORY
+-- P:INSERT CATEGORY vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_categories (
 	category_name varchar,
@@ -365,7 +365,7 @@ INSERT INTO categories(category_name, description, picture)
 VALUES (category_name, description, picture);
 $$
 
--- P:INSERT CUSTOMER
+-- P:INSERT CUSTOMER vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_customers (
 	company_name varchar,
@@ -385,7 +385,7 @@ INSERT INTO customers(company_name, contact_name, contact_title, address, city, 
 VALUES (company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax);
 $$
 
--- P:INSERT PRODUCT
+-- P:INSERT PRODUCT vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_products (
 	product_name varchar,
@@ -404,8 +404,8 @@ INSERT INTO products(product_name, supplier_id, category_id, quantity_per_unit, 
 VALUES (product_name, supplier_id, category_id, quantity_per_unit, unit_price, units_in_stock, units_on_order, reorder_level, discontined);
 $$
 
--- P:INSERT SHIPPER
----------------------
+-- P:INSERT SHIPPER vv
+--------------------- 
 CREATE OR REPLACE PROCEDURE insert_shippers (
 	company_name varchar,
 	phone varchar
@@ -416,7 +416,7 @@ INSERT INTO shippers(company_name, phone)
 VALUES (company_name, phone);
 $$
 
--- P:INSERT EMPLOYEE
+-- P:INSERT EMPLOYEE vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_employees (
 	last_name varchar,
@@ -443,7 +443,7 @@ INSERT INTO employees(last_name, first_name, title, title_of_courtesy, birth_dat
 VALUES (last_name, first_name, title, title_of_courtesy, birth_date, hire_date, address, city, region, postal_code, country, home_phone, extension, photo, notes, reports_to, photo_path);
 $$
 
--- P:INSERT REGION
+-- P:INSERT REGION vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_region (
 	region_description varchar
@@ -457,7 +457,7 @@ $$
 CALL insert_region('Jawa Timur');
 select * from region
 
--- P:INSERT TERRITORIES
+-- P:INSERT TERRITORIES vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_territories (
 	territory_description varchar,
@@ -469,7 +469,7 @@ INSERT INTO territories(territory_description, region_id)
 VALUES (territory_description, region_id);
 $$
 
--- P:INSERT CUSTOMER
+-- P:INSERT CUSTOMER vv
 ---------------------
 CREATE OR REPLACE PROCEDURE insert_customers (
 	customer_id varchar,
@@ -490,7 +490,7 @@ INSERT INTO customers(customer_id, company_name, contact_name, contact_title, ad
 VALUES (customer_id, company_name, contact_name, contact_title, address, city, region, postal_code, country, phone, fax);
 $$
 
--- P:SET DISCOUNT diskon PADA ORDER YANG quantity nya >= jml_produk OG
+-- P:SET DISCOUNT diskon PADA ORDER YANG quantity nya >= jml_produk vv
 ---------------------
 CREATE OR REPLACE PROCEDURE add_discount(jml_produk INTEGER, diskon INTEGER)
 LANGUAGE plpgsql
@@ -500,7 +500,7 @@ AS $$
 			SELECT order_id
 			FROM order_details
 			GROUP BY order_id
-			HAVING SUM(quantity) >= 100 AND SUM(discount) = 0;
+			HAVING SUM(quantity) >= jml_produk AND SUM(discount) = 0;
 		d_id INTEGER;
 	BEGIN
 		OPEN cari_discount;
@@ -519,6 +519,18 @@ AS $$
 CALL add_discount(100, 5);
 select * from order_details
 where quantity >= 100
+--
+UPDATE order_details
+SET discount = 0
+WHERE discount <> 0;
+--
+select * from order_details
+WHERE quantity >= 100 AND discount <> 0;
+--
+SELECT order_id, SUM(discount)
+FROM order_details
+GROUP BY order_id
+HAVING SUM(quantity) >= 100;
 
 -- I:INDEXING EACH IMPORTANT TABLE
 ---------------------------------------
@@ -543,22 +555,23 @@ CREATE INDEX idx_employee_id_order ON orders(employee_id);
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
 CREATE INDEX idx_discount_orderdetails ON order_details(discount);
 
--- A:Aggregate
+--
+
+--------------------------------------------
+-- Aggregate
 --------------------------------------------
 -- Order per bulannya vv
 select to_char(order_date,'Mon') as mon,
        extract(year from order_date) as yyyy,
        count(order_id) as jml
 from orders
-group by mon, yyyy
-order by yyyy;
+group by mon, yyyy;
 
 -- Shipper paling diminati vv
 select s.company_name as PT, count(order_id) as jml
 from orders o 
 join shippers s on o.ship_via = s.shipper_id
 group by PT
-order by jml desc;
 
 -- Category yg paling banyak penjualannya vv
 select ca.category_name, count(order_id) as jml
@@ -566,14 +579,12 @@ from products pr
 join order_details od on pr.product_id = od.product_id
 join categories ca on pr.category_id = ca.category_id
 group by ca.category_name
-order by jml desc;
 
 -- Order tiap customer vv
 select c.contact_name, count(o.order_id)
 from customers c
 join orders o on c.customer_id = o.customer_id
 group by contact_name
-order by jml desc;
 
 -- Category yg paling sering dibeli tiap customer nya vv
 select cu.contact_name, max(ca.category_name), count(ca.category_name)
@@ -592,5 +603,6 @@ join products on (products.product_id = order_details.product_id)
 group by  products.product_name
 order by orderedtime desc
 limit 3
+
 
 
