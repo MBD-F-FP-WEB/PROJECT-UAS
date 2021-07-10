@@ -18,13 +18,28 @@ class ViewController extends Controller
 		$order = Order::count();
 		$product = Product::count();
 		$cus_cats = DB::select('
-			select cu.contact_name, max(ca.category_name), count(ca.category_name)
+			select cu.contact_name, ca.category_name, count(ca.category_name) as jml
 			from customers cu
 			natural join orders o
 			natural join order_details od
 			natural join products p
 			natural join categories ca
-			group by cu.contact_name
+			where ca.category_name=(
+				select cuc.category_name
+				from (
+					select ca2.category_name, count(ca2.category_name) as jml2
+					from customers cu2
+					natural join orders o2
+					natural join order_details od2
+					natural join products p2
+					natural join categories ca2
+					where cu2.customer_id=cu.customer_id
+					group by cu2.customer_id, ca2.category_name
+					order by jml2 desc
+					limit 1
+				) cuc
+			)
+			group by cu.customer_id, ca.category_name
 			limit 10;
 		');
 		$order_pm = DB::select('
@@ -47,30 +62,30 @@ class ViewController extends Controller
 		// 	->join('categories', 'products.category_id', '=', 'categories.category_id')
 		// 	->groupBy('customers.contact_name')
 		// 	->paginate(20);
-			$cus_cats = DB::select('
-				select cu.contact_name, ca.category_name, count(ca.category_name) as jml
-				from customers cu
-				natural join orders o
-				natural join order_details od
-				natural join products p
-				natural join categories ca
-				where ca.category_name=(
-					select cuc.category_name
-					from (
-						select ca2.category_name, count(ca2.category_name) as jml2
-						from customers cu2
-						natural join orders o2
-						natural join order_details od2
-						natural join products p2
-						natural join categories ca2
-						where cu2.customer_id=cu.customer_id
-						group by cu2.customer_id, ca2.category_name
-						order by jml2 desc
-						limit 1
-					) cuc
-				)
-				group by cu.customer_id, ca.category_name;
-			');
+		$cus_cats = DB::select('
+			select cu.contact_name, ca.category_name, count(ca.category_name) as jml
+			from customers cu
+			natural join orders o
+			natural join order_details od
+			natural join products p
+			natural join categories ca
+			where ca.category_name=(
+				select cuc.category_name
+				from (
+					select ca2.category_name, count(ca2.category_name) as jml2
+					from customers cu2
+					natural join orders o2
+					natural join order_details od2
+					natural join products p2
+					natural join categories ca2
+					where cu2.customer_id=cu.customer_id
+					group by cu2.customer_id, ca2.category_name
+					order by jml2 desc
+					limit 1
+				) cuc
+			)
+			group by cu.customer_id, ca.category_name;
+		');
 		return view('tables.detail.customer_category', compact(['cus_cats']));
 	}
 }

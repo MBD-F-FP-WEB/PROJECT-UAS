@@ -545,6 +545,9 @@ CREATE INDEX idx_employee_id_order ON orders(employee_id);
 CREATE INDEX idx_product_id_orderdetails ON order_details(product_id);
 CREATE INDEX idx_discount_orderdetails ON order_details(discount);
 
+-- category
+CREATE INDEX idx_name_categories ON categories(category_name);
+
 --------------------------------------------
 -- aggregate
 --------------------------------------------
