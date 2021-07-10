@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class CategoryController extends Controller
@@ -12,7 +13,16 @@ class CategoryController extends Controller
 	public function index()
 	{
 		$categories = Category::paginate(30);
-		return view('tables.category', compact(['categories']));
+		$stats = DB::select('
+			select ca.category_name, count(order_id) as jml
+			from products pr
+			join order_details od on pr.product_id = od.product_id
+			join categories ca on pr.category_id = ca.category_id
+			group by ca.category_name
+			order by jml desc;
+		');
+			
+		return view('tables.category', compact(['categories', 'stats']));
 	}
 
 	public function create()

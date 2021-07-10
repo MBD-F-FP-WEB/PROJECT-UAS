@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class ShippersController extends Controller
@@ -16,7 +17,14 @@ class ShippersController extends Controller
 	public function index()
 	{
 		$shippers = Shipper::paginate(30);
-		return view('tables.shipper', compact('shippers'));
+		$stats = DB::select('
+			select s.company_name as PT, count(order_id) as jml
+			from orders o 
+			join shippers s on o.ship_via = s.shipper_id
+			group by PT
+			order by jml desc;
+		');
+		return view('tables.shipper', compact(['shippers', 'stats']));
 	}
 
 	/**

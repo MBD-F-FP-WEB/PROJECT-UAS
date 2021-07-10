@@ -9,7 +9,22 @@
   <hr class="horizontal dark mt-0">
   <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-
+      <li class="nav-item">
+        @php
+          $dashboard_active = '';
+        @endphp
+        @if ($active == "dashboard")
+        @php
+          $dashboard_active = 'active';
+        @endphp
+        @endif
+        <a class="nav-link {{$dashboard_active}}" href="{{ route('home') }}">
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            @include('icons.box-3d')
+          </div>
+          <span class="nav-link-text ms-1">Dashboard</span>
+        </a>
+      </li>
       <li class="nav-item">
         @php
           $forms_active = '';

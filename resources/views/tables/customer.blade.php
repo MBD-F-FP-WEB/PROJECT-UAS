@@ -55,6 +55,7 @@
                 <th scope="col">Region</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Fax</th>
+                <th scope="col">Order Num</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -87,6 +88,9 @@
                 </td> 
                 <td class="text-wrap">
                   {{ $customer->fax }}
+                </td>
+                <td>
+                  {{ $customer->jml }}
                 </td>
                 <td>
                   <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalCustomerEdit-{{ $customer->customer_id }}">Edit</button>

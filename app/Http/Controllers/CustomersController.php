@@ -17,7 +17,25 @@ class CustomersController extends Controller
 	 */
 	public function index()
 	{
-		$customers = Customer::paginate(30);
+		// $customers = Customer::paginate(30);
+		$customers = DB::table('customers')
+			->select('*', 'customer_order.jml')
+			->join(DB::raw('
+					(
+						select c.customer_id, count(o.order_id) as jml
+						from customers c
+						join orders o on c.customer_id = o.customer_id
+						group by c.customer_id
+					) customer_order
+				'),
+				function($join)
+				{
+					$join->on('customers.customer_id', '=', 'customer_order.customer_id');
+				}
+			)
+			->orderBy('customer_order.jml', 'DESC')
+			->paginate(30);
+
 		return view('tables.customer', compact(['customers']));
 	}
 

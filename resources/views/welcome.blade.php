@@ -2,7 +2,7 @@
 
 @section('navbar')
 @include('components.sidenav', [
-  'active' => "employee",
+  'active' => "dashboard",
   'form' => ""
 ])
 @endsection
@@ -99,40 +99,96 @@
 @section('content')
 <div class="container mt-5">
     <div class="row">
-      <div class="col-lg-12 mx-auto">
-        <div class="mb-4 w-25">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="../../presentation.html">Page Sections</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Features</li>
-            </ol>
-          </nav>
-          <h3>Features</h3>
-        </div>
-        <!-- Else bootstrap marketplace -->
-        
+      <div class="col-lg-6 mx-auto">        
         <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
           <div class="container border-bottom">
             <div class="row py-3">
-              <div class="col-lg-4 text-start">
-                <p class="lead text-dark pt-1 mb-0">Employee</p>
+              <div class="col-lg-9 text-start">
+                <p class="lead text-dark pt-1 mb-3">Most frequently purchased categories by each customer</p>
               </div>
-              <div class="col-lg-4 mt-1 text-center">
-                <span class="badge bg-light text-dark"><i class="fas fa-lock me-1" aria-hidden="true"></i> Screenshot</span>
-              </div>
-              <div class="col-lg-4 text-end my-auto">
+              <div class="col-lg-3 text-end my-auto">
                 <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                 </a>
               </div>
+              <div>
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush" id="data-table">
+                  <thead class="thead-light">
+                    <tr class="text-center">
+                      <th scope="col">Contact Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($cus_cats as $cus_cat)
+                    <tr class="text-center">
+                      <td>
+                        {{ $cus_cat->contact_name }}
+                      </td>
+                      <td>
+                        {{ $cus_cat->max }} 
+                      </td>
+                      <td>
+                        {{ $cus_cat->count }} 
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-        
-        <!-- End bootstrap marketplace -->
+      </div>
+
+      <div class="col-lg-6 mx-auto">
+        <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
+          <div class="container border-bottom">
+            <div class="row py-3">
+              <div class="col-lg-9 text-start">
+                <p class="lead text-dark pt-1 mb-0">Order Per Month</p>
+              </div>
+              <div class="col-lg-3 text-end my-auto">
+                <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+                  <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div>
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush" id="data-table">
+                  <thead class="thead-light">
+                    <tr class="text-center">
+                      <th scope="col">Year</th>
+                      <th scope="col">Month</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($order_pm as $order)
+                    <tr class="text-center">
+                      <td>
+                        {{ $order->yyyy }}
+                      </td>
+                      <td>
+                        {{ $order->mon }} 
+                      </td>
+                      <td>
+                        {{ $order->jml }} 
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 @endsection
 
 @section('script')
+@endsection
