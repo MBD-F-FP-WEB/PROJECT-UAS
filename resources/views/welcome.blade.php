@@ -128,10 +128,10 @@
                         {{ $cus_cat->contact_name }}
                       </td>
                       <td>
-                        {{ $cus_cat->max }} 
+                        {{ $cus_cat->category_name }} 
                       </td>
                       <td>
-                        {{ $cus_cat->count }} 
+                        {{ $cus_cat->jml }} 
                       </td>
                     </tr>
                     @endforeach

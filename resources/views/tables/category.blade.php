@@ -28,7 +28,7 @@
         <div class="card-body">
           <h5>{{$stat->category_name}}</h5>
           <p class="card-text">#{{$loop->iteration}} Most Popular Category</p>
-          <a href="#" class="btn btn-primary">{{$stat->jml}}</a>
+          <a href="{{ route('table.detail.category_customer', ['id' => $stat->category_name]) }}" class="btn btn-primary">{{$stat->jml}}</a>
         </div>
       </div>
     </div>

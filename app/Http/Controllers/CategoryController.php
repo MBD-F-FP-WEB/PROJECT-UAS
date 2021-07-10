@@ -44,7 +44,17 @@ class CategoryController extends Controller
 
 	public function show($id)
 	{
-		//
+		$customers = DB::table('customers')
+			->select('customers.*')
+			->join('orders', 'customers.customer_id', '=', 'orders.customer_id')
+			->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+			->join('products', 'order_details.product_id', '=', 'products.product_id')
+			->join('categories', 'products.category_id', '=', 'categories.category_id')
+			->where('categories.category_name', 'like', '%'.$id.'%')
+			->paginate(20);
+		$cat_name = $id;
+			
+		return view('tables.detail.category_customer', compact(['customers', 'cat_name']));
 	}
 
 	public function edit($id)

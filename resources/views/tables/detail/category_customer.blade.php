@@ -21,7 +21,7 @@
   <div class="row">
     <div class="col-lg-12 mx-auto">
       <div class="mb-4">
-        <h3>Most frequently purchased categories by each customer</h3>
+        <h3>Category: {{$cat_name}}</h3>
       </div>
       <!-- Else bootstrap marketplace -->
       
@@ -41,27 +41,51 @@
             </div>
           </div>
         </div>
-        <div class="overflow-scroll">
+        <div>
           <!-- Projects table -->
           <table class="table align-items-center table-flush" id="data-table">
             <thead class="thead-light">
-              <tr class="text-center">
-                <th scope="col">Contact Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Total</th>
+              <tr>
+                <th scope="col" class="px-2">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Company</th>
+                <th scope="col">Title</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">Region</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Fax</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($cus_cats as $cus_cat)
-              <tr class="text-center">
-                <td>
-                  {{ $cus_cat->contact_name }}
+              @foreach($customers as $customer)
+              <tr>
+                <td class="px-4">
+                  {{ $customer->customer_id }}
                 </td>
                 <td>
-                  {{ $cus_cat->category_name }} 
+                  {{ $customer->company_name }} 
                 </td>
                 <td>
-                  {{ $cus_cat->jml }} 
+                  {{ $customer->contact_name }} 
+                </td>
+                <td>
+                  {{ $customer->contact_title }}
+                </td>
+                <td class="text-wrap">
+                  {{ $customer->address }}
+                </td>
+                <td class="text-wrap">
+                  {{ $customer->city }}
+                </td>
+                <td>
+                  {{ $customer->region }}
+                </td>
+                <td>
+                  {{ $customer->phone }}
+                </td> 
+                <td class="text-wrap">
+                  {{ $customer->fax }}
                 </td>
               </tr>
               @endforeach
@@ -71,6 +95,9 @@
       </div>
       <!-- End bootstrap marketplace -->
     </div>
+  </div>
+  <div class="row mx-auto">
+    {{ $customers->links() }}
   </div>
 </div>
 @endsection

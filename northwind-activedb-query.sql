@@ -579,13 +579,29 @@ group by contact_name
 order by jml desc;
 
 -- kategori yg paling sering dibeli tiap customer nya
-select cu.contact_name, max(ca.category_name), count(ca.category_name)
+select cu.customer_id, cu.contact_name, ca.category_name, count(ca.category_name) as jml
 from customers cu
 natural join orders o
 natural join order_details od
 natural join products p
 natural join categories ca
-group by cu.contact_name
+where ca.category_name=(
+	select cuc.category_name
+	from (
+		select ca2.category_name, count(ca2.category_name) as jml2
+		from customers cu2
+		natural join orders o2
+		natural join order_details od2
+		natural join products p2
+		natural join categories ca2
+		where cu2.customer_id=cu.customer_id
+		group by cu2.customer_id, ca2.category_name
+		order by jml2 desc
+		limit 1
+	) cuc
+)
+group by cu.customer_id, ca.category_name, cu.contact_name
+order by ca.category_name
 
 -- produk paling laku
 select  order_details.product_id, count(orders.order_id) as orderedtime
