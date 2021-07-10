@@ -27,6 +27,8 @@ class EmployeeController extends Controller
 		from orders o
 		join employees e
 		on (e.employee_id = o.employee_id)
+		join order_details od
+		on (od.order_id = o.order_id)
 		group by o.employee_id, e.last_name
 		order by juml desc
 		limit 3');
@@ -83,7 +85,16 @@ class EmployeeController extends Controller
 	 */
 	public function show($id)
 	{
-		//
+		$orders = DB::table('employees')
+			->select('orders.*', 'products.*')
+			->join('orders', 'employees.employee_id', '=', 'orders.employee_id')
+			->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+			->join('products', 'order_details.product_id', '=', 'products.product_id')
+			->where('employees.last_name', 'like', '%'.$id.'%')
+			->paginate(20);
+		$l_name = $id;
+
+		return view('tables.detail.employee_order', compact(['orders', 'l_name']));
 	}
 
 	/**

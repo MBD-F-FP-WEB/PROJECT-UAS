@@ -587,7 +587,7 @@ from customers c
 join orders o on c.customer_id = o.customer_id
 group by contact_name
 
--- kategori yg paling sering dibeli tiap customer nya
+-- kategori yg paling sering dibeli tiap customer nya vv
 select cu.customer_id, cu.contact_name, ca.category_name, count(ca.category_name) as jml
 from customers cu
 natural join orders o

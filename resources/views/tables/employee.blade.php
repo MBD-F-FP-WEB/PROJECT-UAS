@@ -28,7 +28,7 @@
         <div class="card-body">
           <h5>{{$stat->last_name}}</h5>
           <p class="card-text">#{{$loop->iteration}} Most Orders Employee</p>
-          <a href="#" class="btn btn-primary">{{$stat->juml}}</a>
+          <a href="{{ route('table.detail.employee_order', ['id' => $stat->last_name]) }}" class="btn btn-primary">{{$stat->juml}}</a>
         </div>
       </div>
     </div>

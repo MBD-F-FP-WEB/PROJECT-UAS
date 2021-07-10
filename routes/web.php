@@ -60,6 +60,7 @@ Route::group(['prefix' => 'table'], function () {
 	Route::group(['prefix' => 'detail'], function () {
 		Route::get('customer_category', [ViewController::class, 'showCusCat'])->name('table.detail.customer_category');
 		Route::get('category_customer/{id}', [CategoryController::class, 'show'])->name('table.detail.category_customer');
+		Route::get('employee_order/{id}', [EmployeeController::class, 'show'])->name('table.detail.employee_order');
 	});
 });
 
