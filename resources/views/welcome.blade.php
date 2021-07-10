@@ -107,7 +107,7 @@
                 <p class="lead text-dark pt-1 mb-3">Most frequently purchased categories by each customer</p>
               </div>
               <div class="col-lg-3 text-end my-auto">
-                <a href="../../presentation.html#pricing-soft-ui" class="text-primary icon-move-right">View All
+                <a href="{{ route('table.detail.customer_category') }}" class="text-primary icon-move-right">View All
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                 </a>
               </div>
