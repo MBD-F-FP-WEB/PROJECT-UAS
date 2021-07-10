@@ -550,13 +550,15 @@ select to_char(order_date,'Mon') as mon,
        extract(year from order_date) as yyyy,
        count(order_id) as jml
 from orders
-group by mon, yyyy;
+group by mon, yyyy
+order by yyyy;
 
 -- Shipper paling diminati vv
 select s.company_name as PT, count(order_id) as jml
 from orders o 
 join shippers s on o.ship_via = s.shipper_id
 group by PT
+order by jml desc;
 
 -- Category yg paling banyak penjualannya vv
 select ca.category_name, count(order_id) as jml
@@ -564,12 +566,14 @@ from products pr
 join order_details od on pr.product_id = od.product_id
 join categories ca on pr.category_id = ca.category_id
 group by ca.category_name
+order by jml desc;
 
 -- Order tiap customer vv
 select c.contact_name, count(o.order_id)
 from customers c
 join orders o on c.customer_id = o.customer_id
 group by contact_name
+order by jml desc;
 
 -- Category yg paling sering dibeli tiap customer nya vv
 select cu.contact_name, max(ca.category_name), count(ca.category_name)

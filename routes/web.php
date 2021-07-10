@@ -55,6 +55,11 @@ Route::group(['prefix' => 'table'], function () {
 	Route::get('supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('table.supplier.delete');
 	Route::get('territory/delete/{id}', [TerritoryController::class, 'destroy'])->name('table.territory.delete');
 	Route::get('us_states/delete/{id}', [UsStatesController::class, 'destroy'])->name('table.us_states.delete');
+
+	/*show*/
+	Route::group(['prefix' => 'detail'], function () {
+		Route::get('customer_category', [ViewController::class, 'showCusCat'])->name('table.detail.customer_category');
+	});
 });
 
 Route::group(['prefix' => 'form'], function () {
